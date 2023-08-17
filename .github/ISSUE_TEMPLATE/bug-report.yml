@@ -18,56 +18,56 @@ body:
           required: true
 
   - type: textarea
-      attributes:
-          label: Describe The Bug.
-          description: |
-            Give us a brief description on what is wrong.
+    attributes:
+      label: Describe The Bug.
+      description: |
+        Give us a brief description on what is wrong.
 
-            If you receive an error in console, please share the **full** error using a service like https://paste.gg/ or https://pastebin.com/
+        If you receive an error in console, please share the **full** error using a service like https://paste.gg/ or https://pastebin.com/
 
-      validations:
-          required: true
+    validations:
+      required: true
   
   - type: textarea
-      attributes:
-          label: Expected Behavior
-          description: What should be happening instead?
-      validations:
-          required: true
+    attributes:
+      label: Expected Behavior
+      description: What should be happening instead?
+    validations:
+      required: true
 
   - type: textarea
-      attributes:
-          label: Steps To Reproduce
-          description: Steps to reproduce the behavior
-          placeholder: |
-            1. Go to '...'
-            2. Click on '....'
-            3. Scroll down to '....'
-            4. See error
-      validations:
-          required: true
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
   
   - type: textarea
-      attributes:
-          label: Kingdoms Version
-          description: |
-            Run `/ka version` on your server and tell us the output.
-            "latests" is **not** a valid version.
-      validations:
-          required: true
+    attributes:
+      label: Kingdoms Version
+      description: |
+        Run `/ka version` on your server and tell us the output.
+        "latests" is **not** a valid version.
+    validations:
+      required: true
   
   - type: textarea
-      attributes:
-          label: Server Version
-          description: |
-            Run `/version` on your server and tell us the output.
-            "latests" is **not** a valid version.
-      validations:
-          required: true
+    attributes:
+      label: Server Version
+      description: |
+        Run `/version` on your server and tell us the output.
+        "latests" is **not** a valid version.
+    validations:
+      required: true
   
   - type: textarea
-      attributes:
-          label: Extra Comment
-          description: If you have any additional info you can share that here.
-      validations:
-          required: false
+    attributes:
+      label: Extra Comment
+      description: If you have any additional info you can share that here.
+    validations:
+      required: false
