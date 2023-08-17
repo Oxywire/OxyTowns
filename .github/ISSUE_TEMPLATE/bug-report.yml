@@ -51,7 +51,7 @@ body:
     attributes:
       label: Kingdoms Version
       description: |
-        Run `/ka version` on your server and tell us the output.
+        Run `/version Kingdoms` on your server and tell us the output.
         "latests" is **not** a valid version.
     validations:
       required: true
