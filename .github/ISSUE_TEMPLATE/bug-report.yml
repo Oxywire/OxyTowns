@@ -7,15 +7,15 @@ body:
       value: |
         Thanks for taking the time to fill out this bug report!
   
-  - type: checkbox
+  - type: checkboxes
     attributes:
       label: Before Submitting
       description: Before submitting this issue, please ensure the following
       options:
-      - label: I'm on the latest version of the plugin.
-        required: true
+      - label: I am on the latest version of the plugin.
       - label: I have searched for existing issues
-        required: true
+    validations:
+          required: true
 
   - type: textarea
       attributes:
