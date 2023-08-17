@@ -1,0 +1,73 @@
+name: Bug Report
+description: Create a bug report and help us resolve issues.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  
+  - type: checkbox
+    attributes:
+      label: Before Submitting
+      description: Before submitting this issue, please ensure the following
+      options:
+      - label: I'm on the latest version of the plugin.
+        required: true
+      - label: I have searched for existing issues
+        required: true
+
+  - type: textarea
+      attributes:
+          label: Describe The Bug.
+          description: |
+            Give us a brief description on what is wrong.
+
+            If you receive an error in console, please share the **full** error using a service like https://paste.gg/ or https://pastebin.com/
+
+      validations:
+          required: true
+  
+  - type: textarea
+      attributes:
+          label: Expected Behavior
+          description: What should be happening instead?
+      validations:
+          required: true
+
+  - type: textarea
+      attributes:
+          label: Steps To Reproduce
+          description: Steps to reproduce the behavior
+          placeholder: |
+            1. Go to '...'
+            2. Click on '....'
+            3. Scroll down to '....'
+            4. See error
+      validations:
+          required: true
+  
+  - type: textarea
+      attributes:
+          label: Kingdoms Version
+          description: |
+            Run `/ka version` on your server and tell us the output.
+            "latests" is **not** a valid version.
+      validations:
+          required: true
+  
+  - type: textarea
+      attributes:
+          label: Server Version
+          description: |
+            Run `/version` on your server and tell us the output.
+            "latests" is **not** a valid version.
+      validations:
+          required: true
+  
+  - type: textarea
+      attributes:
+          label: Extra Comment
+          description: If you have any additional info you can share that here.
+      validations:
+          required: false
