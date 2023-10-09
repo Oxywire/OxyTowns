@@ -49,9 +49,9 @@ body:
   
   - type: textarea
     attributes:
-      label: Kingdoms Version
+      label: OxyTowns Version
       description: |
-        Run `/version Kingdoms` on your server and tell us the output.
+        Run `/version OxyTowns` on your server and tell us the output.
         "latests" is **not** a valid version.
     validations:
       required: true
