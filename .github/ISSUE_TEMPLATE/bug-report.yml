@@ -21,9 +21,9 @@ body:
     attributes:
       label: Describe The Bug.
       description: |
-        Give us a brief description on what is wrong.
+        Give us a brief description of what is wrong.
 
-        If you receive an error in console, please share the **full** error using a service like https://paste.gg/ or https://pastebin.com/
+        If you receive an error in the console, please share the **full** error using a service like https://paste.gg/ or https://mclo.gs/
 
     validations:
       required: true
