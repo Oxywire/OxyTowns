@@ -1,0 +1,1661 @@
+paged:
+  PlotPermsMenu:
+    first-element-slot: 9
+    elements-per-page: 45
+    title: Permissions
+    type: CHEST
+    rows: 6
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 36
+          - 44
+          - 46-53
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: [ ]
+        slots:
+          - 45
+      role-OUTSIDER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Outsider"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 1
+      role-TRUSTED:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Trusted"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 2
+      role-MEMBER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Member"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 3
+      role-BUILDER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Builder"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 4
+      role-HELPER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Helper"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 5
+      role-SENATOR:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Senator"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 6
+      role-CO_MAYOR:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Co Mayor"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 7
+      role-selected-OUTSIDER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Outsider"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 1
+      role-selected-TRUSTED:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Trusted"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 2
+      role-selected-MEMBER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Member"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 3
+      role-selected-BUILDER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Builder"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 4
+      role-selected-HELPER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Helper"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 5
+      role-selected-SENATOR:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Senator"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 6
+      role-selected-CO_MAYOR:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Co Mayor"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 7
+      mod:
+        material: ENDER_PEARL
+        display-name: "<c:#ff9f30>Member Perms"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to  toggle."
+        slots:
+          - 49
+      members:
+        material: ENDER_EYE
+        display-name: "<c:#ff9f30>Mod Perms"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to  toggle."
+        slots:
+          - 49
+
+      ## All Permissions
+
+      permission-CHESTS:
+        material: CHEST
+        display-name: "<c:#ff9f30>Open Chests"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Chests"
+          - "<c:#ff9f30>* <white>Trapped Chests"
+          - "<c:#ff9f30>* <white>Barrels"
+          - "<c:#ff9f30>* <white>Shulker Boxes"
+          - ""
+        slots:
+          - 1
+      permission-ARMOR_STAND:
+        material: ARMOR_STAND
+        display-name: "<c:#ff9f30>Interact with armor stands"
+        slots:
+          - 1
+      permission-PLOTS_RENAME:
+        material: NAME_TAG
+        display-name: "<c:#ff9f30>Rename plots"
+        slots:
+          - 1
+      permission-PLOTS_MODIFY:
+        material: BRICKS
+        display-name: "<c:#ff9f30>Modify all plots"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>This will allow players to modify"
+          - "<white>plots that are not theirs."
+          - "<gray><i>(Good for builders)"
+          - ""
+        slots:
+          - 1
+      permission-COMPOSTING:
+        material: COMPOSTER
+        display-name: "<c:#ff9f30>Composting"
+        slots:
+          - 1
+      permission-BUTTONS:
+        material: LEVER
+        display-name: "<c:#ff9f30>Switch Levers & Buttons"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Levers"
+          - "<c:#ff9f30>* <white>Buttons"
+          - ""
+        slots:
+          - 1
+      permission-PLATES:
+        material: STONE_PRESSURE_PLATE
+        display-name: "<c:#ff9f30>Trigger Pressure Plates"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Stone Pressure Plates"
+          - "<c:#ff9f30>* <white>Wooden Pressure Plates"
+          - "<c:#ff9f30>* <white>Iron Pressure Plates"
+          - "<c:#ff9f30>* <white>Gold Pressure Plates"
+          - ""
+        slots:
+          - 1
+      permission-FURNACES:
+        material: FURNACE
+        display-name: "<c:#ff9f30>Open Furnaces"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Furnaces"
+          - "<c:#ff9f30>* <white>Blast Furnaces"
+          - "<c:#ff9f30>* <white>Smokers"
+          - "<c:#ff9f30>* <white>Camp Fires"
+          - ""
+        slots:
+          - 1
+      permission-KICK:
+        material: BARRIER
+        display-name: "<c:#ff9f30>Kick members from the town"
+        slots:
+          - 1
+      permission-VEHICLES:
+        material: MINECART
+        display-name: "<c:#ff9f30>Vehicles"
+        slots:
+          - 1
+      permission-SPAWN:
+        material: BEACON
+        display-name: "<c:#ff9f30>Set the town spawn"
+        slots:
+          - 1
+      permission-BLOCK_BREAK:
+        material: DIAMOND_PICKAXE
+        display-name: "<c:#ff9f30>Break Blocks"
+        slots:
+          - 1
+      permission-BEACON:
+        material: BEACON
+        display-name: "<c:#ff9f30>Beacons"
+        slots:
+          - 1
+      permission-PLOTS_ASSIGN:
+        material: MAP
+        display-name: "<c:#ff9f30>Assign players to plots"
+        slots:
+          - 1
+      permission-OUTPOST:
+        material: DARK_OAK_DOOR
+        display-name: "<c:#ff9f30>Create Outposts"
+        slots:
+          - 1
+      permission-VAULT:
+        material: ENDER_CHEST
+        display-name: "<c:#ff9f30>Access town vaults"
+        slots:
+          - 1
+      permission-ANVIL:
+        material: ANVIL
+        display-name: "<c:#ff9f30>Use Anvils"
+        slots:
+          - 1
+      permission-DOORS:
+        material: OAK_DOOR
+        display-name: "<c:#ff9f30>Open Doors"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Doors"
+          - "<c:#ff9f30>* <white>Trap Doors"
+          - "<c:#ff9f30>* <white>Fence Gates"
+          - ""
+        slots:
+          - 1
+      permission-OPEN:
+        material: DIRT
+        slots:
+          - 1
+      permission-LECTERN:
+        material: LECTERN
+        display-name: "<c:#ff9f30>Lecterns"
+        slots:
+          - 1
+      permission-REDSTONE:
+        material: REDSTONE
+        display-name: "<c:#ff9f30>Use Redstone"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Dispensers"
+          - "<c:#ff9f30>* <white>Droppers"
+          - "<c:#ff9f30>* <white>Hoppers"
+          - "<c:#ff9f30>* <white>Daylight Sensors"
+          - "<c:#ff9f30>* <white>Repeaters"
+          - "<c:#ff9f30>* <white>Comparators"
+          - "<c:#ff9f30>* <white>Tripwires"
+          - ""
+        slots:
+          - 1
+      permission-INVITE:
+        material: FILLED_MAP
+        display-name: "<c:#ff9f30>Invite members to the town"
+        slots:
+          - 1
+      permission-UPGRADES:
+        material: ANVIL
+        display-name: "<c:#ff9f30>Upgrade the town"
+        slots:
+          - 1
+      permission-PLOTS_EVICT:
+        material: BARRIER
+        display-name: "<c:#ff9f30>Evict players from plots"
+        slots:
+          - 1
+      permission-WITHDRAW:
+        material: GOLD_INGOT
+        display-name: "<c:#ff9f30>Withdraw from the town bank"
+        slots:
+          - 1
+      permission-TRUST:
+        material: TOTEM_OF_UNDYING
+        display-name: "<c:#ff9f30>Manage Trust"
+        slots:
+          - 1
+      permission-ANIMALS:
+        material: PIG_SPAWN_EGG
+        display-name: "<c:#ff9f30>Animals"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Breed Animals"
+          - "<c:#ff9f30>* <white>Kill Animals"
+          - ""
+        slots:
+          - 1
+      permission-CLAIM_UNCLAIM:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30>Manage claims"
+        slots:
+          - 1
+      permission-PUNISH:
+        material: IRON_BARS
+        display-name: "<c:#ff9f30>Ban players"
+        slots:
+          - 1
+      permission-PVP:
+        material: DIRT
+        slots:
+          - 1
+      permission-BLOCK_PLACE:
+        material: BRICKS
+        display-name: "<c:#ff9f30>Place Blocks"
+        slots:
+          - 1
+      permission-RENAME:
+        material: NAME_TAG
+        display-name: "<c:#ff9f30>Rename the town"
+        slots:
+          - 1
+      permission-BREWING:
+        material: BREWING_STAND
+        display-name: "<c:#ff9f30>Brewing"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Brewing Stands"
+          - "<c:#ff9f30>* <white>Cauldrons"
+          - ""
+        slots:
+          - 1
+      permission-PLOTS_TYPE:
+        material: HAY_BLOCK
+        display-name: "<c:#ff9f30>Modify plot types"
+        slots:
+          - 1
+      permission-LEASH:
+        material: LEAD
+        display-name: "<c:#ff9f30>Leash Mobs"
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: [ ]
+  PlotMembersMenu:
+    title: "Plot Members"
+    type: CHEST
+    rows: 5
+    first-element-slot: 9
+    elements-per-page: 36
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-39
+          - 42-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: [ ]
+        slots:
+          - 36
+      member:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30><name>"
+        lore:
+          - ""
+          - "<c:#f7d3a3>Status: <status:'<green>Online':'<red>Offline'>"
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: [ ]
+  MembersMenu:
+    title: "Town Residents"
+    type: CHEST
+    rows: 5
+    first-element-slot: 9
+    elements-per-page: 36
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-39
+          - 42-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      ban:
+        material: IRON_BARS
+        display-name: "<c:#ff9f30>Banned Players"
+        lore: []
+        slots:
+          - 40
+      trusted:
+        material: SLIME_BALL
+        display-name: "<c:#ff9f30>Trusted Members"
+        lore: []
+        slots:
+          - 41
+      member:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30><name>"
+        lore:
+          - "<c:#f7d3a3>Status: <status:'<green>Online':'<red>Offline'>"
+          - ""
+          - "<c:#f7d3a3>Role: <white><role>"
+          - ""
+          - "<green>▲ Promote <gray>(Left-Click)"
+          - "<red>▼ Demote <gray>(Right-Click)"
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+  TrustedMenu:
+    title: "Trusted Members"
+    type: CHEST
+    rows: 5
+    first-element-slot: 9
+    elements-per-page: 36
+    decorator-elements:
+      - material: LIME_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-39
+          - 42-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      ban:
+        material: IRON_BARS
+        display-name: "<c:#ff9f30>Banned Players"
+        lore: []
+        slots:
+          - 40
+      members:
+        material: HEART_OF_THE_SEA
+        display-name: "<c:#ff9f30>Town Members"
+        lore: []
+        slots:
+          - 41
+      entry:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30><name>"
+        lore:
+          - "<c:#f7d3a3>Trusted on: <white><date:dd/MM/yyyy> <dark_gray>(DD/MM/YYYY)"
+          - "<c:#f7d3a3>Trusted by: <white><executor>"
+          - "<c:#f7d3a3>Reason: <white><reason>"
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+  BansMenu:
+    title: "Town Bans"
+    type: CHEST
+    rows: 5
+    first-element-slot: 9
+    elements-per-page: 45
+    decorator-elements:
+      - material: IRON_BARS
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-39
+          - 42-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      ban-entry:
+        material: PLAYER_HEAD
+        display-name: "<red><name>"
+        lore:
+          - "<c:#f7d3a3>Banned on: <white><date:dd/MM/yyyy> <dark_gray>(DD/MM/YYYY)"
+          - "<c:#f7d3a3>Banned by: <white><executor>"
+          - "<c:#f7d3a3>Reason: <white><reason>"
+        slots: []
+      members:
+        material: HEART_OF_THE_SEA
+        display-name: "<c:#ff9f30>Town Members"
+        lore: []
+        slots:
+          - 40
+      trusted:
+        material: SLIME_BALL
+        display-name: "<c:#ff9f30>Trusted Members"
+        lore: []
+        slots:
+          - 41
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+  OutpostsMenu:
+    title: "Outposts"
+    type: CHEST
+    rows: 5
+    first-element-slot: 9
+    elements-per-page: 45
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: [ ]
+        slots:
+          - 36
+      outpost:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30><b>Outpost"
+        lore:
+          - "<c:#f7d3a3>World: <white><world>"
+          - "<c:#f7d3a3>Coords: <white><x> <gray>-<white> <z>"
+          - ""
+          - "<yellow>■ Left Click to  visit."
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+  PermissionMenu:
+    title: Permissions
+    type: CHEST
+    rows: 6
+    first-element-slot: 9
+    elements-per-page: 45
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 36
+          - 44
+          - 46-53
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 45
+      role-OUTSIDER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Outsider"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 1
+      role-TRUSTED:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Trusted"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 2
+      role-MEMBER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Member"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 3
+      role-BUILDER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Builder"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 4
+      role-HELPER:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Helper"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 5
+      role-SENATOR:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Senator"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 6
+      role-CO_MAYOR:
+        material: GRAY_DYE
+        display-name: "<c:#ff9f30>Co Mayor"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 7
+      role-selected-OUTSIDER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Outsider"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 1
+      role-selected-TRUSTED:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Trusted"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 2
+      role-selected-MEMBER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Member"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 3
+      role-selected-BUILDER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Builder"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 4
+      role-selected-HELPER:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Helper"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 5
+      role-selected-SENATOR:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Senator"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 6
+      role-selected-CO_MAYOR:
+        material: LIME_DYE
+        display-name: "<c:#ff9f30>Co Mayor"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 7
+      mod:
+        material: ENDER_PEARL
+        display-name: "<c:#ff9f30>Member Perms"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to  toggle."
+        slots:
+          - 49
+      members:
+        material: ENDER_EYE
+        display-name: "<c:#ff9f30>Mod Perms"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to  toggle."
+        slots:
+          - 49
+
+      ## All Permissions
+
+      permission-CHESTS:
+        material: CHEST
+        display-name: "<c:#ff9f30>Open Chests"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Chests"
+          - "<c:#ff9f30>* <white>Trapped Chests"
+          - "<c:#ff9f30>* <white>Barrels"
+          - "<c:#ff9f30>* <white>Shulker Boxes"
+          - ""
+        slots:
+          - 1
+      permission-ARMOR_STAND:
+        material: ARMOR_STAND
+        display-name: "<c:#ff9f30>Interact with armor stands"
+        slots:
+          - 1
+      permission-PLOTS_RENAME:
+        material: NAME_TAG
+        display-name: "<c:#ff9f30>Rename plots"
+        slots:
+          - 1
+      permission-PLOTS_MODIFY:
+        material: BRICKS
+        display-name: "<c:#ff9f30>Modify all plots"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>This will allow players to modify"
+          - "<white>plots that are not theirs."
+          - "<gray><i>(Good for builders)"
+          - ""
+        slots:
+          - 1
+      permission-COMPOSTING:
+        material: COMPOSTER
+        display-name: "<c:#ff9f30>Composting"
+        slots:
+          - 1
+      permission-BUTTONS:
+        material: LEVER
+        display-name: "<c:#ff9f30>Switch Levers & Buttons"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Levers"
+          - "<c:#ff9f30>* <white>Buttons"
+          - ""
+        slots:
+          - 1
+      permission-PLATES:
+        material: STONE_PRESSURE_PLATE
+        display-name: "<c:#ff9f30>Trigger Pressure Plates"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Stone Pressure Plates"
+          - "<c:#ff9f30>* <white>Wooden Pressure Plates"
+          - "<c:#ff9f30>* <white>Iron Pressure Plates"
+          - "<c:#ff9f30>* <white>Gold Pressure Plates"
+          - ""
+        slots:
+          - 1
+      permission-FURNACES:
+        material: FURNACE
+        display-name: "<c:#ff9f30>Open Furnaces"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Furnaces"
+          - "<c:#ff9f30>* <white>Blast Furnaces"
+          - "<c:#ff9f30>* <white>Smokers"
+          - "<c:#ff9f30>* <white>Camp Fires"
+          - ""
+        slots:
+          - 1
+      permission-KICK:
+        material: BARRIER
+        display-name: "<c:#ff9f30>Kick members from the town"
+        slots:
+          - 1
+      permission-VEHICLES:
+        material: MINECART
+        display-name: "<c:#ff9f30>Vehicles"
+        slots:
+          - 1
+      permission-SPAWN:
+        material: BEACON
+        display-name: "<c:#ff9f30>Set the town spawn"
+        slots:
+          - 1
+      permission-BLOCK_BREAK:
+        material: DIAMOND_PICKAXE
+        display-name: "<c:#ff9f30>Break Blocks"
+        slots:
+          - 1
+      permission-BEACON:
+        material: BEACON
+        display-name: "<c:#ff9f30>Beacons"
+        slots:
+          - 1
+      permission-PLOTS_ASSIGN:
+        material: MAP
+        display-name: "<c:#ff9f30>Assign players to plots"
+        slots:
+          - 1
+      permission-OUTPOST:
+        material: DARK_OAK_DOOR
+        display-name: "<c:#ff9f30>Create Outposts"
+        slots:
+          - 1
+      permission-VAULT:
+        material: ENDER_CHEST
+        display-name: "<c:#ff9f30>Access town vaults"
+        slots:
+          - 1
+      permission-ANVIL:
+        material: ANVIL
+        display-name: "<c:#ff9f30>Use Anvils"
+        slots:
+          - 1
+      permission-DOORS:
+        material: OAK_DOOR
+        display-name: "<c:#ff9f30>Open Doors"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Doors"
+          - "<c:#ff9f30>* <white>Trap Doors"
+          - "<c:#ff9f30>* <white>Fence Gates"
+          - ""
+        slots:
+          - 1
+      permission-OPEN:
+        material: DIRT
+        slots:
+          - 1
+      permission-LECTERN:
+        material: LECTERN
+        display-name: "<c:#ff9f30>Lecterns"
+        slots:
+          - 1
+      permission-REDSTONE:
+        material: REDSTONE
+        display-name: "<c:#ff9f30>Use Redstone"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Dispensers"
+          - "<c:#ff9f30>* <white>Droppers"
+          - "<c:#ff9f30>* <white>Hoppers"
+          - "<c:#ff9f30>* <white>Daylight Sensors"
+          - "<c:#ff9f30>* <white>Repeaters"
+          - "<c:#ff9f30>* <white>Comparators"
+          - "<c:#ff9f30>* <white>Tripwires"
+          - ""
+        slots:
+          - 1
+      permission-INVITE:
+        material: FILLED_MAP
+        display-name: "<c:#ff9f30>Invite members to the town"
+        slots:
+          - 1
+      permission-UPGRADES:
+        material: ANVIL
+        display-name: "<c:#ff9f30>Upgrade the town"
+        slots:
+          - 1
+      permission-PLOTS_EVICT:
+        material: BARRIER
+        display-name: "<c:#ff9f30>Evict players from plots"
+        slots:
+          - 1
+      permission-WITHDRAW:
+        material: GOLD_INGOT
+        display-name: "<c:#ff9f30>Withdraw from the town bank"
+        slots:
+          - 1
+      permission-TRUST:
+        material: TOTEM_OF_UNDYING
+        display-name: "<c:#ff9f30>Manage Trust"
+        slots:
+          - 1
+      permission-ANIMALS:
+        material: PIG_SPAWN_EGG
+        display-name: "<c:#ff9f30>Animals"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Breed Animals"
+          - "<c:#ff9f30>* <white>Kill Animals"
+          - ""
+        slots:
+          - 1
+      permission-CLAIM_UNCLAIM:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30>Manage claims"
+        slots:
+          - 1
+      permission-PUNISH:
+        material: IRON_BARS
+        display-name: "<c:#ff9f30>Ban players"
+        slots:
+          - 1
+      permission-PVP:
+        material: DIRT
+        slots:
+          - 1
+      permission-BLOCK_PLACE:
+        material: BRICKS
+        display-name: "<c:#ff9f30>Place Blocks"
+        slots:
+          - 1
+      permission-RENAME:
+        material: NAME_TAG
+        display-name: "<c:#ff9f30>Rename the town"
+        slots:
+          - 1
+      permission-BREWING:
+        material: BREWING_STAND
+        display-name: "<c:#ff9f30>Brewing"
+        lore:
+          - ""
+          - "<c:#ff9f30>* <white>Brewing Stands"
+          - "<c:#ff9f30>* <white>Cauldrons"
+          - ""
+        slots:
+          - 1
+      permission-PLOTS_TYPE:
+        material: HAY_BLOCK
+        display-name: "<c:#ff9f30>Modify plot types"
+        slots:
+          - 1
+      permission-LEASH:
+        material: LEAD
+        display-name: "<c:#ff9f30>Leash Mobs"
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+  TownsMenu:
+    title: "Towns"
+    type: CHEST
+    rows: 6
+    first-element-slot: 9
+    elements-per-page: 45
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-3
+          - 5-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 36
+          - 44
+          - 46-53
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 45
+      comparator:
+        material: COMPARATOR
+        display-name: "<c:#ff9f30><b>Sort Towns"
+        lore:
+          - "<yellow>■ Left Click to sort towns."
+          - ""
+          - "<c:#f7d3a3>Sorting by: <white><comparator>"
+        slots:
+          - 4
+      list:
+        material: EMERALD
+        display-name: "<c:#ff9f30><b><name>"
+        lore:
+          - "<c:#f7d3a3>Town Mayor: <white><owner>"
+          - "<c:#f7d3a3>Town Founded: <white><age:dd/MM/yyyy> <dark_gray>(DD/MM/YYYY)"
+          - "<c:#f7d3a3>Residents: <white><members-and-owner>"
+          - "<c:#f7d3a3>Land Owned: <white><claims>/<maxclaims>"
+          - "<c:#f7d3a3>Outposts Owned: <white><outposts>/<maxoutposts>"
+          - "<c:#f7d3a3>Town Balance: <white>$<worth>"
+          - ""
+          - "<yellow>■ Left Click to teleport."
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+  ClaimsMenu:
+    title: "Claims"
+    type: CHEST
+    rows: 6
+    first-element-slot: 9
+    elements-per-page: 45
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 36
+          - 44-53
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      claims:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30>Claimed Chunk"
+        lore:
+          - "<c:#f7d3a3>Coords: <white>x<x> <gray>- <white>z<z>"
+          - "<c:#f7d3a3>World: <white><world>"
+          - ""
+          - "<red>Warning: Make sure to not TP in survival mode!"
+          - ""
+          - "<yellow>■ Left Click to open tab."
+        slots:
+          - 1
+    previous-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Previous Page"
+      slots:
+        - 18
+    next-page-element:
+      material: ARROW
+      display-name: "<c:#ff9f30>Next Page"
+      slots:
+        - 26
+    blacklisted-slots: []
+singles:
+  TownMainMenu:
+    title: "<town>"
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35-44
+    elements:
+      info:
+        material: TOTEM_OF_UNDYING
+        display-name: "<c:#ff9f30><b><name>"
+        lore:
+          - "<gray>Town Information."
+          - ""
+          - "<c:#f7d3a3>Mayor: <white><owner>"
+          - "<c:#f7d3a3>Residents: <white><members-and-owner>"
+          - "<c:#f7d3a3>Town Balance: <white>$<worth>"
+          - "<c:#f7d3a3>Land Owned: <white><claims> Chunks"
+          - "<c:#f7d3a3>Outposts Owned: <white><outposts>"
+          - "<c:#f7d3a3>Founded: <white><age:dd/MM/yyyy> <dark_gray>(DD/MM/YYYY)"
+        slots:
+          - 19
+      residents:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30><b>Residents"
+        lore:
+          - "<gray>List all your members."
+          - ""
+          - "<yellow>■ Left Click to open the residents menu."
+        slots:
+          - 12
+      vault:
+        material: ENDER_CHEST
+        display-name: "<c:#ff9f30><b>Town Vaults"
+        lore:
+          - "<gray>Your own private town vaults."
+          - ""
+          - "<yellow>■ Left Click to open the town vault selector."
+        slots:
+          - 14
+      bank:
+        material: GOLD_INGOT
+        display-name: "<c:#ff9f30><b>Town Bank"
+        lore:
+          - "<gray>Financial Overview."
+          - ""
+          - "<gold>Town Balance: <yellow><worth>"
+          - "<gold>Town Upkeep: <yellow><upkeep>"
+          - ""
+          - "<yellow>/town deposit <number>"
+          - "<gray>Deposit money into the town bank."
+          - ""
+          - "<yellow>/town withdraw <number>"
+          - "<gray>Withdraw money from the town bank."
+        slots:
+          - 16
+      upgrades:
+        material: ANVIL
+        display-name: "<c:#ff9f30><b>Town Upgrades"
+        lore:
+          - "<gray>Enhance your town"
+          - ""
+          - "<yellow>■ Left Click to open the town upgrades."
+        slots:
+          - 30
+      outposts:
+        material: DARK_OAK_DOOR
+        display-name: "<c:#ff9f30><b>Town Outposts"
+        lore:
+          - "<gray>Unlock outposts."
+          - ""
+          - "<yellow>■ Left Click to open the town outposts menu."
+        slots:
+          - 32
+      settings:
+        material: COMPARATOR
+        display-name: "<c:#ff9f30><b>Town Settings"
+        lore:
+          - "<gray>Manage your town."
+          - ""
+          - "<yellow>■ Left Click to open the town settings."
+          - ""
+          - "<gray><i>This allows you to toggle settings"
+          - "<gray><i>and permissions for your members."
+        slots:
+          - 34
+  VaultSelectorMenu:
+    title: Vault Selector
+    type: CHEST
+    rows: 1
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-39
+          - 42-44
+    elements:
+      vault:
+        material: CHEST
+        display-name: "<c:#ff9f30><b>Vault #<number>"
+        slots:
+          - 1
+  UpgradeMainMenu:
+    title: Town Upgrades
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      info:
+        material: ANVIL
+        display-name: "<c:#ff9f30>Info"
+        lore:
+          - "<gray>Enhance your town!"
+          - ""
+          - "<white>Here you can upgrade your town and"
+          - "<white>improve its traits. You'll need money"
+          - "<white>in your town bank in order to unlock stuff."
+        slots:
+          - 4
+      upgrade-CLAIMS:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30><b>Claims"
+        lore:
+          - "<gray>Expand your town!"
+          - ""
+          - "<white>Here you can unlock more claims."
+          - "<white>This will allow you to claim more land."
+        slots:
+          - 19
+      upgrade-MEMBERS:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30><b>Members"
+        lore:
+          - "<gray>Expand your town!"
+          - ""
+          - "<white>Here you can unlock more member slots."
+          - "<white>This will allow you to have more members."
+        slots:
+          - 21
+      upgrade-OUTPOSTS:
+        material: DARK_OAK_DOOR
+        display-name: "<c:#ff9f30><b>Outposts"
+        lore:
+          - "<gray>Expand your town!"
+          - ""
+          - "<white>Here you can unlock more outposts."
+          - "<white>This will allow you to claim more outposts."
+        slots:
+          - 25
+      upgrade-VAULT_AMOUNT:
+        material: ENDER_CHEST
+        display-name: "<c:#ff9f30><b>Vaults"
+        lore:
+          - "<gray>Expand your vault!"
+          - ""
+          - "<white>Here you can unlock more vault space."
+          - "<white>This will allow you to get more vaults."
+        slots:
+          - 23
+  UpgradeMenu:
+    title: "Town Upgrades"
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      upgrade-unlocked:
+        material: LIME_DYE
+        display-name: "<green>This upgrade is unlocked."
+        lore:
+          - "<c:#f7d3a3>Amount: <white><amount> <upgrade>"
+        slots:
+          - 19
+      upgrade-locked:
+        material: GRAY_DYE
+        display-name: "<red><b>Locked"
+        lore:
+          - "<c:#f7d3a3>Amount: <white><amount> <upgrade>"
+          - "<c:#f7d3a3>Price: <white>$<price>"
+          - ""
+          - "<yellow>■ Left Click to unlock more <upgrade>."
+        slots:
+          - 19
+      # info items
+      upgrade-info-CLAIMS:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30>Info"
+        lore:
+          - ""
+          - "<white>Unlocking more land will allow"
+          - "<white>you to claim more chunks of land."
+        slots:
+          - 4
+      upgrade-info-MEMBERS:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30>Info"
+        lore:
+          - ""
+          - "<white>Unlocking more members will increase"
+          - "<white>the total capacity of your town."
+        slots:
+          - 4
+      upgrade-info-OUTPOSTS:
+        material: DARK_OAK_DOOR
+        display-name: "<c:#ff9f30>Info"
+        lore:
+          - ""
+          - "<white>Unlocking more outposts allow you"
+          - "<white>to create more remote town locations."
+        slots:
+          - 4
+      upgrade-info-VAULT_AMOUNT:
+        material: ENDER_CHEST
+        display-name: "<c:#ff9f30>Info"
+        lore:
+          - ""
+          - "<white>Unlocking more vaults will allow"
+          - "<white>you to store more items."
+        slots:
+          - 4
+  TownSettingsMenu:
+    title: "Town Settings"
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slot: 1
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      toggles:
+        material: COMPARATOR
+        display-name: "<c:#ff9f30><b>Town Toggles"
+        lore:
+          - "<gray>Manage your town toggles."
+          - ""
+          - "<yellow>■ Left Click to change town toggles."
+        slots:
+          - 21
+      roles:
+        material: NAME_TAG
+        display-name: "<c:#ff9f30><b>Town Roles"
+        lore:
+          - "<gray>Manage your town permissions."
+          - ""
+          - "<yellow>■ Left Click to open the town settings."
+        slots:
+          - 23
+  TownTogglesMenu:
+    title: "Town Toggles"
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      pvp:
+        material: DIAMOND_SWORD
+        display-name: "<c:#ff9f30><b>PVP Status"
+        lore:
+          - "<gray>Whether you want to allow players"
+          - "<gray>to pvp in your town."
+          - ""
+          - "<c:#f7d3a3>Status: <status:'<red>PvP Enabled':'<green>PvP Disabled'>"
+          - ""
+          - "<yellow>■ Left Click to switch!"
+        slots:
+          - 22
+      join:
+        material: BARRIER
+        display-name: "<c:#ff9f30><b>Town Join Status"
+        lore:
+          - "<gray>Whether you want to allow players"
+          - "<gray>to join your town without an invite."
+          - ""
+          - "<c:#f7d3a3>Status: <status:'<green>Open':'<red>Closed'>"
+          - ""
+          - "<yellow>■ Left Click to switch!"
+        slots:
+          - 23
+      mobs:
+        material: ZOMBIE_HEAD
+        display-name: "<c:#ff9f30><b>Hostile Mobs Status"
+        lore:
+          - "<gray>Whether you want to allow hostile"
+          - "<gray>mobs in your town or not."
+          - ""
+          - "<c:#f7d3a3>Status: <status:'<red>Mobs Enabled':'<green>Mobs Disabled'>"
+          - ""
+          - "<yellow>■ Left Click to switch!"
+        slots:
+          - 24
+      spawn-setting:
+        material: RED_BED
+        display-name: "<c:#ff9f30><b>Town Spawn Status"
+        lore:
+          - "<gray>Whether you want to allow players"
+          - "<gray>to teleport to your town."
+          - ""
+          - "<c:#f7d3a3>Status: <white><status>"
+          - ""
+          - "<yellow>■ Left Click to switch!"
+        slots:
+          - 21
+  PlotMenu:
+    title: "Plot"
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35-44
+    elements:
+      members:
+        material: PLAYER_HEAD
+        display-name: "<c:#ff9f30><b>Members"
+        lore:
+          - "<gray>List all your members."
+          - ""
+          - "<yellow>■ Left Click to open the members menu."
+        slots:
+          - 20
+      perms:
+        material: COMPARATOR
+        display-name: "<c:#ff9f30><b>Plot Permissions"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to manage the plot's permissions."
+          - ""
+          - "<gray><i>This allows you to toggle settings"
+          - "<gray><i>and permissions for your members."
+        slots:
+          - 22
+      type:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30><b>Plot Type"
+        lore:
+          - ""
+          - "<yellow>■ Left Click to manage the plot's type."
+          - ""
+          - "<gray><i>This allows you to change the plot type."
+        slots:
+          - 24
+  PlotTypeMenu:
+    title: "Plot Type"
+    type: CHEST
+    rows: 5
+    decorator-elements:
+      - material: GRAY_STAINED_GLASS_PANE
+        display-name: "<gray> "
+        slots:
+          - 0-9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 37-44
+    elements:
+      go-home:
+        material: RED_STAINED_GLASS_PANE
+        display-name: "<red>Return Home"
+        lore: []
+        slots:
+          - 36
+      plot-type-DEFAULT:
+        material: GRASS_BLOCK
+        display-name: "<c:#ff9f30>Default Plot"
+        lore:
+          - "<c:#f7d3a3>This is the default plot type."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 19
+      plot-type-FARM:
+        material: HAY_BLOCK
+        display-name: "<c:#ff9f30><b>Farm Plot"
+        lore:
+          - "<c:#f7d3a3>Allow players to place/break farmables."
+          - ""
+          - "<red>Warning: ALL players including outsiders will"
+          - "<red>be able to break farmable blocks."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 21
+      plot-type-MOB_FARM:
+        material: CHICKEN
+        display-name: "<c:#ff9f30><b>Mobfarm Plot"
+        lore:
+          - "<c:#f7d3a3>Allow players to kill animals."
+          - ""
+          - "<red>Warning: ALL players including outsiders will"
+          - "<red>be able to kill animals."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 23
+      plot-type-ARENA:
+        material: DIAMOND_SWORD
+        display-name: "<c:#ff9f30><b>Arena Plot"
+        lore:
+          - "<c:#f7d3a3>Allow players to pvp."
+          - ""
+          - "<red>Warning: ALL players including outsiders will"
+          - "<red>be able to kill players. This has higher priority than the global town settings!"
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 25
+
+common-permission-lore:
+  - "<status:'<green>Enabled':'<red>Disabled'>"
+  - ""
+  - "<yellow>■ Left Click to toggle."

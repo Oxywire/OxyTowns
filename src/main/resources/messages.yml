@@ -1,0 +1,284 @@
+action-cancelled: "<red>You have cancelled this action."
+invalid-name: "<red>Your town or plot name may only contain A-Z and 0-9 characters."
+now-entering-wilderness:
+  action-bar: "<gold><bold>Now entering: <red>Wilderness"
+now-entering-town:
+  action-bar: "<gold><bold>Now entering: <yellow><town>"
+bypass-on: "<gold>You have toggled town bypass <green>on<gold>."
+bypass-off: "<gold>You have toggled town bypass <red>off<gold>."
+town:
+  no-town: "<red>You're not in a town."
+  already-member: "<red>You're already in a town."
+  not-owner: "<red>You must be the town mayor to do this."
+  not-found: "<red>That player is invalid. Have they joined this server before?"
+  invalid-name: "<red>Please put a valid MC username."
+  creation-no-permission: "<red>You do not have permission to create a town."
+  creation-name-already-exists: "<yellow><name> <red>already exists. Please pick another name."
+  creation-town-created:
+    message: "<gold>Town <yellow><name> <gold>has been created by <yellow><player><gold>."
+    sound:
+      key: entity.ui.toast.challenge_complete
+      volume: 1.0
+      pitch: 1.0
+  success-title:
+    title:
+      title: "<gold>Success!"
+      sub-title: "<white>You established a town."
+  towny-map-header: "<yellow><st>                                <gold></st><bold> Town Map<yellow><st>                                "
+  towny-map-footer: "<yellow><st>                                                                                "
+  town-disband-confirm: |
+    <gray>
+    <gray>              <gold><st>               <gold></st><bold> Town Disband <gold><st>               <reset>
+    <gray>
+    <red>         You are about to disband your town. Are you sure?
+    <gray>
+    <gray><italic>                          Please make a choice.
+    <gray>                        <click:run_command:/t cancel><red><bold>[Cancel]</click>     <click:run_command:/t disband confirm><green><bold>[Confirm]</click>
+    <gray>                 <gold><st>                                             <reset>
+  town-disband-success: "<red>The town of <yellow><town><red> fell into ruins."
+  error-player-already-in-town: "<yellow><player> <red>is already in a town."
+  error-player-already-invited: "<yellow><player> <red>is already invited."
+  broadcast-player-invited: "<yellow><player> <gold>has been invited to the town."
+  error-member-upgrade-needed: "<red>Maximum amount of residents reached. Buy town upgrades if you need more."
+  error-no-permission-invite: "<red>You are not allowed to invite members."
+  broadcast-member-joined: "<yellow><player> <gold>joined the town."
+  broadcast-member-leave: "<yellow><player> <gold>left the town."
+  not-member: "<yellow><player> <red>is not a member of your town."
+  cant-kick-mayor: "<red>You can't kick the town mayor."
+  kick-success: "<yellow><player> <red>has been kicked from the town."
+  no-permission-kick: "<red>You are not allowed to kick someone."
+  rename-broadcast: "<gold>Town has been renamed to <yellow><new-name><gold>."
+  rename-no-permission: "<red>You are not allowed to rename your town."
+  settings-no-permission: "<red>You are not allowed to manage town settings."
+  chunk-not-claimed: "<red>You've not claimed this chunk."
+  spawn-set: "<gold>Successfully set town spawn."
+  no-permission-spawn-set: "<red>You are not allowed to set your town spawn."
+  no-permission-claim: "<red>You are not allowed to claim/unclaim chunks."
+  not-valid-claim: "<red>This is an invalid town."
+  view-town-chunk: |
+    <c:#ff9f30><b>|</b><st>                                                            </st>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3><c:#ff9f30><b><name></b>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>Established on: <white><age:MMMM d, yyyy>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>Population: <white><members-and-owner> Players
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>Land Mass: <white><claims> Claims and <outposts> Outposts.
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>The town has <white>$<worth><c:#f7d3a3> in the bank,
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>and pays <white>$<upkeep> <c:#f7d3a3>in taxes.
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b><st>                                                            </st>
+  no-permission-teleport: "<red>This town is private and you can't teleport here."
+  no-spawn-set: "<red>No home has been set."
+  broadcast-promotion: "<yellow><player> <gold>has been demoted to <yellow><role><gold>."
+  broadcast-demotion: "<yellow><player> <gold>has been promoted to <yellow><role><gold>."
+  not-online: "<red>Player is not online."
+  trust-added: "<yellow><player> <gold>has been added to the town trust list."
+  trust-removed: "<yellow><player> <gold>has been removed from the town trust list."
+  cant-trust-them: "<red>You can't trust members of your town."
+  no-permission-trust: "<red>You are not allowed to manage town trust."
+  already-mayor: "<red>That player is already the town mayor."
+  town-transfer-mayor-confirm: |
+    <gray>
+    <gray>         <gold><st>               </st><gold><bold> Transfer Mayorship <gold><st>               <reset>
+    <gray>
+    <yellow>            <gray>Are you sure you want to transfer mayorship?
+    <gray>
+    <gray><italic>                          Please make a choice.
+    <gray>                        <click:run_command:/t cancel><red><bold>[Cancel]</click>     <click:run_command:/t setmayor <player> confirm><green><bold>[Accept]</click>
+    <gray>                 <gold><st>                                             <reset>
+  town-transfer-mayor-success: "<yellow><player> <gold>is now the mayor of the town."
+  plot:
+    type:
+      set-type-no-permission: "<red>You are not allowed to change this plot type."
+      type-changed: "<gold>You changed this plot to <yellow><type><gold>."
+    member:
+      not-member: "<yellow><player> <red>is not a member of the town."
+      success: "<yellow><player> <gold>was added to this plot."
+      added: "<yellow><player> <gold>added you to a plot."
+      already-member: "<yellow><player> <red>is already a member of this plot."
+    help-message: |
+      <c:#ff9f30><b>|</b><st>                                                            </st>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3><c:#ff9f30><b>Plot Commands:</b>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>/plot assign <player> <gray>- <white>Assign a player to the plot.
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>/plot evict <player> <gray>- <white>Evict a player from the plot.
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>/plot rename <name> <gray>- <white>Rename the plot.
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>/plot type <type> <gray>- <white>Set the plot type.
+      <c:#ff9f30><b>|</b>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3><c:#ff9f30><b>Plot Types:</b>
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Default <gray>- <white>The default plot type.
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Farm <gray>- <white>Allow <u>ALL</u> players to farm.
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Mobfarm <gray>- <white>Allow <u>ALL</u> players to kill animals.
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Arena <gray>- <white>Allow <u>ALL</u> players to pvp.
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+      <c:#ff9f30><b>|</b><st>                                                            </st>
+    not-claimed: "<red>No members have been assigned to this plot."
+    enter:
+      action-bar: "<gold>Now entering: <yellow><plot> <gray>[<type>]"
+    no-permission-assign: "<red>You are not allowed to assign members to plots."
+    evicted: "<yellow><player> <red>evicted from the plot."
+    evicted-no-permission: "<red>You are not allowed to evict members from plots."
+    rename-no-permission: "<red>You are not allowed to rename the plot."
+    manage-no-permission: "<red>You are not allowed to manage this plot."
+    rename-success: "<gold>Renamed plot to <yellow><name><gold>."
+    is-not-plot: "<red>This is not a plot."
+    plot-info: |
+      <c:#ff9f30><b>|</b><st>                                                            </st>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3><c:#ff9f30><b><name></b>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>This plot was created on <white><age:MMMM d, yyyy>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>Members: <white><members>
+      <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+      <c:#ff9f30><b>|</b><st>                                                            </st>
+    here-delimiter: "<gray>, <yellow>"
+  claim:
+    claim-success: "<gold>You successfully claimed <yellow><claims> chunk(s) <gold>for <yellow>$<price><gold>."
+    chunk-already-claimed: "<red>This chunk is already claimed."
+    town-near: "<red>There's already another town within 5 chunks. Move a bit further away."
+    error-connected-claims: "<red>Your claims must be connected."
+    error-protected-claim: "<red>You can't claim this area."
+    error-upgrade-required: "<red>Maximum amount of claimed chunks reached. Buy town upgrades if you need more."
+    error-blacklisted-world: "<red>You can't claim in this world."
+    error-cannot-afford-claim: "<red>Your town can't afford this. Deposit money using <yellow>/t deposit <amount><red>."
+    error-over-max-radius: "<red>The maximum radius allowed is <yellow><max><red>."
+    error-zero-input: "<red>Please use <yellow>/t claim <red>to claim the current chunk you are standing in."
+    error-negative-input: "<red>Please specify a positive number for the radius to claim."
+  unclaim:
+    not-claimed: "<red>This area isn't claimed."
+    unclaim-success: "<red>Chunk unclaimed."
+    confirm-home-block-unclaim: |
+      <gray>
+      <gray>              <gold><st>               </st><gold><bold> Town Unclaim <gold><st>               <reset>
+      <gray>
+      <red>    This claim contains your town's home. Are you sure you want to unclaim this?
+      <gray>
+      <gray><italic>                          Please make a choice.
+      <gray>                        <click:run_command:/t cancel><red><bold>[Cancel]</click>     <click:run_command:/t unclaim confirm><green><bold>[Confirm]</click>
+      <gray>                 <gold><st>                                             <reset>
+    chunk-linked-outpost: "<red>You can not unclaim this chunk because it is linked to an outpost."
+    unclaim-confirm: |
+      <gray>
+      <gray>              <gold><st>               </st><gold><bold> Town Unclaim <gold><st>               <reset>
+      <gray>
+      <red>    You are about to unclaim a town outpost. Are you sure?
+      <gray>
+      <gray><italic>                          Please make a choice.
+      <gray>                        <click:run_command:/t cancel><red><bold>[Cancel]</click>     <click:run_command:/t unclaim confirm><green><bold>[Confirm]</click>
+      <gray>                 <gold><st>
+  bank:
+    error-cannot-afford: "<red>Your town can't afford this."
+    error-withdraw-not-allowed: "<red>You are not allowed to withdraw money from your town bank."
+    deposit-successful: "<yellow><player> <gold>has deposited <yellow>$<amount><gold> into the town bank."
+    withdraw-successful: "<yellow><player> <gold>has withdrawn <yellow>$<amount> <gold>from the town bank."
+  outpost:
+    claim-successful: "<yellow><town> <gold>successfully claimed this outpost."
+    upgrade-required: "<red>Maximum amount of outposts reached. Buy town upgrades if you need more."
+    no-permission-claim: "<red>You are not allowed to claim an outpost."
+  upgrade:
+    unlocked-already: "<gold>You've already unlocked this."
+    cannot-afford: "<red>Your town can't afford this unlock. <red>(<price>)"
+    unlock-first: "<red>Unlock <yellow><tier> <red>first."
+    upgraded: "<gold>Successfully upgraded <yellow><upgrade> <green>to <yellow><tier> <green>for <yellow><price><green>."
+    no-permission: "<red>You don't have permission to upgrade your town."
+  vault:
+    no-open-permission: "<red>You don't have permission to open the Town Vault."
+    invalid-number: "<red>That is not a valid Vault number. Please try again!"
+  ban:
+    already-banned: "<red>That user is already banned from your town."
+    no-permission: "<red>You don't have permission to ban users from your town."
+    target-in-town: "<red>You can't ban town members."
+    broadcast-ban: "<yellow><player> <red>is now banned from your town."
+    invalid-reason: "<red>Please keep your ban reason to under 20 characters."
+  unban:
+    not-banned: "<red>That player is not banned."
+    no-permission: "<red>You don't have permission to unban users from your town."
+    broadcast-unban: "<yellow><player> <gold>is now unbanned from your town."
+player:
+  error-cannot-afford-deposit: "<red>You don't have enough money to deposit <yellow>$<amount><red>."
+  town-invited-expired: "<red>Your invite from <yellow><town> <red>has expired."
+  town-join-confirmation: |
+    <gray>
+    <gray>              <gold><st>               </st><gold><bold> Town Invite <gold><st>               <reset>
+    <gray>
+    <yellow>               <player> <gray>invited you to join <yellow><town><gray>.
+    <gray>
+    <gray><italic>                          Please make a choice.
+    <gray>                        <click:run_command:/t cancel><red><bold>[Cancel]</click>     <click:run_command:/t join <town>><green><bold>[Accept]</click>
+    <gray>                 <gold><st>                                             <reset>
+  already-in-town: "<red>You're already in a town."
+  invalid-town: "<red>That's not a valid town."
+  not-invited: "<red>You're not invited to this town."
+  full-town: "<red>This town is full. Come back later."
+  mayor-cannot-leave: "<red>Town mayors can't leave their town."
+  successfully-left: "<red>You left your town."
+  kicked-from-town: "<red>You have been kicked from the town."
+  cant-kick-self: "<red>You can't kick yourself."
+  banned-from-town: "<yellow><player> <red>banned you from their town <yellow><town><red>."
+  banned-warning-title:
+    title:
+      title: "<dark_red>(<red>!<dark_red>) <red>Banned <dark_red>(<red>!<dark_red>)"
+      sub-title: "<red>You're banned from that town."
+  unban-message: "<gold>You've been unbanned from <yellow><town><gold>."
+  cant-do-that-command-in-this-plot-type: "<red>You can't do that command in this <type> plots."
+  you-were-trusted: "<gold>You were trusted in <yellow><town><gold>."
+  you-were-untrusted: "<gold>You were untrusted in <yellow><town><gold>."
+  you-are-now-the-mayor: "<gold>You are now the mayor of <yellow><town><gold>."
+admin:
+  town:
+    player-in-town: "<red>That player is already in a town."
+    player-not-in-town: "<red>That player is not in a town."
+    player-is-mayor: "<red>This user is the mayor of a town already. Try disbanding it first."
+    player-force-added: "<red>You've added <yellow><player> <red>to <yellow><town><red>."
+    player-force-removed: "<red>You've removed <yellow><player> <red>from <yellow><town><red>."
+    player-force-mayor: "<yellow><player> <red>is now the new mayor of <yellow><town><red>."
+    disband-warning: |
+      <gray>
+      <gray>              <gold><st>               </st><gold><bold> Town Disband <gold><st>               <reset>
+      <gray>
+      <red>         You are about to disband this town. Are you sure?
+      <gray>
+      <gray><italic>                          Please make a choice.
+      <gray>                        <click:run_command:/t cancel><red><bold>[Cancel]</click>     <click:run_command:/ta town disband <town> confirm><green><bold>[Confirm]</click>
+      <gray>                 <gold><st>                                             <reset>
+    disband-success: "<red>You've disbanded the town of <yellow><town><red>."
+    bank:
+      added: "<red>You've added <yellow>$<amount> <red>to <yellow><town>'s <red>bank. (New balance is <yellow>$<balance><red>)"
+      balance: "<yellow><town> <gold>has a balance of <yellow>$<balance><gold>."
+      set: "<red>You've set <yellow><town>'s <red>balance to <yellow>$<balance><red>."
+      not-enough: "<red>This town does not have enough money to take from their bank."
+      removed: "<red>You've removed <yellow>$<amount> <red>from <yellow><town>'s <red>bank. (New balance is <yellow>$<balance><red>)"
+    chunk-already-claimed: "<red>This chunk is already claimed by <town>."
+    chunk-claim-success: "<red>You've claimed this chunk for <yellow><town><red>."
+    chunk-unclaim-success: "<red>You've unclaimed this chunk for <yellow><town><red>."
+  stats: |
+    <c:#ff9f30><b>|</b><st>                                                            </st>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3><c:#ff9f30><b>Kingdom Stats</b>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>There is a total of <white><towns> towns<c:#f7d3a3> with a total
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>of <white><members> <c:#f7d3a3>people being part of said towns.
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>A total of <white><chunks> chunks <c:#f7d3a3>have been claimed
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>and there are <white><outposts> outposts<c:#f7d3a3>.
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>Global Town bank: <white>$<money>
+    <c:#ff9f30><b>|</b>  <c:#f7d3a3>Amount of plots: <white><plots> Plots
+    <c:#ff9f30><b>|</b><st>                                                            </st>
+tax:
+  collection-message: |
+    <gray>
+    <dark_red>(<red>!<dark_red>) <red>A new day is here! Taxes and rent have been collected <dark_red>(<red>!<dark_red>)
+    <gray>
+  town-disbanded: "<red>The town of <yellow><town> <red>couldn''t afford to pay taxes."
+  collection-warning: |
+    <gray>
+    <dark_red>(<red>!<dark_red>) <red>Town taxes will be collected in <yellow><time> <red>minutes <dark_red>(<red>!<dark_red>)
+    <gray>
+command-feedback:
+  argument-parse: "<red>This is an invalid command argument."
+  command-execution: "<red>An internal error occurred while attempting to perform this command."
+  invalid-command-sender: "<red>Invalid command sender. You must be of type <red><value>"
+  invalid-syntax: "<red>This is an invalid command."
+  no-permission: "<red>I'm sorry, but you do not have permission to perform this command.<br>Please contact the server administrators if you believe that this is an error."

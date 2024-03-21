@@ -1,0 +1,21 @@
+stroke: true
+stroke-color: 0x000000
+stroke-weight: 3
+stroke-opacity: 1.0
+
+fill: true
+fill-color: 0xffc800
+fill-opacity: 0.5
+fill-rule: EVENODD
+
+click-tooltip: |
+  <bold><town></bold>
+  Mayor: <bold><mayor></bold>
+  Established on: <bold><age></bold>
+  Land Mass: <bold><claims> claims and <outposts> outposts</bold>
+  Residents: <bold><residents></bold>
+
+hover-tooltip: <town>
+
+town-spawn-icon: https://oxywire.com/images/logo.png
+town-spawn-icon-size: 32

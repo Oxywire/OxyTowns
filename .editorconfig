@@ -1,0 +1,14 @@
+[*]
+max_line_length = 150
+trim_trailing_whitespace = true
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+ij_continuation_indent_size = 4
+
+[*.java]
+indent_size = 4
+
+[*.md]
+max_line_length = off

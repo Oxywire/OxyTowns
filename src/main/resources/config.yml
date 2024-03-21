@@ -1,0 +1,245 @@
+# This is how much it costs for a town to claim a chunk.
+claim-price: 150.0
+
+# This is how much it costs for a town to claim an outpost.
+outpost-price: 50000.0
+
+# This is the max chunk radius players can claim using /t claim <radius>.
+# Setting this to 3 means that a 7x7 (total of 49 chunks) can be claimed at once.
+max-claim-radius: 3
+
+# This command will be executed in console when a player is banned from a town.
+# Keeping it to "spawn <player>" ensures that the banned player is teleported out of the town.
+ban-console-command: spawn <player>
+
+# These are the plot type settings. This is where you can define what is and isn't allowed in each plot type.
+# Blocks; allows you to configure which blocks can be broken inside said plot type.
+# Entities, allows you to configure which entities can be killed inside said plot type.
+# Blacklisted Commands; allows you to configure which commands are not allowed while standing in said plot type.
+plots:
+  FARM:
+    blocks:
+      - WHEAT
+      - CARROTS
+      - POTATOES
+      - BEETROOTS
+      - PUMPKIN
+      - PUMPKIN_SEEDS
+      - MELON
+      - MELON_SEEDS
+      - SUGAR_CANE
+      - CACTUS
+      - NETHER_WART
+      - BAMBOO
+      - COCOA
+      - COCOA_BEANS
+      - SWEET_BERRY_BUSH
+      - CHORUS_FLOWER
+      - CHORUS_PLANT
+      - OAK_LOG
+      - BIRCH_LOG
+      - SPRUCE_LOG
+      - JUNGLE_LOG
+      - ACACIA_LOG
+      - DARK_OAK_LOG
+      - MANGROVE_LOG
+      - CHERRY_LOG
+      - CRIMSON_STEM
+      - WARPED_STEM
+      - OAK_LEAVES
+      - BIRCH_LEAVES
+      - SPRUCE_LEAVES
+      - JUNGLE_LEAVES
+      - ACACIA_LEAVES
+      - DARK_OAK_LEAVES
+      - MANGROVE_LEAVES
+      - CHERRY_LEAVES
+      - AZALEA_LEAVES
+      - FLOWERING_AZALEA_LEAVES
+      - STRIPPED_OAK_LOG
+      - STRIPPED_BIRCH_LOG
+      - STRIPPED_SPRUCE_LOG
+      - STRIPPED_JUNGLE_LOG
+      - STRIPPED_ACACIA_LOG
+      - STRIPPED_DARK_OAK_LOG
+      - STRIPPED_MANGROVE_LOG
+      - STRIPPED_CHERRY_LOG
+      - STRIPPED_CRIMSON_STEM
+      - STRIPPED_WARPED_STEM
+      - OAK_SAPLING
+      - BIRCH_SAPLING
+      - SPRUCE_SAPLING
+      - JUNGLE_SAPLING
+      - ACACIA_SAPLING
+      - DARK_OAK_SAPLING
+      - MANGROVE_PROPAGULE
+      - CHERRY_SAPLING
+      - CRIMSON_FUNGUS
+      - WARPED_FUNGUS
+      - BROWN_MUSHROOM
+      - RED_MUSHROOM
+      - RED_MUSHROOM_BLOCK
+      - MUSHROOM_STEM
+      - BROWN_MUSHROOM_BLOCK
+      - MANGROVE_ROOTS
+      - MUDDY_MANGROVE_ROOTS
+      - NETHER_WART_BLOCK
+      - WARPED_WART_BLOCK
+    entities: []
+    blacklisted-commands: []
+  MOB_FARM:
+    blocks: []
+    entities:
+      - ALLAY
+      - AXOLOTL
+      - BAT
+      - BEE
+      - BLAZE
+      - CAMEL
+      - CAT
+      - CAVE_SPIDER
+      - CHICKEN
+      - COD
+      - COW
+      - CREEPER
+      - DOLPHIN
+      - DONKEY
+      - DROWNED
+      - ELDER_GUARDIAN
+      - ENDER_DRAGON
+      - ENDERMAN
+      #- ENDERMITE
+      - EVOKER
+      - FOX
+      - FROG
+      - GHAST
+      - GIANT
+      - GLOW_SQUID
+      - GOAT
+      - GUARDIAN
+      - HOGLIN
+      - HORSE
+      - HUSK
+      - ILLUSIONER
+      - IRON_GOLEM
+      - LLAMA
+      - MAGMA_CUBE
+      - MULE
+      - MUSHROOM_COW
+      - OCELOT
+      - PANDA
+      - PARROT
+      - PHANTOM
+      - PIG
+      - PIGLIN
+      - PIGLIN_BRUTE
+      - PILLAGER
+      - POLAR_BEAR
+      - PUFFERFISH
+      - RABBIT
+      - RAVAGER
+      - SALMON
+      - SHEEP
+      - SHULKER
+      - SHULKER_BULLET
+      - SILVERFISH
+      - SKELETON
+      - SKELETON_HORSE
+      - SLIME
+      - SNIFFER
+      - SNOWMAN
+      - SPIDER
+      - SQUID
+      - STRAY
+      - STRIDER
+      - TADPOLE
+      - TRADER_LLAMA
+      - TROPICAL_FISH
+      - TURTLE
+      - VEX
+      - VILLAGER
+      - VINDICATOR
+      - WANDERING_TRADER
+      - WARDEN
+      - WITCH
+      - WITHER
+      - WITHER_SKELETON
+      - WITHER_SKULL
+      - WOLF
+      - ZOGLIN
+      - ZOMBIE
+      - ZOMBIE_HORSE
+      - ZOMBIE_VILLAGER
+      - ZOMBIFIED_PIGLIN
+    blacklisted-commands: []
+  ARENA:
+    blocks: []
+    entities:
+      - PLAYER
+    blacklisted-commands:
+      - /fly
+
+# These are the upgrades settings. This is where you can define how much you unlock and how much they cost.
+upgrades:
+  CLAIMS:
+    # The first number indicates the amount of claims. The second number indicates the cost of the upgrade.
+    # "25: 500.0" means that you will unlock 25 claims for $500.
+    25: 500.0
+    50: 25000.0
+    150: 50000.0
+    250: 100000.0
+    500: 250000.0
+    750: 500000.0
+    1000: 1000000.0
+  MEMBERS:
+    # The first number indicates the amount of members. The second number indicates the cost of the upgrade.
+    # "10: 500.0" means that you will unlock 10 total members for $500.
+    10: 500.0
+    25: 2500.0
+    50: 15000.0
+    75: 50000.0
+    100: 150000.0
+    150: 350000.0
+    250: 500000.0
+  VAULT_AMOUNT:
+    # The first number indicates the amount of vaults. The second number indicates the cost of the upgrade.
+    # "2: 1000.0" means that you will unlock 2 total vaults for $1,000.
+    2: 1000.0
+    3: 2500.0
+    4: 5000.0
+    5: 10000.0
+    6: 25000.0
+    8: 50000.0
+    9: 75000.0
+  OUTPOSTS:
+    # The first number indicates the amount of vaults. The second number indicates the cost of the upgrade.
+    # "1: 1000.0" means that you will unlock 2 total vaults for $1,000.
+    1: 1000.0
+    2: 2500.0
+    3: 5000.0
+    4: 15000.0
+    5: 25000.0
+    6: 50000.0
+    7: 100000.0
+
+# These are the worlds where players can NOT claim land.
+blacklisted-worlds:
+  - example_world
+
+# Town upkeep settings.
+# Upkeep will be collected once a day. This money will be withdrawn from all town banks.
+upkeep:
+  # Whether upkeep is enabled.
+  enabled: true
+  # This is the amount that the server will collect for every claimed chunk a town has.
+  town-value: 25.0
+  # The settings below define what time upkeep will be collected.
+  hour: 12
+  timezone: America/New_York
+
+# We provide a barebones town chat system. It's up to your chat plugin for a more robust system.
+town-chat:
+  # Whether town chat is enabled.
+  enabled: true
+  # This is the format of the town chat message.
+  format: "<green>[Town] <white><sender>: <gray><message>"
