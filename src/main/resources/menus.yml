@@ -1220,8 +1220,8 @@ singles:
         lore:
           - "<gray>Financial Overview."
           - ""
-          - "<gold>Town Balance: <yellow><worth>"
-          - "<gold>Town Upkeep: <yellow><upkeep>"
+          - "<gold>Town Balance: <yellow>$<worth>"
+          - "<gold>Town Upkeep: <yellow>$<upkeep>"
           - ""
           - "<yellow>/town deposit <number>"
           - "<gray>Deposit money into the town bank."
