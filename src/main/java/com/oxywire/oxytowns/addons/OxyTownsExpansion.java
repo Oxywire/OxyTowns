@@ -6,6 +6,7 @@ import com.oxywire.oxytowns.config.messaging.Message;
 import com.oxywire.oxytowns.entities.impl.town.Town;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
@@ -15,14 +16,15 @@ public final class OxyTownsExpansion extends PlaceholderExpansion {
 
     private final TownCache townCache = OxyTownsPlugin.get().getTownCache();
     private final Map<String, Function<OfflinePlayer, String>> placeholderData = Map.of(
-        "name", player -> townCache.getTownByPlayer(player.getUniqueId()).map(Town::getName).orElse("&cNone"),
-    "balance", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(Town::getBankValue).orElse(0.00)),
-    "chunks", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getClaimedChunks().size()).orElse(0)),
-    "outposts", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOutpostChunks().size()).orElse(0)),
-    "all_claims", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOutpostAndClaimedChunks().size()).orElse(0)),
-    "owner", player -> townCache.getTownByPlayer(player.getUniqueId()).map(town -> Bukkit.getOfflinePlayer(town.getOwner()).getName()).orElse(""),
-    "member_count", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOwnerAndMemberNames().size()).orElse(0)),
-        "town_rank", player -> townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOwnerAndMembersWithRoles().get(player.getUniqueId())).map(Message::formatEnum).orElse("")
+        "name", player -> townCache.getTownByPlayer(player.getUniqueId()).map(Town::getName).orElse("None"),
+        "balance", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(Town::getBankValue).orElse(0.00)),
+        "chunks", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getClaimedChunks().size()).orElse(0)),
+        "outposts", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOutpostChunks().size()).orElse(0)),
+        "all_claims", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOutpostAndClaimedChunks().size()).orElse(0)),
+        "owner", player -> townCache.getTownByPlayer(player.getUniqueId()).map(town -> Bukkit.getOfflinePlayer(town.getOwner()).getName()).orElse(""),
+        "member_count", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOwnerAndMemberNames().size()).orElse(0)),
+        "town_rank", player -> townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOwnerAndMembersWithRoles().get(player.getUniqueId())).map(Message::formatEnum).orElse(""),
+        "whereami", player -> Optional.ofNullable(townCache.getTownByLocation(player.getLocation())).map(Town::getName).orElse("Wilderness")
     );
     private static final Function<OfflinePlayer, String> NULL = player -> "";
 
