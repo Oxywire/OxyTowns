@@ -11,6 +11,7 @@ import java.util.function.Function;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public final class OxyTownsExpansion extends PlaceholderExpansion {
 
@@ -24,7 +25,7 @@ public final class OxyTownsExpansion extends PlaceholderExpansion {
         "owner", player -> townCache.getTownByPlayer(player.getUniqueId()).map(town -> Bukkit.getOfflinePlayer(town.getOwner()).getName()).orElse(""),
         "member_count", player -> String.valueOf(townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOwnerAndMemberNames().size()).orElse(0)),
         "town_rank", player -> townCache.getTownByPlayer(player.getUniqueId()).map(town -> town.getOwnerAndMembersWithRoles().get(player.getUniqueId())).map(Message::formatEnum).orElse(""),
-        "whereami", player -> Optional.ofNullable(townCache.getTownByLocation(player.getLocation())).map(Town::getName).orElse("Wilderness")
+        "whereami", player -> player instanceof Player onlinePlayer ? Optional.ofNullable(townCache.getTownByLocation(onlinePlayer.getLocation())).map(Town::getName).orElse("Wilderness") : "Wilderness"
     );
     private static final Function<OfflinePlayer, String> NULL = player -> "";
 
