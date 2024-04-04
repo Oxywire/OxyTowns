@@ -4,6 +4,7 @@ import xyz.jpenilla.runpaper.task.RunServer
 
 plugins {
     java
+    `maven-publish`
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.freefair.lombok") version "8.2.2"
 
@@ -89,6 +90,14 @@ tasks {
             url("https://download.luckperms.net/1534/bukkit/loader/LuckPerms-Bukkit-5.4.121.jar")
             url("https://ci.enginehub.org/repository/download/bt11/22585:id/worldguard-bukkit-7.0.10-SNAPSHOT-dist.jar?branch=version/7.0.x&guest=1")
             url("https://ci.enginehub.org/repository/download/bt10/22825:id/worldedit-bukkit-7.2.18-SNAPSHOT-dist.jar?branch=version/7.2.x&guest=1")
+        }
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("plugin") {
+            from(components["java"])
         }
     }
 }
