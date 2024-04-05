@@ -21,7 +21,7 @@ public final class VaultMenu extends StorageGui {
 
         final byte[][] serialized = Json.GSON.fromJson(encoded, byte[][].class);
 
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < serialized.length; i++) {
             final byte[] item = serialized[i];
             if (item == null || item.length == 0) continue;
             items[i] = ItemStack.deserializeBytes(item);
