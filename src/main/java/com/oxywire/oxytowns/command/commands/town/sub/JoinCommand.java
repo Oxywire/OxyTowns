@@ -8,6 +8,8 @@ import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
 import com.oxywire.oxytowns.entities.types.Upgrade;
 import com.oxywire.oxytowns.entities.types.settings.Setting;
+import com.oxywire.oxytowns.events.TownPlayerJoinEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
@@ -53,6 +55,10 @@ public final class JoinCommand {
             return;
         }
 
+        TownPlayerJoinEvent joinEvent = new TownPlayerJoinEvent(wantedTown.get(), sender);
+        Bukkit.getPluginManager().callEvent(joinEvent);
+        if (joinEvent.isCancelled())
+            return;
         wantedTown.get().handleJoin(sender);
     }
 }

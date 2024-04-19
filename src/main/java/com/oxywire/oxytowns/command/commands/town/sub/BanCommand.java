@@ -13,6 +13,7 @@ import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
 import com.oxywire.oxytowns.entities.types.perms.Permission;
 import com.oxywire.oxytowns.events.TownPlayerBanEvent;
+import com.oxywire.oxytowns.events.TownPlayerLeaveEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -56,6 +57,11 @@ public final class BanCommand {
             messages.getTown().getBan().getInvalidReason().send(sender);
             return;
         }
+
+        TownPlayerLeaveEvent leaveEvent = new TownPlayerLeaveEvent(town, sender, TownPlayerLeaveEvent.Reason.BANNED);
+        Bukkit.getPluginManager().callEvent(leaveEvent);
+        if (leaveEvent.isCancelled())
+            return;
 
         final TownPlayerBanEvent event = new TownPlayerBanEvent(town, offlinePlayer);
         Bukkit.getPluginManager().callEvent(event);

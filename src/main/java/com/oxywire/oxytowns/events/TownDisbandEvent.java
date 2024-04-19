@@ -9,14 +9,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Called when a town has been disbanded by a player.
  */
-public class TownDisbandEvent extends TownEvent implements Cancellable {
+public class TownDisbandEvent extends TownPlayerEvent implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
 
     /** The player disbanding the town */
     private final Player player;
     private boolean cancelled;
     public TownDisbandEvent(Town town, Player player) {
-        super(town);
+        super(town, player);
         this.player = player;
     }
 
@@ -28,10 +28,6 @@ public class TownDisbandEvent extends TownEvent implements Cancellable {
     @SuppressWarnings("unused")
     public static HandlerList getHandlerList() {
         return HANDLERS;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     @Override

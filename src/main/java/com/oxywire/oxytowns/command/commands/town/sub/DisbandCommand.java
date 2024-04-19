@@ -11,9 +11,12 @@ import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
 import com.oxywire.oxytowns.events.TownDisbandEvent;
+import com.oxywire.oxytowns.events.TownPlayerLeaveEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public final class DisbandCommand {
 
@@ -51,6 +54,12 @@ public final class DisbandCommand {
         TownDisbandEvent disbandEvent = new TownDisbandEvent(town, sender);
         if (!disbandEvent.callEvent())
             return;
+
+        for (UUID player : town.getOwnerAndMembers()) {
+            TownPlayerLeaveEvent leaveEvent = new TownPlayerLeaveEvent(town, Bukkit.getOfflinePlayer(player), TownPlayerLeaveEvent.Reason.DISBANDED);
+            Bukkit.getPluginManager().callEvent(leaveEvent);
+        }
+
         messages.getTown().getTownDisbandSuccess().send(Bukkit.getServer(), Placeholder.unparsed("town", town.getName()));
         this.townCache.deleteTown(town);
     }
