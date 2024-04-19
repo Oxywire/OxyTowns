@@ -10,6 +10,7 @@ import com.oxywire.oxytowns.command.annotation.MustBeInTown;
 import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.events.TownDisbandEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -47,6 +48,9 @@ public final class DisbandCommand {
             return;
         }
 
+        TownDisbandEvent disbandEvent = new TownDisbandEvent(town, sender);
+        if (!disbandEvent.callEvent())
+            return;
         messages.getTown().getTownDisbandSuccess().send(Bukkit.getServer(), Placeholder.unparsed("town", town.getName()));
         this.townCache.deleteTown(town);
     }

@@ -6,7 +6,7 @@ import com.oxywire.oxytowns.entities.types.perms.Permission;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public final class TownPermissionChangeEvent extends Event {
+public final class TownPermissionChangeEvent extends TownEvent {
 
     private static final HandlerList HANDLERS = new HandlerList();
     private final Town town;
@@ -21,6 +21,7 @@ public final class TownPermissionChangeEvent extends Event {
      * @param permission the permission being changed
      */
     public TownPermissionChangeEvent(final Town town, final Role role, final Permission permission) {
+        super(town);
         this.town = town;
         this.role = role;
         this.permission = permission;
@@ -32,10 +33,6 @@ public final class TownPermissionChangeEvent extends Event {
 
     public HandlerList getHandlers() {
         return HANDLERS;
-    }
-
-    public Town getTown() {
-        return this.town;
     }
 
     public Role getRole() {
