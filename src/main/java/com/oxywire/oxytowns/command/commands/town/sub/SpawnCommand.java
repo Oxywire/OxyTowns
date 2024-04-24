@@ -38,7 +38,7 @@ public final class SpawnCommand {
 
             if (town.getSpawnSetting() == SpawnSetting.MEMBERS) {
                 final Optional<Town> possibleTown = townCache.getTownByPlayer(sender);
-                if (possibleTown.isPresent() && !possibleTown.get().equals(town)) {
+                if (possibleTown.isEmpty() || !possibleTown.get().equals(town)) {
                     messages.getTown().getNoPermissionTeleport().send(sender);
                     return;
                 }
