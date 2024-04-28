@@ -67,7 +67,7 @@ public final class UpgradeMenu extends Menu {
 
                         if (this.upgrade == Upgrade.VAULT_AMOUNT) {
                             for (int i = this.town.getVaults().size(); i < this.upgrade.getTiers().keySet().toArray(Integer[]::new)[upgradeTier]; i++) {
-                                this.town.getVaults().add(new VaultMenu(i, "Town Vault"));
+                                this.town.getVaults().add(new VaultMenu(6, "Town Vault"));
                             }
 
                             OxyTownsPlugin.get().getTownCache().updateVaultLogic(this.town);
