@@ -51,7 +51,7 @@ public final class DisbandCommand {
             return;
         }
 
-        TownDisbandEvent disbandEvent = new TownDisbandEvent(town, sender);
+        TownDisbandEvent disbandEvent = new TownDisbandEvent(town);
         if (!disbandEvent.callEvent())
             return;
 

@@ -7,7 +7,9 @@ import cloud.commandframework.annotations.CommandPermission;
 import com.oxywire.oxytowns.cache.TownCache;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.events.TownPlayerJoinEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
@@ -32,6 +34,11 @@ public final class TownAddPlayerCommand {
             messages.getAdmin().getTown().getPlayerInTown().send(sender);
             return;
         }
+
+        TownPlayerJoinEvent joinEvent = new TownPlayerJoinEvent(town, member);
+        Bukkit.getPluginManager().callEvent(joinEvent);
+        if (joinEvent.isCancelled())
+            return;
 
         town.handleAdminJoin(member.getUniqueId());
         messages.getAdmin().getTown().getPlayerForceAdded().send(

@@ -7,7 +7,7 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Called when a town has been created by a player.
+ * Called when a town is about to be created by a player.
  */
 public class TownCreateEvent extends TownPlayerEvent implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();

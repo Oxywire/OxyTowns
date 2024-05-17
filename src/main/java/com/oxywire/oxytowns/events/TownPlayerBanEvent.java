@@ -5,10 +5,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public final class TownPlayerBanEvent extends TownEvent {
+public final class TownPlayerBanEvent extends TownPlayerEvent {
 
     private static final HandlerList HANDLERS = new HandlerList();
-    private final OfflinePlayer offlinePlayer;
 
     /**
      * Player ban event called when a player is being banned from a town.
@@ -17,19 +16,15 @@ public final class TownPlayerBanEvent extends TownEvent {
      * @param offlinePlayer the player being banned
      */
     public TownPlayerBanEvent(final Town town, final OfflinePlayer offlinePlayer) {
-        super(town);
-        this.offlinePlayer = offlinePlayer;
+        super(town, offlinePlayer);
     }
 
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
+    @Override
     public HandlerList getHandlers() {
         return HANDLERS;
-    }
-
-    public OfflinePlayer getOfflinePlayer() {
-        return this.offlinePlayer;
     }
 }
