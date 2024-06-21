@@ -110,7 +110,7 @@ configure<BukkitPluginDescription> {
     version = "${project.version}"
 
     main = "com.oxywire.oxytowns.OxyTownsPlugin"
-    authors = listOf("SirKillian", "Glare", "SirSalad")
+    authors = listOf("SirKillian", "SirSalad", "Glare",)
     depend = listOf("Vault")
     softDepend = listOf("WorldGuard", "PlaceholderAPI", "squaremap")
 }
