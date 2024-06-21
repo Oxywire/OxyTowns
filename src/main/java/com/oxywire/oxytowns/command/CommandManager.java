@@ -50,7 +50,7 @@ public final class CommandManager extends PaperCommandManager<CommandSender> {
         this.annotationParser = new AnnotationParser<>(this, CommandSender.class, params -> SimpleCommandMeta.empty());
 
         registerAsynchronousCompletions();
-        registerBrigadier();
+        // registerBrigadier(); // Update to cloud 2.x
 
         setSetting(ManagerSettings.ALLOW_UNSAFE_REGISTRATION, true);
         setSetting(ManagerSettings.OVERRIDE_EXISTING_COMMANDS, true);
