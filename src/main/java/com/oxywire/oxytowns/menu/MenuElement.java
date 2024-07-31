@@ -12,6 +12,8 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -118,7 +120,16 @@ public class MenuElement {
         if (this.displayName != null) meta.displayName(itemComponent(this.displayName, placeholders));
         if (this.lore != null) meta.lore(this.lore.stream().map(it -> itemComponent(it, placeholders)).toList());
         if (this.customModelData != null) meta.setCustomModelData(this.customModelData);
-        if (this.itemFlags != null) meta.addItemFlags(this.itemFlags);
+        if (this.itemFlags != null) {
+            for (ItemFlag itemFlag : this.itemFlags) {
+                if (itemFlag == ItemFlag.HIDE_ATTRIBUTES) {
+                    // Add some dummy attribute so we can hide all attributes
+                    meta.addAttributeModifier(Attribute.HORSE_JUMP_STRENGTH, new AttributeModifier("dummy", 0, AttributeModifier.Operation.ADD_SCALAR));
+                }
+
+                meta.addItemFlags(itemFlag);
+            }
+        }
 
         if (this.material == Material.PLAYER_HEAD && this.skullTexture != null) {
             final PlayerProfile pp = Bukkit.createProfile(UUID.randomUUID());
