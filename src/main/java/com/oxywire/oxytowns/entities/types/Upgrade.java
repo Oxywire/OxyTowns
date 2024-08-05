@@ -1,7 +1,6 @@
 package com.oxywire.oxytowns.entities.types;
 
 import com.oxywire.oxytowns.config.Config;
-import com.oxywire.oxytowns.config.messaging.Message;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.kyori.adventure.text.minimessage.tag.resolver.Formatter;
@@ -20,14 +19,18 @@ public enum Upgrade {
 
     private final int defaultValue;
 
+    public String getDisplayName() {
+        return Config.get().getUpgrades().get(this).getDisplayName();
+    }
+
     public Map<Integer, Double> getTiers() {
-        return Config.get().getUpgrades().get(this);
+        return Config.get().getUpgrades().get(this).getUpgrade();
     }
 
     public TagResolver[] getPlaceholders(int tier) {
         Map<Integer, Double> tiers = getTiers();
         return new TagResolver[]{
-            Placeholder.unparsed("upgrade", Message.formatEnum(this)),
+            Placeholder.unparsed("upgrade", getDisplayName()),
             Formatter.number("amount", tiers.keySet().toArray(Integer[]::new)[tier]),
             Formatter.number("tier", tier + 1),
             Formatter.number("price", tiers.values().toArray(Double[]::new)[tier]),

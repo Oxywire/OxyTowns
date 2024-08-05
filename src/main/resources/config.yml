@@ -182,45 +182,53 @@ plots:
 # These are the upgrades settings. This is where you can define how much you unlock and how much they cost.
 upgrades:
   CLAIMS:
-    # The first number indicates the amount of claims. The second number indicates the cost of the upgrade.
-    # "25: 500.0" means that you will unlock 25 claims for $500.
-    25: 500.0
-    50: 25000.0
-    150: 50000.0
-    250: 100000.0
-    500: 250000.0
-    750: 500000.0
-    1000: 1000000.0
+    display-name: "Claims"
+    upgrade:
+      # The first number indicates the amount of claims. The second number indicates the cost of the upgrade.
+      # "25: 500.0" means that you will unlock 25 claims for $500.
+      25: 500.0
+      50: 25000.0
+      150: 50000.0
+      250: 100000.0
+      500: 250000.0
+      750: 500000.0
+      1000: 1000000.0
   MEMBERS:
-    # The first number indicates the amount of members. The second number indicates the cost of the upgrade.
-    # "10: 500.0" means that you will unlock 10 total members for $500.
-    10: 500.0
-    25: 2500.0
-    50: 15000.0
-    75: 50000.0
-    100: 150000.0
-    150: 350000.0
-    250: 500000.0
+    display-name: "Members"
+    upgrade:
+      # The first number indicates the amount of members. The second number indicates the cost of the upgrade.
+      # "10: 500.0" means that you will unlock 10 total members for $500.
+      10: 500.0
+      25: 2500.0
+      50: 15000.0
+      75: 50000.0
+      100: 150000.0
+      150: 350000.0
+      250: 500000.0
   VAULT_AMOUNT:
-    # The first number indicates the amount of vaults. The second number indicates the cost of the upgrade.
-    # "2: 1000.0" means that you will unlock 2 total vaults for $1,000.
-    2: 1000.0
-    3: 2500.0
-    4: 5000.0
-    5: 10000.0
-    6: 25000.0
-    8: 50000.0
-    9: 75000.0
+    display-name: "Vault Amount"
+    upgrade:
+      # The first number indicates the amount of vaults. The second number indicates the cost of the upgrade.
+      # "2: 1000.0" means that you will unlock 2 total vaults for $1,000.
+      2: 1000.0
+      3: 2500.0
+      4: 5000.0
+      5: 10000.0
+      6: 25000.0
+      8: 50000.0
+      9: 75000.0
   OUTPOSTS:
-    # The first number indicates the amount of vaults. The second number indicates the cost of the upgrade.
-    # "1: 1000.0" means that you will unlock 2 total vaults for $1,000.
-    1: 1000.0
-    2: 2500.0
-    3: 5000.0
-    4: 15000.0
-    5: 25000.0
-    6: 50000.0
-    7: 100000.0
+    display-name: "Outposts"
+    upgrade:
+      # The first number indicates the amount of vaults. The second number indicates the cost of the upgrade.
+      # "1: 1000.0" means that you will unlock 2 total vaults for $1,000.
+      1: 1000.0
+      2: 2500.0
+      3: 5000.0
+      4: 15000.0
+      5: 25000.0
+      6: 50000.0
+      7: 100000.0
 
 # These are the worlds where players can NOT claim land.
 blacklisted-worlds:

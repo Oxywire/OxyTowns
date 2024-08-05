@@ -3,7 +3,6 @@ package com.oxywire.oxytowns.config;
 import com.oxywire.oxytowns.OxyTownsPlugin;
 import com.oxywire.oxytowns.config.messaging.Message;
 import com.oxywire.oxytowns.entities.types.PlotType;
-import com.oxywire.oxytowns.entities.types.Upgrade;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,11 +44,11 @@ public final class Config {
     );
 
     @Setting
-    private Map<Upgrade, Map<Integer, Double>> upgrades = new LinkedHashMap<>(Map.of(
-        Upgrade.CLAIMS, Map.of(15, 10_000.0, 20, 20_000.0, 50, 30_000.0, 100, 40_000.0, 200, 50_000.0, 350, 60_000.0, 500, 70_000.0),
-        Upgrade.MEMBERS, Map.of(10, 10_000.0, 25, 20_000.0, 50, 30_000.0, 75, 40_000.0, 100, 50_000.0, 150, 60_000.0, 250, 70_000.0),
-        Upgrade.VAULT_AMOUNT, Map.of(2, 10_000.0, 3, 20_000.0, 4, 30_000.0, 5, 40_000.0, 6, 50_000.0, 7, 60_000.0, 8, 70_000.0),
-        Upgrade.OUTPOSTS, Map.of(1, 10_000.0, 2, 20_000.0, 3, 30_000.0, 4, 40_000.0, 5, 50_000.0, 6, 60_000.0, 7, 70_000.0)
+    private Map<com.oxywire.oxytowns.entities.types.Upgrade, Config.Upgrade> upgrades = new LinkedHashMap<>(Map.of(
+        com.oxywire.oxytowns.entities.types.Upgrade.CLAIMS, new Config.Upgrade("Claims", Map.of(15, 10_000.0, 20, 20_000.0, 50, 30_000.0, 100, 40_000.0, 200, 50_000.0, 350, 60_000.0, 500, 70_000.0)),
+        com.oxywire.oxytowns.entities.types.Upgrade.MEMBERS, new Config.Upgrade("Members", Map.of(10, 10_000.0, 25, 20_000.0, 50, 30_000.0, 75, 40_000.0, 100, 50_000.0, 150, 60_000.0, 250, 70_000.0)),
+        com.oxywire.oxytowns.entities.types.Upgrade.VAULT_AMOUNT, new Config.Upgrade("Vault Amount", Map.of(2, 10_000.0, 3, 20_000.0, 4, 30_000.0, 5, 40_000.0, 6, 50_000.0, 7, 60_000.0, 8, 70_000.0)),
+        com.oxywire.oxytowns.entities.types.Upgrade.OUTPOSTS, new Config.Upgrade("Outposts", Map.of(1, 10_000.0, 2, 20_000.0, 3, 30_000.0, 4, 40_000.0, 5, 50_000.0, 6, 60_000.0, 7, 70_000.0))
     ));
 
     @Setting
@@ -110,5 +109,17 @@ public final class Config {
 
         @Setting
         private Message format = new Message().setMessage("<blue>[Town] <white><sender>: <gray><message>");
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @ConfigSerializable
+    public static final class Upgrade {
+        @Setting
+        private String displayName;
+
+        @Setting
+        private Map<Integer, Double> upgrade;
     }
 }
