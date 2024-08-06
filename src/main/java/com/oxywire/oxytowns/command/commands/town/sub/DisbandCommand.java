@@ -10,9 +10,13 @@ import com.oxywire.oxytowns.command.annotation.MustBeInTown;
 import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.events.TownDisbandEvent;
+import com.oxywire.oxytowns.events.TownPlayerLeaveEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public final class DisbandCommand {
 
@@ -45,6 +49,15 @@ public final class DisbandCommand {
         if (!town.getOwner().equals(sender.getUniqueId())) {
             messages.getTown().getNotOwner().send(sender);
             return;
+        }
+
+        TownDisbandEvent disbandEvent = new TownDisbandEvent(town);
+        if (!disbandEvent.callEvent())
+            return;
+
+        for (UUID player : town.getOwnerAndMembers()) {
+            TownPlayerLeaveEvent leaveEvent = new TownPlayerLeaveEvent(town, Bukkit.getOfflinePlayer(player), TownPlayerLeaveEvent.Reason.DISBANDED);
+            Bukkit.getPluginManager().callEvent(leaveEvent);
         }
 
         messages.getTown().getTownDisbandSuccess().send(Bukkit.getServer(), Placeholder.unparsed("town", town.getName()));

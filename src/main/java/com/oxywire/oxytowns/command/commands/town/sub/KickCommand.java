@@ -8,6 +8,7 @@ import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.town.Town;
 import com.oxywire.oxytowns.entities.types.perms.Permission;
+import com.oxywire.oxytowns.events.TownPlayerLeaveEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -46,6 +47,11 @@ public final class KickCommand {
             messages.getTown().getNotMember().send(sender, Placeholder.unparsed("player", playerName));
             return;
         }
+
+        TownPlayerLeaveEvent leaveEvent = new TownPlayerLeaveEvent(town, wantedPlayer, TownPlayerLeaveEvent.Reason.KICKED);
+        Bukkit.getPluginManager().callEvent(leaveEvent);
+        if (leaveEvent.isCancelled())
+            return;
 
         town.handleKick(wantedPlayer);
 
