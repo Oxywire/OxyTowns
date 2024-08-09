@@ -74,7 +74,6 @@ import org.bukkit.event.world.PortalCreateEvent;
 
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -718,12 +717,13 @@ public class NewEventsHandler implements Listener {
 
         Town attackerTown = cache.getTownByLocation(attacker.getLocation());
         Town victimTown = cache.getTownByLocation(victim.getLocation());
-        if (attackerTown == null || victimTown == null || !victim.getChunk().equals(attacker.getChunk())) {
+        if ((attackerTown == null || victimTown == null) && !Config.get().isAllowPvpInWilderness()) {
             event.setCancelled(true);
             return;
         }
 
-        Plot plot = victimTown.getPlot(attacker.getLocation());
+        if (victimTown == null) return;
+        Plot plot = victimTown.getPlot(victim.getLocation());
         if (plot != null && plot.getType() != PlotType.ARENA) {
             event.setCancelled(true);
             return;

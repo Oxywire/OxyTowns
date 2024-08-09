@@ -52,6 +52,9 @@ public final class Config {
     ));
 
     @Setting
+    private boolean allowPvpInWilderness = false;
+
+    @Setting
     private List<String> blacklistedWorlds = List.of(
         "resource_world"
     );

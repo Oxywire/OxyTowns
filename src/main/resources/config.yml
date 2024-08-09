@@ -230,6 +230,9 @@ upgrades:
       6: 50000.0
       7: 100000.0
 
+# Whether PVP is allowed in wilderness. If this is set to false, PVP will only be allowed in arena plots.
+allow-pvp-in-wilderness: false
+
 # These are the worlds where players can NOT claim land.
 blacklisted-worlds:
   - example_world
