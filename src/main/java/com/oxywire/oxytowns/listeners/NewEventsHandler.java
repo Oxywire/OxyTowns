@@ -847,22 +847,31 @@ public class NewEventsHandler implements Listener {
     }
 
     private boolean checkWorldAndRegion(Player player, Location location, Permission permission, Town foundTown, Object queryObject) {
+        // If it's wilderness, allow it
         if (foundTown == null) {
             return true;
         }
 
+        // Otherwise, check the plot first
         final Plot foundPlot = foundTown.getPlot(location);
-
         if (
             foundPlot != null
-                && foundPlot.getAssignedMembers().contains(player.getUniqueId())
-                || foundTown.hasPermission(player.getUniqueId(), Permission.PLOTS_MODIFY)
+                && (
+                    foundPlot.getAssignedMembers().contains(player.getUniqueId())
+                        || foundPlot.getPermission(foundTown.getRole(player.getUniqueId()), permission)
+                        || foundPlot.getType().test(queryObject)
+                )
         ) {
             return true;
         }
 
-        boolean hasPerm = foundTown.hasPermission(player.getUniqueId(), permission);
-        return foundPlot != null && foundPlot.getType().test(queryObject) || hasPerm;
+        // Otherwise, check town permissions
+        // Always allow if the player has plots_modify
+        if (foundTown.hasPermission(player.getUniqueId(), Permission.PLOTS_MODIFY)) {
+            return true;
+        }
+
+        return foundTown.hasPermission(player.getUniqueId(), permission);
     }
 
     public <E extends BlockEvent & Cancellable> void handleFarmland(Player player, E event) {
