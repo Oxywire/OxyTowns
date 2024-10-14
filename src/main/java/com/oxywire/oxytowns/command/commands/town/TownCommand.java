@@ -55,6 +55,7 @@ public final class TownCommand {
     public List<String> invitableMembers(final CommandContext<Player> context, final String input) {
         return Bukkit.getOnlinePlayers().stream()
             .filter(it -> this.townCache.getTownByPlayer(it).isEmpty())
+            .filter(it -> context.getSender().canSee(it))
             .map(Player::getName)
             .toList();
     }
