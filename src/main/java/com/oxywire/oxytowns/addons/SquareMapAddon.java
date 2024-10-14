@@ -86,6 +86,7 @@ public final class SquareMapAddon extends BukkitRunnable {
                 .build();
 
             if (town.getSpawnPosition() != null) {
+                if (town.getSpawnPosition().getWorld() == null) return;
                 final SimpleLayerProvider layer = this.providers.get(town.getSpawnPosition().getWorld().getName());
                 if (layer == null) return;
 
@@ -100,6 +101,8 @@ public final class SquareMapAddon extends BukkitRunnable {
             }
 
             for (final ChunkPosition claim : town.getOutpostAndClaimedChunks()) {
+                if (Bukkit.getWorld(claim.getWorld()) == null) continue;
+
                 final Point point1 = Point.point(claim.getX() << 4, claim.getZ() << 4);
                 final Point point2 = Point.point((claim.getX() << 4) + 16, (claim.getZ() << 4) + 16);
                 final Marker marker = Marker.rectangle(point1, point2).markerOptions(options);
