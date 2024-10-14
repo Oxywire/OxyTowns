@@ -222,7 +222,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     }
 
     public Plot getPlot(final ChunkPosition position) {
-        return this.playerPlots.get(position);
+        return this.playerPlots.computeIfAbsent(position, pos -> outpostChunks.stream().filter(pos::contains).findFirst().map(it -> new Plot(UUID.randomUUID(), PlotType.DEFAULT, pos, "")).orElse(null));
     }
 
     /**
@@ -483,7 +483,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @return role has perm or not
      */
     public boolean getPermission(final Role role, final Permission permission) {
-        return this.permissionSets.get(role).contains(permission);
+        return this.permissionSets.getOrDefault(role, EnumSet.noneOf(Permission.class)).contains(permission);
     }
 
     /**
