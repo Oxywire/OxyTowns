@@ -181,7 +181,7 @@ town:
     unlocked-already: "<gold>You've already unlocked this."
     cannot-afford: "<red>Your town can't afford this unlock. <red>(<price>)"
     unlock-first: "<red>Unlock <yellow><tier> <red>first."
-    upgraded: "<gold>Successfully upgraded <yellow><upgrade> <green>to <yellow><tier> <green>for <yellow><price><green>."
+    upgraded: "<gold>Successfully upgraded <yellow><upgrade> <green>to  tier <yellow><tier> <green>for <yellow>$<price><green>."
     no-permission: "<red>You don't have permission to upgrade your town."
   vault:
     no-open-permission: "<red>You don't have permission to open the Town Vault."
