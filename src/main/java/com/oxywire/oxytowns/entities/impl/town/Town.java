@@ -300,6 +300,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
         return this.getOwnerAndMembers().stream()
             .map(Bukkit::getOfflinePlayer)
             .map(OfflinePlayer::getName)
+            .filter(Objects::nonNull)
             .collect(Collectors.toList());
     }
 
@@ -312,6 +313,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
         return this.bans.stream()
             .map(entry -> Bukkit.getOfflinePlayer(entry.getUser()))
             .map(OfflinePlayer::getName)
+            .filter(Objects::nonNull)
             .collect(Collectors.toList());
     }
 
