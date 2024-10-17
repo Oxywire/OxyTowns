@@ -1,6 +1,7 @@
 package com.oxywire.oxytowns.listeners;
 
 import com.destroystokyo.paper.MaterialSetTag;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.collect.Sets;
 import com.oxywire.oxytowns.OxyTownsPlugin;
 import com.oxywire.oxytowns.cache.TownCache;
@@ -408,6 +409,17 @@ public class NewEventsHandler implements Listener {
     public void onPlayerInteract$8(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK
             && (event.getClickedBlock().getType() == Material.BEEHIVE || event.getClickedBlock().getType() == Material.BEE_NEST)
+            && !cache.isBypassing(event.getPlayer())
+            && canInteract(event.getPlayer(), event.getClickedBlock().getLocation(), Permission.ANIMALS, event.getClickedBlock())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract$14(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+            && event.getItem() != null
+            && MaterialTags.SPAWN_EGGS.isTagged(event.getItem())
             && !cache.isBypassing(event.getPlayer())
             && canInteract(event.getPlayer(), event.getClickedBlock().getLocation(), Permission.ANIMALS, event.getClickedBlock())) {
             event.setCancelled(true);
