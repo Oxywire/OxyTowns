@@ -86,7 +86,7 @@ public class NewEventsHandler implements Listener {
     private static final Set<Material> FURNACE_MATERIALS = EnumSet.of(Material.FURNACE, Material.BLAST_FURNACE, Material.SMOKER, Material.CAMPFIRE,
         Material.SOUL_CAMPFIRE);
     private static final Set<Material> REDSTONE_MATERIALS = Sets.newHashSet(Material.DISPENSER, Material.DROPPER, Material.HOPPER, Material.DAYLIGHT_DETECTOR,
-        Material.REPEATER, Material.COMPARATOR, Material.NOTE_BLOCK, Material.JUKEBOX);
+        Material.REPEATER, Material.COMPARATOR, Material.NOTE_BLOCK, Material.JUKEBOX, Material.CRAFTER);
     private static final Set<Material> DOOR_MATERIALS = EnumSet.noneOf(Material.class);
     private static final Set<Material> INTERACT_SETS = EnumSet.of(Material.PUMPKIN, Material.CAKE, Material.CAVE_VINES_PLANT, Material.CAVE_VINES, Material.SWEET_BERRY_BUSH, Material.RESPAWN_ANCHOR, Material.DECORATED_POT);
 
