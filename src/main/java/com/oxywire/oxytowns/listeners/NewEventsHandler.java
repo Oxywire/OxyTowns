@@ -141,29 +141,25 @@ public class NewEventsHandler implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        Player player = null;
+        if (!(event.getEntity() instanceof Enemy)) return;
 
-        if (event.getDamager() instanceof Projectile projectile && projectile.getShooter() != null && projectile.getShooter() instanceof Player shooter) {
-            player = shooter;
-        }
+        // Figure the attacker
+        Player attacker = null;
+        if (event.getDamager() instanceof Player player) attacker = player;
+        else if (event.getDamager() instanceof Projectile projectile && projectile.getShooter() instanceof Player player) attacker = player;
+        if (attacker == null) return;
 
-        if (event.getDamager() instanceof Player attacker && !(event.getEntity() instanceof Player)) {
-            player = attacker;
-        }
-
+        // Don't proc if it's wilderness
         Town town = cache.getTownByLocation(event.getEntity().getLocation());
-        if (town == null) {
-            return;
-        }
+        if (town == null) return;
 
         Plot plot = town.getPlot(event.getEntity().getLocation());
-        if ((plot == null || plot.getType() == PlotType.MOB_FARM) && event.getEntity() instanceof Enemy) {
-            return;
-        }
+        // Allow mobs if it's a mob farm plot
+        // Or if the town toggle is on
+        if (plot != null && plot.isModified() && plot.getType() == PlotType.MOB_FARM) return;
+        else if (town.getToggle(Setting.MOBS)) return;
 
-        if (player != null && !cache.isBypassing(player) && canInteract(player, event.getEntity().getLocation(), Permission.BLOCK_BREAK, event.getEntity())) {
-            event.setCancelled(true);
-        }
+        event.setCancelled(true);
     }
 
     @EventHandler
