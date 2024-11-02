@@ -4,11 +4,13 @@ import com.oxywire.oxytowns.OxyTownsPlugin;
 import com.oxywire.oxytowns.cache.TownCache;
 import com.oxywire.oxytowns.entities.impl.plot.Plot;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.entities.types.PlotType;
 import com.oxywire.oxytowns.entities.types.Role;
 import com.oxywire.oxytowns.entities.types.perms.Permission;
 import com.oxywire.oxytowns.utils.ChunkPosition;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -62,6 +64,19 @@ public final class OxyTownsApi {
      * @return true if the player has permission, false otherwise
      */
     public boolean hasPermission(final UUID player, final Permission permission, final ChunkPosition chunkPosition) {
+        return hasPermission(player, permission, chunkPosition, null);
+    }
+
+    /**
+     * Checks if a player has permission to do something at a given chunk position
+     *
+     * @param player the player's uuid
+     * @param permission the permission
+     * @param chunkPosition the position
+     * @param queryObject the object to check
+     * @return true if the player has permission, false otherwise
+     */
+    public boolean hasPermission(final UUID player, final Permission permission, final ChunkPosition chunkPosition, @Nullable final Object queryObject) {
         final TownCache townCache = OxyTownsPlugin.get().getTownCache();
 
         // They're bypassing via /ta bypass
@@ -75,24 +90,26 @@ public final class OxyTownsApi {
             return true;
         }
 
-        final Plot plot = town.getPlot(chunkPosition);
-        final Role role = town.getRole(player);
-
-        // They're either the mayor or have plots_modify
-        if (town.getPermission(role, Permission.PLOTS_MODIFY)) {
+        // Always allow if the player is the mayor or has plots_modify
+        if (town.hasPermission(player, Permission.PLOTS_MODIFY)) {
             return true;
         }
 
-        // Let plot perms override their town perms
-        if (plot.getAssignedMembers().contains(player) || plot.getPermission(role, permission)) {
-            return true;
-        }
-
-        // Check their town perms
-        if (plot.getAssignedMembers().isEmpty() && plot.getPermissions().isEmpty()) {
+        // Get the plot
+        final Plot foundPlot = town.getPlot(chunkPosition);
+        // If there isn't a plot there, check the town perms
+        if (foundPlot == null) {
             return town.hasPermission(player, permission);
         }
 
-        return false;
+        // If the plot was at all modified, check the plot perms
+        if (!foundPlot.getAssignedMembers().isEmpty() || !foundPlot.getName().isEmpty() || foundPlot.getType() != PlotType.DEFAULT) {
+            return foundPlot.getAssignedMembers().contains(player)  // always allow assigned members
+                || foundPlot.getPermission(town.getRole(player), permission) // plot perms
+                || foundPlot.getType().test(queryObject); // ex: farm plots & crops
+        }
+
+        // Otherwise, check town permissions
+        return town.hasPermission(player, permission);
     }
 }

@@ -13,7 +13,7 @@ import com.oxywire.oxytowns.entities.impl.town.Town;
 import com.oxywire.oxytowns.entities.types.PlotType;
 import com.oxywire.oxytowns.entities.types.perms.Permission;
 import com.oxywire.oxytowns.entities.types.settings.Setting;
-import com.oxywire.oxytowns.utils.RegionUtils;
+import com.oxywire.oxytowns.utils.ChunkPosition;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -73,7 +73,6 @@ import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -788,61 +787,6 @@ public class NewEventsHandler implements Listener {
         return currentTown == null || targetTown == null;
     }
 
-    /**
-     * This is mainly used for entities that are not players
-     *
-     * @param location the location to check
-     * @return if they can interact or not
-     */
-    private boolean canInteract(final Location location) {
-        if (RegionUtils.isInRegion(location)) {
-            return true;
-        }
-
-        final Town town = this.cache.getTownByLocation(location);
-        return town == null;
-    }
-
-    private boolean doesPlotOverride(final Location location, final Object toTest, final PlotType... types) {
-        final Town foundTown = this.cache.getTownByLocation(location);
-
-        return isTownPresent(location, toTest, foundTown, types);
-    }
-
-    static boolean isTownPresent(Location location, Object toTest, Town foundTown, PlotType[] types) {
-        if (foundTown != null) {
-            final Plot plot = foundTown.getPlot(location);
-            if (plot != null && Arrays.asList(types).contains(plot.getType())) {
-                return plot.getType().test(toTest);
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if a player is banned at a location
-     *
-     * @param player   the player to check
-     * @param location the location to check
-     * @return banned or not at the location
-     */
-    public boolean isBanned(final Player player, final Location location) {
-        final Town town = this.cache.getTownByLocation(location);
-        return town != null && isBanned(player, town);
-    }
-
-    /**
-     * Helper method to check if a player is banned from a town
-     *
-     * @param player the player to check
-     * @param town   the town to check banned from
-     * @return banned from town or not
-     */
-    public boolean isBanned(final Player player, final Town town) {
-        return town.checkBan(player).isPresent() && !player.hasPermission("oxytowns.bypass.bans");
-    }
-
 
     /**
      * Check if a player can interact with something at a specific location
@@ -853,37 +797,12 @@ public class NewEventsHandler implements Listener {
      * @return if the player can interact at the specific location
      */
     private boolean canInteract(final Player player, final Location location, final Permission permission, Object queryObject) {
-        final Town foundTown = this.cache.getTownByLocation(location);
-
-        return !checkWorldAndRegion(player, location, permission, foundTown, queryObject);
-    }
-
-    private boolean checkWorldAndRegion(Player player, Location location, Permission permission, Town foundTown, Object queryObject) {
-        // If it's wilderness, allow it
-        if (foundTown == null) {
-            return true;
-        }
-
-        // Otherwise, check the plot first
-        final Plot foundPlot = foundTown.getPlot(location);
-        if (
-            foundPlot != null
-                && (
-                    foundPlot.getAssignedMembers().contains(player.getUniqueId())
-                        || foundPlot.getPermission(foundTown.getRole(player.getUniqueId()), permission)
-                        || foundPlot.getType().test(queryObject)
-                )
-        ) {
-            return true;
-        }
-
-        // Otherwise, check town permissions
-        // Always allow if the player has plots_modify
-        if (foundTown.hasPermission(player.getUniqueId(), Permission.PLOTS_MODIFY)) {
-            return true;
-        }
-
-        return foundTown.hasPermission(player.getUniqueId(), permission);
+        return !OxyTownsPlugin.get().getOxyTownsApi().hasPermission(
+            player.getUniqueId(),
+            permission,
+            ChunkPosition.chunkPosition(location),
+            queryObject
+        );
     }
 
     public <E extends BlockEvent & Cancellable> void handleFarmland(Player player, E event) {

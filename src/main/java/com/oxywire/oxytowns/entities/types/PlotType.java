@@ -4,6 +4,7 @@ import com.oxywire.oxytowns.config.Config;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Set;
 
@@ -14,7 +15,11 @@ public enum PlotType {
     MOB_FARM,
     ARENA;
 
-    public boolean test(final Object queryObject) {
+    public boolean test(@Nullable final Object queryObject) {
+        if (queryObject == null) {
+            return false;
+        }
+
         final Config.Plot config = Config.get().getPlots().get(this);
         if (config == null) {
             return false;
