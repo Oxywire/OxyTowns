@@ -76,6 +76,7 @@ import org.bukkit.event.world.PortalCreateEvent;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiPredicate;
 
 @SuppressWarnings("unused")
 public class NewEventsHandler implements Listener {
@@ -711,38 +712,66 @@ public class NewEventsHandler implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity$2(EntityDamageByEntityEvent event) {
+        // Figure the attacker
         Player attacker = null;
-        if (event.getDamager() instanceof Player player) {
-            attacker = player;
-        }
-        if (event.getDamager() instanceof Projectile projectile && projectile.getShooter() instanceof Player player) {
-            attacker = player;
-        }
+        if (event.getDamager() instanceof Player player) attacker = player;
+        else if (event.getDamager() instanceof Projectile projectile && projectile.getShooter() instanceof Player player) attacker = player;
+        if (attacker == null) return;
+        // Figure the victim
+        if (!(event.getEntity() instanceof Player victim)) return;
 
-        if (attacker == null || !(event.getEntity() instanceof Player victim)) {
-            return;
-        }
-        if (Config.get().getBlacklistedWorlds().contains(victim.getWorld().getName())) {
-            return;
-        }
+        // Don't proc in non-whitelisted worlds
+        if (Config.get().getBlacklistedWorlds().contains(victim.getWorld().getName())) return;
 
-        Town attackerTown = cache.getTownByLocation(attacker.getLocation());
-        Town victimTown = cache.getTownByLocation(victim.getLocation());
-        if ((attackerTown == null || victimTown == null) && !Config.get().isAllowPvpInWilderness()) {
+        ChunkPosition attackerLocation = ChunkPosition.chunkPosition(attacker.getLocation());
+        ChunkPosition victimLocation = ChunkPosition.chunkPosition(victim.getLocation());
+        Town attackerTown = cache.getTownByChunk(attackerLocation);
+        Town victimTown = cache.getTownByChunk(victimLocation);
+
+        // If both players are in wilderness, and we allow pvp in wilderness, allow it
+        if (attackerTown == null && victimTown == null) {
+            if (Config.get().isAllowPvpInWilderness()) return;
+
             event.setCancelled(true);
             return;
         }
 
-        if (victimTown == null) return;
-        Plot plot = victimTown.getPlot(victim.getLocation());
-        if (plot != null && plot.getType() != PlotType.ARENA) {
+        BiPredicate<Town, Location> permitsPvpHalfHalf = (town, location) -> {
+            // We're expecting the other player to be in wilderness
+            if (!Config.get().isAllowPvpInWilderness()) return false;
+
+            Plot plot = town.getPlot(location);
+            // If the plot was at all modified, only allow if it's an arena plot
+            // Otherwise, check the town toggle
+            if (plot != null && plot.isModified() && plot.getType() != PlotType.ARENA) return false;
+            else return town.getToggle(Setting.PVP);
+        };
+
+        // If the attacker is in wilderness, and the victim is not
+        if (attackerTown == null) {
+            if (permitsPvpHalfHalf.test(victimTown, victim.getLocation())) return;
+
             event.setCancelled(true);
             return;
         }
 
-        if (plot == null && !victimTown.getToggle(Setting.PVP)) {
+        // If the attacker is in wilderness, and the victim is not
+        if (victimTown == null) {
+            if (permitsPvpHalfHalf.test(attackerTown, attacker.getLocation())) return;
+
             event.setCancelled(true);
+            return;
         }
+
+        // If both players are in a town
+        Plot attackerPlot = attackerTown.getPlot(attacker.getLocation());
+        Plot victimPlot = victimTown.getPlot(victim.getLocation());
+
+        if (attackerPlot != null && attackerPlot.isModified() && attackerPlot.getType() == PlotType.ARENA
+            && victimPlot != null && victimPlot.isModified() && victimPlot.getType() == PlotType.ARENA) return;
+        else if (attackerTown.getToggle(Setting.PVP) && victimTown.getToggle(Setting.PVP)) return;
+
+        event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -754,7 +783,7 @@ public class NewEventsHandler implements Listener {
         if (town == null) return;
 
         final Plot plot = town.getPlot(event.getLocation());
-        if (plot != null && (!plot.getAssignedMembers().isEmpty() || !plot.getName().isEmpty() || plot.getType() != PlotType.DEFAULT)) {
+        if (plot != null && plot.isModified()) {
             // If the plot was at all modified, only allow mobs if it's a mob farm plot
             if (plot.getType() != PlotType.MOB_FARM) {
                 event.setCancelled(true);

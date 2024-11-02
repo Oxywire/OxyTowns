@@ -79,6 +79,10 @@ public final class Plot implements CreatedDateHolder, Placeholdered, Named {
         }
     }
 
+    public boolean isModified() {
+        return !this.getAssignedMembers().isEmpty() || !this.getName().isEmpty() || this.getType() != PlotType.DEFAULT;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
