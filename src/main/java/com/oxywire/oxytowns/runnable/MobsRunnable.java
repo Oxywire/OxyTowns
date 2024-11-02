@@ -14,7 +14,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
-import java.util.Objects;
 
 public final class MobsRunnable extends BukkitRunnable {
 
@@ -34,9 +33,15 @@ public final class MobsRunnable extends BukkitRunnable {
 
                 final Town town = TOWN_CACHE.getTownByLocation(entity.getLocation());
                 if (town == null) continue;
-                final Plot plot = town.getPlot(entity.getLocation());
 
-                if (plot == null && !town.getToggle(Setting.MOBS) || (plot != null && plot.getType() != PlotType.MOB_FARM)) {
+                final Plot plot = town.getPlot(entity.getLocation());
+                if (plot != null && (!plot.getAssignedMembers().isEmpty() || !plot.getName().isEmpty() || plot.getType() != PlotType.DEFAULT)) {
+                    // If the plot was at all modified, only allow mobs if it's a mob farm plot
+                    if (plot.getType() != PlotType.MOB_FARM) {
+                        entity.remove();
+                    }
+                } else if (!town.getToggle(Setting.MOBS)) {
+                    // Otherwise, check the town toggle
                     entity.remove();
                 }
             }

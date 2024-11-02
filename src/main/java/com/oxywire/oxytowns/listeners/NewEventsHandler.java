@@ -747,14 +747,21 @@ public class NewEventsHandler implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEntitySpawn(final EntitySpawnEvent event) {
-        if (event.getEntity() instanceof Enemy && !Config.get().getBlacklistedWorlds().contains(event.getLocation().getWorld().getName())) {
-            final Town town = cache.getTownByLocation(event.getLocation());
-            if (town == null) return;
-            final Plot plot = town.getPlot(event.getLocation());
+        if (!(event.getEntity() instanceof Enemy)) return;
+        if (Config.get().getBlacklistedWorlds().contains(event.getLocation().getWorld().getName())) return;
 
-            if (plot == null && !town.getToggle(Setting.MOBS) || (plot != null && plot.getType() != PlotType.MOB_FARM)) {
+        final Town town = cache.getTownByLocation(event.getLocation());
+        if (town == null) return;
+
+        final Plot plot = town.getPlot(event.getLocation());
+        if (plot != null && (!plot.getAssignedMembers().isEmpty() || !plot.getName().isEmpty() || plot.getType() != PlotType.DEFAULT)) {
+            // If the plot was at all modified, only allow mobs if it's a mob farm plot
+            if (plot.getType() != PlotType.MOB_FARM) {
                 event.setCancelled(true);
             }
+        } else if (!town.getToggle(Setting.MOBS)) {
+            // Otherwise, check the town toggle
+            event.setCancelled(true);
         }
     }
 
