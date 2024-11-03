@@ -34,6 +34,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.WindCharge;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.event.Cancellable;
@@ -676,6 +677,16 @@ public class NewEventsHandler implements Listener {
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
         event.blockList().removeIf(block -> crossesBorder(event.getEntity().getLocation().getBlock(), block));
+    }
+
+    @EventHandler
+    public void onEntityExplode$1(EntityExplodeEvent event) {
+        if (!(event.getEntity() instanceof WindCharge windCharge)) return;
+        if (!(windCharge.getShooter() instanceof Player player)) return;
+
+        if (!cache.isBypassing(player) && canInteract(player, windCharge.getLocation(), Permission.BLOCK_BREAK, Material.AIR)) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
