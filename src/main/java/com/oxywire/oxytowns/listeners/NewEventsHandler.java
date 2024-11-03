@@ -544,6 +544,18 @@ public class NewEventsHandler implements Listener {
     }
 
     @EventHandler
+    public void onPlayerInteract$15(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+            && event.getItem() != null
+            && event.getInteractionPoint() != null
+            && event.getItem().getType() == Material.ARMOR_STAND
+            && !cache.isBypassing(event.getPlayer())
+            && canInteract(event.getPlayer(), event.getInteractionPoint(), Permission.ARMOR_STAND, event.getItem())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
         if (event.getRightClicked() instanceof ArmorStand
             && !cache.isBypassing(event.getPlayer())
