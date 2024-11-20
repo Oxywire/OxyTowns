@@ -11,7 +11,9 @@ import com.oxywire.oxytowns.command.annotation.CreateConfirmation;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.config.messaging.Message;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.events.TownDisbandEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 @CommandPermission("oxytowns.admin")
@@ -42,6 +44,11 @@ public final class TownDisbandCommand {
     @AcceptConfirmation("admin_town_disband")
     @Hidden
     public void onDisbandConfirm(final CommandSender sender, final @Argument("town") Town town) {
+        TownDisbandEvent disbandEvent = new TownDisbandEvent(town);
+        Bukkit.getPluginManager().callEvent(disbandEvent);
+        if (disbandEvent.isCancelled())
+            return;
+
         Messages.get().getAdmin().getTown().getDisbandSuccess().send(sender, Placeholder.unparsed("town", town.getName()));
         this.townCache.deleteTown(town);
     }
