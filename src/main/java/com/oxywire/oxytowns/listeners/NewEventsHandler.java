@@ -51,6 +51,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.EntityBlockFormEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
@@ -396,6 +397,16 @@ public class NewEventsHandler implements Listener {
     public void onPlayerShearEntity(PlayerShearEntityEvent event) {
         if (!cache.isBypassing(event.getPlayer())
             && canInteract(event.getPlayer(), event.getEntity().getLocation(), Permission.ANIMALS, event.getEntity())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Animals) && !(event.getEntity() instanceof WaterMob)) return;
+        if (!(event.getDamageSource().getCausingEntity() instanceof Player player)) return;
+
+        if (!cache.isBypassing(player) && canInteract(player, event.getEntity().getLocation(), Permission.ANIMALS, event.getEntity())) {
             event.setCancelled(true);
         }
     }
