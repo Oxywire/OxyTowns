@@ -30,6 +30,7 @@ import org.bukkit.entity.Enemy;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
@@ -363,7 +364,7 @@ public class NewEventsHandler implements Listener {
 
     @EventHandler
     public void onPlayerInteractEntity$0(PlayerInteractEntityEvent event) {
-        if ((event.getRightClicked() instanceof Animals || event.getRightClicked() instanceof Allay && !(event.getRightClicked() instanceof Vehicle))
+        if ((event.getRightClicked() instanceof Animals || event.getRightClicked() instanceof Allay)
             && !cache.isBypassing(event.getPlayer())
             && canInteract(event.getPlayer(), event.getRightClicked().getLocation(), Permission.ANIMALS, event.getRightClicked())) {
             event.setCancelled(true);
@@ -497,6 +498,7 @@ public class NewEventsHandler implements Listener {
     public void onPlayerInteractEntity$1(PlayerInteractEntityEvent event) {
         if (event.getRightClicked() instanceof Animals
         && event.getRightClicked() instanceof Vehicle
+        && !(event.getRightClicked() instanceof Pig)
         && !cache.isBypassing(event.getPlayer())
         && canInteract(event.getPlayer(), event.getRightClicked().getLocation(), Permission.VEHICLES, event.getRightClicked())) {
             event.setCancelled(true);
