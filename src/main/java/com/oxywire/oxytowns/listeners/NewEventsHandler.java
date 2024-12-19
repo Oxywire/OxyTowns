@@ -63,6 +63,7 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketEntityEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -545,6 +546,16 @@ public class NewEventsHandler implements Listener {
 
         if (cache.isBypassing(attacker)) return;
         if (!canInteract(attacker, event.getEntity().getLocation(), Permission.ARMOR_STAND, event.getEntity())) return;
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlayerFish(PlayerFishEvent event) {
+        if (event.getCaught() == null || !(event.getCaught() instanceof ArmorStand)) return;
+
+        if (cache.isBypassing(event.getPlayer())) return;
+        if (!canInteract(event.getPlayer(), event.getCaught().getLocation(), Permission.ARMOR_STAND, event.getCaught())) return;
 
         event.setCancelled(true);
     }
