@@ -32,6 +32,7 @@ import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WindCharge;
@@ -724,6 +725,16 @@ public class NewEventsHandler implements Listener {
         if (!(windCharge.getShooter() instanceof Player player)) return;
 
         if (!cache.isBypassing(player) && canInteract(player, windCharge.getLocation(), Permission.BLOCK_BREAK, Material.AIR)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityExplode$2(EntityExplodeEvent event) {
+        if (!(event.getEntity() instanceof TNTPrimed tntPrimed)) return;
+        if (tntPrimed.getSource() == null) return;
+        if (!(tntPrimed.getSource() instanceof Player player)) return;
+        if (!cache.isBypassing(player) && canInteract(player, tntPrimed.getLocation(), Permission.BLOCK_BREAK, Material.AIR)) {
             event.setCancelled(true);
         }
     }
