@@ -536,12 +536,17 @@ public class NewEventsHandler implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity$1(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof ArmorStand
-            && event.getDamager() instanceof Player player
-            && !cache.isBypassing(player)
-            && canInteract(player, event.getEntity().getLocation(), Permission.ARMOR_STAND, event.getEntity())) {
-            event.setCancelled(true);
-        }
+        if (!(event.getEntity() instanceof ArmorStand)) return;
+
+        Player attacker = null;
+        if (event.getDamager() instanceof Player player) attacker = player;
+        else if (event.getDamager() instanceof Projectile projectile && projectile.getShooter() instanceof Player player) attacker = player;
+        if (attacker == null) return;
+
+        if (cache.isBypassing(attacker)) return;
+        if (!canInteract(attacker, event.getEntity().getLocation(), Permission.ARMOR_STAND, event.getEntity())) return;
+
+        event.setCancelled(true);
     }
 
     @EventHandler
