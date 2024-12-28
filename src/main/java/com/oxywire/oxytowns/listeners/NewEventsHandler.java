@@ -641,41 +641,41 @@ public class NewEventsHandler implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         final Location from = event.getFrom();
         final Location to = event.getTo();
-        if (to == null) {
+        final Player player = event.getPlayer();
+
+        if (cache.isBypassing(player)) return;
+        if ((from.getBlockX() >> 4) == (to.getBlockX() >> 4) && (from.getBlockZ() >> 4) == (to.getBlockZ() >> 4)) return; // Same chunk
+
+        final Town oldTown = cache.getTownByLocation(event.getFrom());
+        final Town newTown = cache.getTownByLocation(event.getTo());
+
+        if (oldTown == null && newTown == null) return; // Continuing in Wilderness
+
+        if (oldTown != null && newTown == null) { // Entering Wilderness
+            Messages.get().getNowEnteringWilderness().send(player);
             return;
         }
 
-        if ((from.getBlockX() >> 4) != (to.getBlockX() >> 4) || (from.getBlockZ() >> 4) != (to.getBlockZ() >> 4) && !cache.isBypassing(event.getPlayer())) {
-            final Player player = event.getPlayer();
-            final Town oldTown = cache.getTownByLocation(event.getFrom());
-            final Town newTown = cache.getTownByLocation(event.getTo());
-
-            if (oldTown == null && newTown == null) { // Continuing in Wilderness
+        if (oldTown == null) { // Entering new Territory
+            if (newTown.getBannedUUIDs().contains(player.getUniqueId())) {
+                event.setCancelled(true);
+                Messages.get().getPlayer().getBannedWarningTitle().send(player);
                 return;
             }
 
-            Messages messages = Messages.get();
-            if (oldTown != null && newTown == null) { // Entering Wilderness
-                messages.getNowEnteringWilderness().send(player);
-                return;
-            }
+            Messages.get().getNowEnteringTown().send(player, Placeholder.unparsed("town", newTown.getName()));
+            return;
+        }
 
-            if ((newTown != null && oldTown == null) || !newTown.equals(oldTown)) { // Entering new Territory
-                if (newTown.getBannedUUIDs().contains(player.getUniqueId()) && !cache.isBypassing(player)) {
-                    event.setCancelled(true);
-                    messages.getPlayer().getBannedWarningTitle().send(player);
-                    return;
-                }
-                messages.getNowEnteringTown().send(player, Placeholder.unparsed("town", newTown.getName()));
-            }
-
+        if (oldTown.equals(newTown)) { // Same town, new plot
             Plot plot = newTown.getPlot(event.getTo());
-            if (plot != null) {
-                messages.getTown().getPlot().getEnter().send(
+            if (plot != null && plot.isModified()) {
+                Messages.get().getTown().getPlot().getEnter().send(
                     player,
                     Placeholder.unparsed("plot", plot.getName()),
                     Placeholder.unparsed("type", plot.getType().name())
                 );
+
                 // Disable their fly if it is a PVP plot
                 if (plot.getType() == PlotType.ARENA && !(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)) {
                     player.setAllowFlight(false);
