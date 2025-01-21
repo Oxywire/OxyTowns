@@ -1,16 +1,14 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
-import xyz.jpenilla.runpaper.task.RunServer
 
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.freefair.lombok") version "8.2.2"
+    id("com.gradleup.shadow") version "8.3.5"
+    id("io.freefair.lombok") version "8.11"
 
     // Paper environment
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-    id("xyz.jpenilla.run-paper") version "2.2.0"
 
     // Version checking
     id("com.github.ben-manes.versions") version "0.47.0"
@@ -28,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.9")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
@@ -47,7 +45,7 @@ dependencies {
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 tasks {
@@ -56,7 +54,7 @@ tasks {
     }
 
     withType<JavaCompile> {
-        options.release.set(17)
+        options.release.set(21)
         options.encoding = Charsets.UTF_8.name()
         options.compilerArgs = listOf("-parameters")
     }
@@ -78,19 +76,6 @@ tasks {
         )
 
         archiveFileName.set("OxyTowns-${project.version}.jar")
-    }
-
-    withType<RunServer> {
-        minecraftVersion("1.20.2")
-
-        downloadPlugins {
-            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
-            hangar("squaremap", "1.2.1")
-            url("https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar")
-            url("https://download.luckperms.net/1534/bukkit/loader/LuckPerms-Bukkit-5.4.121.jar")
-            url("https://ci.enginehub.org/repository/download/bt11/22585:id/worldguard-bukkit-7.0.10-SNAPSHOT-dist.jar?branch=version/7.0.x&guest=1")
-            url("https://ci.enginehub.org/repository/download/bt10/22825:id/worldedit-bukkit-7.2.18-SNAPSHOT-dist.jar?branch=version/7.2.x&guest=1")
-        }
     }
 }
 

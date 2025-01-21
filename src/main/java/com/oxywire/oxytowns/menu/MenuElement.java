@@ -12,6 +12,7 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -124,7 +125,7 @@ public class MenuElement {
             for (ItemFlag itemFlag : this.itemFlags) {
                 if (itemFlag == ItemFlag.HIDE_ATTRIBUTES) {
                     // Add some dummy attribute so we can hide all attributes
-                    meta.addAttributeModifier(Attribute.HORSE_JUMP_STRENGTH, new AttributeModifier("dummy", 0, AttributeModifier.Operation.ADD_SCALAR));
+                    meta.addAttributeModifier(Attribute.GENERIC_BURNING_TIME, new AttributeModifier(new NamespacedKey("oxywire", "dummy"), 0, AttributeModifier.Operation.ADD_SCALAR));
                 }
 
                 meta.addItemFlags(itemFlag);
