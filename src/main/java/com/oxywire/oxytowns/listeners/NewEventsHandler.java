@@ -868,6 +868,17 @@ public class NewEventsHandler implements Listener {
         }
     }
 
+    // Rooted dirt
+    @EventHandler
+    public void onPlayerInteract$16(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+            && event.getClickedBlock().getType() == Material.ROOTED_DIRT
+            && !cache.isBypassing(event.getPlayer())
+            && canInteract(event.getPlayer(), event.getClickedBlock().getLocation(), Permission.BLOCK_BREAK, event.getClickedBlock())) {
+            event.setCancelled(true);
+        }
+    }
+
     private boolean borderCheck(final Block block, final BlockFace direction, final List<Block> blocks) {
         final Block testing = block.getRelative(direction);
         if (crossesBorder(block, testing)) {
