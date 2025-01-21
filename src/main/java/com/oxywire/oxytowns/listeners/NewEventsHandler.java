@@ -58,6 +58,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
+import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
@@ -77,6 +78,7 @@ import org.bukkit.event.player.PlayerUnleashEntityEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.world.PortalCreateEvent;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -875,6 +877,18 @@ public class NewEventsHandler implements Listener {
             && event.getClickedBlock().getType() == Material.ROOTED_DIRT
             && !cache.isBypassing(event.getPlayer())
             && canInteract(event.getPlayer(), event.getClickedBlock().getLocation(), Permission.BLOCK_BREAK, event.getClickedBlock())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPotionSplash(PotionSplashEvent event) {
+        if (event.getPotion().getEffects().stream().anyMatch(it -> it.getType() == PotionEffectType.INFESTED)
+            && event.getEntity().getShooter() != null
+            && event.getEntity().getShooter() instanceof Player player
+            && !cache.isBypassing(player)
+            && canInteract(player, event.getEntity().getLocation(), Permission.BLOCK_BREAK, event.getEntity())
+        ) {
             event.setCancelled(true);
         }
     }
