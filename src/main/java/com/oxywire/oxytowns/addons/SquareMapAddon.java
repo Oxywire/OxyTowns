@@ -87,13 +87,13 @@ public final class SquareMapAddon extends BukkitRunnable {
 
             if (town.getSpawnPosition() != null) {
                 if (town.getSpawnPosition().getWorld() == null) return;
-                final SimpleLayerProvider layer = this.providers.get(town.getSpawnPosition().getWorld().getName());
+                final SimpleLayerProvider layer = this.providers.get(town.getSpawnPosition().getWorld());
                 if (layer == null) return;
 
                 layer.addMarker(
                     Key.key(String.format("town-%s", town.getName())),
                     Marker.icon(
-                        Point.point(town.getSpawnPosition().x(), town.getSpawnPosition().z()),
+                        Point.point(town.getSpawnPosition().getX(), town.getSpawnPosition().getZ()),
                         TOWN_SPAWN_KEY,
                         config.getTownSpawnIconSize()
                     )

@@ -23,6 +23,7 @@ import com.oxywire.oxytowns.menu.town.VaultMenu;
 import com.oxywire.oxytowns.runnable.TaxSchedule;
 import com.oxywire.oxytowns.entities.model.CreatedDateHolder;
 import com.oxywire.oxytowns.utils.ChunkPosition;
+import com.oxywire.oxytowns.utils.FinePosition;
 import com.oxywire.oxytowns.utils.Placeholdered;
 import lombok.Getter;
 import lombok.Setter;
@@ -65,9 +66,9 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     private final Set<TrustedEntry> trusted;
     private final Map<Role, Set<Permission>> permissionSets;
     // private final Set<ChunkPosition> claimedChunks;
-    private final Set<Location> outpostChunks;
+    private final Set<FinePosition> outpostChunks;
     private final Map<ChunkPosition, Plot> playerPlots;
-    private Location spawnPosition;
+    private FinePosition spawnPosition;
     @Setter
     private double bankValue;
     private final Map<Upgrade, Integer> townUpgrades;
@@ -159,7 +160,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @param location the location to claim
      */
     public void claimOutpost(final Location location) {
-        this.outpostChunks.add(location);
+        this.outpostChunks.add(FinePosition.finePosition(location));
         OxyTownsPlugin.get().getTownCache().getTownsMap().put(ChunkPosition.chunkPosition(location), this);
     }
 
@@ -198,12 +199,12 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
             return true;
         }
 
-        for (Location location : this.outpostChunks) {
-            if (!location.isWorldLoaded()) {
-                continue; // TODO: ???
-            }
+        for (FinePosition location : this.outpostChunks) {
+//            if (!location.isWorldLoaded()) {
+//                continue; // ??? - We lose the entire world context if it unloads (i.e. on shutdown)
+//            }
 
-            if (location.getBlockX() >> 4 == chunkPosition.getX() && location.getBlockZ() >> 4 == chunkPosition.getZ() && location.getWorld().getName().equals(chunkPosition.getWorld())) {
+            if (((int) location.getX()) >> 4 == chunkPosition.getX() && ((int) location.getZ()) >> 4 == chunkPosition.getZ() && location.getWorld().equals(chunkPosition.getWorld())) {
                 return true;
             }
         }
@@ -436,7 +437,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @param entity the entity
      */
     public void teleport(final Entity entity) {
-        entity.teleportAsync(this.spawnPosition);
+        entity.teleportAsync(this.spawnPosition.getBukkitLocation());
     }
 
     /**
@@ -660,11 +661,11 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     }
 
     public Location getHome() {
-        return this.spawnPosition;
+        return this.spawnPosition.getBukkitLocation();
     }
 
     public void setHome(final Location location) {
-        this.spawnPosition = location;
+        this.spawnPosition = FinePosition.finePosition(location);
     }
 
     public boolean hasWorth(final Double toCheck) {

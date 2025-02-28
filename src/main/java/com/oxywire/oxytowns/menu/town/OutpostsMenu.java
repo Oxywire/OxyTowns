@@ -30,10 +30,10 @@ public final class OutpostsMenu extends PagedMenu {
 
         return this.town.getOutpostChunks().stream()
             .map(chunk -> elements.get("outpost").getElement(
-                e -> player.teleportAsync(chunk),
+                e -> player.teleportAsync(chunk.getBukkitLocation()),
                 Formatter.number("x", chunk.getX()),
                 Formatter.number("z", chunk.getZ()),
-                Placeholder.unparsed("world", chunk.getWorld().getName())
+                Placeholder.unparsed("world", chunk.getWorld())
             ))
             .toArray(ClickableItem[]::new);
     }
