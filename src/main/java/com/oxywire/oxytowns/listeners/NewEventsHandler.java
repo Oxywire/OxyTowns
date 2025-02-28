@@ -30,6 +30,7 @@ import org.bukkit.entity.Enemy;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -176,6 +177,8 @@ public class NewEventsHandler implements Listener {
         if (town == null) return;
 
         Plot plot = town.getPlot(event.getEntity().getLocation());
+        // Always allow players to damage hostile mobs, because they'd otherwise be invulnerable
+        if (event.getEntity() instanceof Monster) return;
         // Allow mobs if it's a mob farm plot
         // Or if the town toggle is on
         if (plot != null && plot.isModified() && plot.getType() == PlotType.MOB_FARM) return;
