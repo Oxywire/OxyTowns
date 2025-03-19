@@ -33,7 +33,7 @@ public final class RegionUtils {
 
         final Chunk chunk = location.getChunk();
         final BlockVector3 min = BukkitAdapter.asBlockVector(chunk.getBlock(0, world.getMinHeight(), 0).getLocation());
-        final BlockVector3 max = BukkitAdapter.asBlockVector(chunk.getBlock(15, world.getMaxHeight(), 15).getLocation());
+        final BlockVector3 max = BukkitAdapter.asBlockVector(chunk.getBlock(15, world.getMaxHeight() - 1, 15).getLocation());
 
         final Set<ProtectedRegion> protectedRegion = regionManager.getApplicableRegions(new ProtectedCuboidRegion("tmp", min, max)).getRegions();
         return !protectedRegion.isEmpty() || Config.get().getBlacklistedWorlds().stream().anyMatch(it -> it.equalsIgnoreCase(world.getName()));
