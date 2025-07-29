@@ -10,8 +10,10 @@ import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.plot.Plot;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.entities.types.PlotType;
 import com.oxywire.oxytowns.entities.types.perms.Permission;
 import com.oxywire.oxytowns.menu.plot.PlotMenu;
+import com.oxywire.oxytowns.utils.ChunkPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -33,6 +35,21 @@ public final class PlotCommand {
     public void onDefault(final Player sender, final @SendersTown Town sendersTown) {
         if (!sendersTown.hasClaimed(sender.getLocation())) {
             Messages.get().getTown().getChunkNotClaimed().send(sender);
+            return;
+        }
+
+        final Plot plot = sendersTown.getPlot(sender.getLocation());
+        if (plot == null) {
+            if (!sendersTown.hasPermission(sender.getUniqueId(), Permission.PLOTS_MODIFY)) {
+                Messages.get().getTown().getPlot().getManageNoPermission().send(sender);
+                return;
+            }
+
+            final Plot newPlot = new Plot(PlotType.DEFAULT, ChunkPosition.chunkPosition(sender.getLocation()), "");
+            sendersTown.claimPlot(newPlot);
+
+            PlotMenu.open(sender, sendersTown, sendersTown.getPlot(sender.getLocation()));
+
             return;
         }
 

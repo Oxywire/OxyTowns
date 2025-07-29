@@ -38,6 +38,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.ZoneId;
 import java.util.Date;
@@ -65,7 +66,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     private Map<UUID, Role> members;
     private final Set<TrustedEntry> trusted;
     private final Map<Role, Set<Permission>> permissionSets;
-    // private final Set<ChunkPosition> claimedChunks;
+    private final Set<ChunkPosition> claimedChunks;
     private final Set<FinePosition> outpostChunks;
     private final Map<ChunkPosition, Plot> playerPlots;
     private FinePosition spawnPosition;
@@ -89,7 +90,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
         this.owner = owner;
         this.members = new ConcurrentHashMap<>();
         this.permissionSets = OxyTownsPlugin.get().getOxyTownsApi().createDefault();
-        // this.claimedChunks = Sets.newConcurrentHashSet();
+        this.claimedChunks = Sets.newConcurrentHashSet();
         this.outpostChunks = Sets.newConcurrentHashSet();
         this.playerPlots = new ConcurrentHashMap<>();
         this.spawnPosition = null;
@@ -119,7 +120,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @param chunkRegion Chunk regions to claim.
      */
     public void claimChunks(final ChunkPosition chunkRegion) {
-        this.playerPlots.put(chunkRegion, new Plot(UUID.randomUUID(), PlotType.DEFAULT, chunkRegion, ""));
+        this.claimedChunks.add(chunkRegion);
         OxyTownsPlugin.get().getTownCache().getTownsMap().put(chunkRegion, this);
     }
 
@@ -143,10 +144,8 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      */
     public void unclaimChunk(final ChunkPosition chunkRegion, final Player player) {
         this.outpostChunks.removeIf(it -> ChunkPosition.chunkPosition(it).equals(chunkRegion));
-
-        final Plot plot = this.playerPlots.remove(chunkRegion);
-        if (plot == null) return;
-
+        this.claimedChunks.remove(chunkRegion);
+        this.playerPlots.remove(chunkRegion);
         OxyTownsPlugin.get().getTownCache().getTownsMap().remove(chunkRegion);
 
         if (this.spawnPosition != null && chunkRegion.contains(this.spawnPosition)) {
@@ -182,7 +181,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     public ImmutableSet<ChunkPosition> getOutpostAndClaimedChunks() {
         final Set<ChunkPosition> chunks = Sets.newHashSet();
 
-        chunks.addAll(this.playerPlots.keySet());
+        chunks.addAll(this.claimedChunks);
         chunks.addAll(this.outpostChunks.stream().map(ChunkPosition::chunkPosition).collect(Collectors.toSet()));
 
         return ImmutableSet.copyOf(chunks);
@@ -195,7 +194,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @return claimed or not
      */
     public boolean hasClaimed(final ChunkPosition chunkPosition) {
-        if (playerPlots.containsKey(chunkPosition)) {
+        if (claimedChunks.contains(chunkPosition)) {
             return true;
         }
 
@@ -218,12 +217,27 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @param location the location to check
      * @return if a plot is there or not
      */
+    @Nullable
     public Plot getPlot(final Location location) {
         return this.getPlot(ChunkPosition.chunkPosition(location));
     }
 
+    @Nullable
     public Plot getPlot(final ChunkPosition position) {
-        return this.playerPlots.computeIfAbsent(position, pos -> outpostChunks.stream().filter(pos::contains).findFirst().map(it -> new Plot(UUID.randomUUID(), PlotType.DEFAULT, pos, "")).orElse(null));
+        return this.playerPlots.get(position);
+    }
+
+    /**
+     * Helper method to claim a plot.
+     *
+     * @param plot the plot to claim
+     */
+    public void claimPlot(final Plot plot) {
+        if (this.playerPlots.containsKey(plot.getChunkPosition())) {
+            return;
+        }
+
+        this.playerPlots.put(plot.getChunkPosition(), plot);
     }
 
     /**
@@ -347,6 +361,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     public void removePlayer(final OfflinePlayer player) {
         this.members.remove(player.getUniqueId());
         this.playerPlots.values().forEach(plot -> plot.getAssignedMembers().remove(player.getUniqueId()));
+        this.playerPlots.values().removeIf(plot -> plot.getAssignedMembers().isEmpty());
     }
 
     /**

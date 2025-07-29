@@ -149,8 +149,6 @@ public class OxyTownsPlugin extends JavaPlugin {
 
         this.taxSchedule = new TaxSchedule(this);
         new MobsRunnable().runTaskTimer(this, 0, 20 * 8);
-
-        getLogger().info(() -> "Ready to go! That only took " + (System.currentTimeMillis() - start) + "ms");
     }
 
     private void registerAddons() {

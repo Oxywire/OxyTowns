@@ -79,6 +79,7 @@ import org.bukkit.event.player.PlayerUnleashEntityEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.world.PortalCreateEvent;
+import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.EnumSet;
@@ -181,7 +182,7 @@ public class NewEventsHandler implements Listener {
         if (event.getEntity() instanceof Monster) return;
         // Allow mobs if it's a mob farm plot
         // Or if the town toggle is on
-        if (plot != null && plot.isModified() && plot.getType() == PlotType.MOB_FARM) return;
+        if (plot != null && plot.getType() == PlotType.MOB_FARM) return;
         else if (town.getToggle(Setting.MOBS)) return;
 
         event.setCancelled(true);
@@ -211,14 +212,14 @@ public class NewEventsHandler implements Listener {
     @EventHandler
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
         if (!cache.isBypassing(event.getPlayer())
-            && canInteract(event.getPlayer(), event.getBlockClicked().getLocation(), Permission.BLOCK_PLACE, event.getBlock())) {
+            && canInteract(event.getPlayer(), event.getBlock().getLocation(), Permission.BLOCK_PLACE, event.getBlock())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (event.getBlock().getType() == Material.LECTERN) {
+        if (event.getBlock().getType() == Material.LECTERN && Tag.ITEMS_LECTERN_BOOKS.isTagged(event.getItemInHand().getType())) {
             return;
         }
 
@@ -674,7 +675,7 @@ public class NewEventsHandler implements Listener {
 
         if (oldTown.equals(newTown)) { // Same town, new plot
             Plot plot = newTown.getPlot(event.getTo());
-            if (plot != null && plot.isModified()) {
+            if (plot != null) {
                 Messages.get().getTown().getPlot().getEnter().send(
                     player,
                     Placeholder.unparsed("plot", plot.getName()),
@@ -739,10 +740,19 @@ public class NewEventsHandler implements Listener {
     @EventHandler
     public void onEntityExplode$2(EntityExplodeEvent event) {
         if (!(event.getEntity() instanceof TNTPrimed tntPrimed)) return;
-        if (tntPrimed.getSource() == null) return;
-        if (!(tntPrimed.getSource() instanceof Player player)) return;
-        if (!cache.isBypassing(player) && canInteract(player, tntPrimed.getLocation(), Permission.BLOCK_BREAK, Material.AIR)) {
-            event.setCancelled(true);
+
+        Location location = tntPrimed.getLocation();
+        Entity source = tntPrimed.getSource();
+
+        if (source instanceof Player player) {
+            if (!cache.isBypassing(player) && canInteract(player, location, Permission.BLOCK_BREAK, Material.AIR)) {
+                event.setCancelled(true);
+            }
+        } else {
+            // Source is null or not a player
+            if (cache.getTownByLocation(location) != null) {
+                event.setCancelled(true);
+            }
         }
     }
 
@@ -769,6 +779,16 @@ public class NewEventsHandler implements Listener {
         ) {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onStructureGrow(StructureGrowEvent event) {
+        List<BlockState> blocks = event.getBlocks();
+        if (blocks.isEmpty()) return;
+        Block first = blocks.getFirst().getBlock();
+        if (blocks.stream().noneMatch(it -> crossesBorder(first, it.getBlock()))) return;
+
+        event.setCancelled(true);
     }
 
     @EventHandler
@@ -822,7 +842,7 @@ public class NewEventsHandler implements Listener {
             Plot plot = town.getPlot(location);
             // If the plot was at all modified, only allow if it's an arena plot
             // Otherwise, check the town toggle
-            if (plot != null && plot.isModified() && plot.getType() != PlotType.ARENA) return false;
+            if (plot != null && plot.getType() != PlotType.ARENA) return false;
             else return town.getToggle(Setting.PVP);
         };
 
@@ -846,8 +866,8 @@ public class NewEventsHandler implements Listener {
         Plot attackerPlot = attackerTown.getPlot(attacker.getLocation());
         Plot victimPlot = victimTown.getPlot(victim.getLocation());
 
-        if (attackerPlot != null && attackerPlot.isModified() && attackerPlot.getType() == PlotType.ARENA
-            && victimPlot != null && victimPlot.isModified() && victimPlot.getType() == PlotType.ARENA) return;
+        if (attackerPlot != null && attackerPlot.getType() == PlotType.ARENA
+            && victimPlot != null && victimPlot.getType() == PlotType.ARENA) return;
         else if (attackerTown.getToggle(Setting.PVP) && victimTown.getToggle(Setting.PVP)) return;
 
         event.setCancelled(true);
@@ -862,7 +882,7 @@ public class NewEventsHandler implements Listener {
         if (town == null) return;
 
         final Plot plot = town.getPlot(event.getLocation());
-        if (plot != null && plot.isModified()) {
+        if (plot != null) {
             // If the plot was at all modified, only allow mobs if it's a mob farm plot
             if (plot.getType() != PlotType.MOB_FARM) {
                 event.setCancelled(true);

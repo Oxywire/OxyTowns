@@ -9,7 +9,9 @@ import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.plot.Plot;
 import com.oxywire.oxytowns.entities.impl.town.Town;
+import com.oxywire.oxytowns.entities.types.PlotType;
 import com.oxywire.oxytowns.entities.types.perms.Permission;
+import com.oxywire.oxytowns.utils.ChunkPosition;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -28,15 +30,10 @@ public final class AssignCommand {
     @MustBeInTown
     public void onAssign(final Player sender, final @SendersTown Town town, final @Argument(value = "name", suggestions = "plot:assignable-members") String name) {
         final Messages messages = Messages.get();
-        final Plot foundPlot = town.getPlot(sender.getLocation());
-        final Town foundTown = this.townCache.getTownByLocation(sender.getLocation());
-        if (foundTown == null || !foundTown.equals(town)) {
-            messages.getTown().getPlot().getNotClaimed().send(sender);
-            return;
-        }
+        Plot foundPlot = town.getPlot(sender.getLocation());
 
-        if (!town.hasPermission(sender.getUniqueId(), Permission.PLOTS_ASSIGN)) {
-            messages.getTown().getPlot().getNoPermissionAssign().send(sender);
+        if (!town.hasClaimed(sender.getLocation())) {
+            messages.getTown().getPlot().getNotClaimed().send(sender);
             return;
         }
 
@@ -47,25 +44,42 @@ public final class AssignCommand {
             return;
         }
 
-        if (!town.getOwnerAndMembers().contains(foundPlayer.getUniqueId())) {
-            messages.getTown().getPlot().getMember().getNotMember()
-                .send(sender, Placeholder.unparsed("player", foundPlayer.getName()),
+        if (!town.isMember(foundPlayer.getUniqueId())) {
+            messages.getTown().getNotMember().send(sender, Placeholder.unparsed("player", name));
+            return;
+        }
+
+        if (foundPlot == null) {
+            final ChunkPosition chunkPosition = ChunkPosition.chunkPosition(sender.getLocation().getChunk());
+            if (!town.getOwnerAndMembers().contains(foundPlayer.getUniqueId())) {
+                messages.getTown().getPlot().getMember().getNotMember().send(
+                    sender,
+                    Placeholder.unparsed("player", name),
+                    Placeholder.unparsed("adder", sender.getName())
+                );
+                return;
+            }
+
+            final Plot newPlot = new Plot(PlotType.DEFAULT, chunkPosition, name);
+            town.claimPlot(newPlot);
+            foundPlot = newPlot;
+        }
+
+        if (town.hasPermission(sender.getUniqueId(), Permission.PLOTS_ASSIGN)) {
+            if (foundPlot.getAssignedMembers().contains(foundPlayer.getUniqueId())) {
+                messages.getTown().getPlot().getMember().getAlreadyMember().send(
+                    sender, Placeholder.unparsed("player", name),
                     Placeholder.unparsed("adder", sender.getName()));
-            return;
-        }
+                return;
+            }
+            foundPlot.addMember(foundPlayer.getUniqueId());
 
-        if (foundPlot.getAssignedMembers().contains(foundPlayer.getUniqueId())) {
-            messages.getTown().getPlot().getMember().getAlreadyMember().send(
-                sender, Placeholder.unparsed("player", foundPlayer.getName()),
-                Placeholder.unparsed("adder", sender.getName()));
-            return;
-        }
-
-        foundPlot.addMember(foundPlayer.getUniqueId());
-
-        messages.getTown().getPlot().getMember().getSuccess().send(sender, Placeholder.unparsed("player", foundPlayer.getName()));
-        if (foundPlayer.isOnline()) {
-            messages.getTown().getPlot().getMember().getAdded().send(foundPlayer.getPlayer(), Placeholder.unparsed("player", sender.getName()));
+            messages.getTown().getPlot().getMember().getSuccess().send(sender, Placeholder.unparsed("player", name));
+            if (foundPlayer.isOnline()) {
+                messages.getTown().getPlot().getMember().getAdded().send(foundPlayer.getPlayer(), Placeholder.unparsed("player", sender.getName()));
+            }
+        } else {
+            messages.getTown().getPlot().getNoPermissionAssign().send(sender);
         }
     }
 }

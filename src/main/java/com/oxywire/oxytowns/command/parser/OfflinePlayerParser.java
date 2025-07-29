@@ -17,15 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * A copy of the default {@link cloud.commandframework.bukkit.parsers.OfflinePlayerArgument.OfflinePlayerParser}
- * that is thread safe, and will not perform a web request to get the player's UUID.
- * <p>
- * The {@link Bukkit#getOfflinePlayer(String)} method will perform a web request if the player has never joined the
- * server before, which is redundant since we ignore if the player has never joined the server before regardless.
- *
- * @param <C> Command sender type
- */
 public final class OfflinePlayerParser<C> implements ArgumentParser<C, OfflinePlayer> {
 
     @Override
@@ -42,11 +33,16 @@ public final class OfflinePlayerParser<C> implements ArgumentParser<C, OfflinePl
         }
 
         // This is the only change from the original parser
-        final OfflinePlayer player = Bukkit.getOfflinePlayerIfCached(input);
-        if (player == null) {
+        OfflinePlayer player = Bukkit.getOfflinePlayerIfCached(input);
+        if (player != null) {
+            inputQueue.remove();
+            return ArgumentParseResult.success(player);
+        }
+
+        player = Bukkit.getOfflinePlayer(input);
+        if (!player.hasPlayedBefore()) {
             return ArgumentParseResult.failure(new OfflinePlayerArgument.OfflinePlayerParseException(input, commandContext));
         }
-        // End change
 
         inputQueue.remove();
         return ArgumentParseResult.success(player);

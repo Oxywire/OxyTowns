@@ -102,14 +102,7 @@ public final class OxyTownsApi {
             return town.hasPermission(player, permission);
         }
 
-        // If the plot was at all modified, check the plot perms
-        if (foundPlot.isModified()) {
-            return foundPlot.getAssignedMembers().contains(player)  // always allow assigned members
-                || foundPlot.getPermission(town.getRole(player), permission) // plot perms
-                || foundPlot.getType().test(queryObject); // ex: farm plots & crops
-        }
-
-        // Otherwise, check town permissions
-        return town.hasPermission(player, permission);
+        // There is a plot, so only the members can interact
+        return foundPlot.getAssignedMembers().contains(player);
     }
 }

@@ -30,9 +30,15 @@ public final class EvictCommand {
     public void onEvict(final Player sender, final @SendersTown Town town, final @Argument(value = "name", suggestions = "plot:evictable-members") String name) {
         final Messages messages = Messages.get();
         final Plot plot = town.getPlot(sender.getLocation());
-        final Town foundTown = this.townCache.getTownByLocation(sender.getLocation());
-        if (foundTown == null || !foundTown.equals(town) || plot == null) {
+
+        if (!town.hasClaimed(sender.getLocation()) || plot == null) {
             messages.getTown().getPlot().getNotClaimed().send(sender);
+            return;
+        }
+
+        final OfflinePlayer foundPlayer = Bukkit.getOfflinePlayerIfCached(name);
+        if (foundPlayer == null) {
+            messages.getTown().getNotFound().send(sender, Placeholder.unparsed("player", name));
             return;
         }
 
@@ -40,30 +46,17 @@ public final class EvictCommand {
             messages.getTown().getPlot().getEvictedNoPermission().send(sender);
             return;
         }
-
-        final OfflinePlayer foundPlayer = Bukkit.getOfflinePlayerIfCached(name);
-
-        if (foundPlayer == null) {
-            messages.getTown().getNotFound().send(sender, Placeholder.unparsed("player", name));
-            return;
-        }
-
-        if (!town.getOwnerAndMembers().contains(foundPlayer.getUniqueId())) {
-            messages.getTown().getNotMember().send(sender, Placeholder.unparsed("player", foundPlayer.getName()));
-            return;
-        }
-
         if (!plot.getAssignedMembers().contains(foundPlayer.getUniqueId())) {
-            messages.getTown().getPlot().getMember().getNotMember().send(sender, Placeholder.unparsed("player", foundPlayer.getName()));
+            messages.getTown().getPlot().getMember().getNotMember().send(sender, Placeholder.unparsed("player", name));
             return;
         }
 
         plot.getAssignedMembers().remove(foundPlayer.getUniqueId());
 
         if (plot.getAssignedMembers().isEmpty()) {
-            town.getPlayerPlots().remove(plot);
+            town.getPlayerPlots().remove(plot.getChunkPosition());
         }
 
-        messages.getTown().getPlot().getEvicted().send(sender, Placeholder.unparsed("player", foundPlayer.getName()));
+        messages.getTown().getPlot().getEvicted().send(sender, Placeholder.unparsed("player", name));
     }
 }

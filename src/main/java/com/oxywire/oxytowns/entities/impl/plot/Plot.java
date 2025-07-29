@@ -2,11 +2,9 @@ package com.oxywire.oxytowns.entities.impl.plot;
 
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.config.messaging.Message;
+import com.oxywire.oxytowns.entities.model.CreatedDateHolder;
 import com.oxywire.oxytowns.entities.model.Named;
 import com.oxywire.oxytowns.entities.types.PlotType;
-import com.oxywire.oxytowns.entities.model.CreatedDateHolder;
-import com.oxywire.oxytowns.entities.types.Role;
-import com.oxywire.oxytowns.entities.types.perms.Permission;
 import com.oxywire.oxytowns.utils.ChunkPosition;
 import com.oxywire.oxytowns.utils.Placeholdered;
 import lombok.Data;
@@ -17,11 +15,8 @@ import org.bukkit.Bukkit;
 
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -29,22 +24,17 @@ import java.util.UUID;
 @Data
 public final class Plot implements CreatedDateHolder, Placeholdered, Named {
 
-    private Set<UUID> assignedMembers;
-    private Map<Role, Set<Permission>> permissions;
-
-    private UUID uuid;
     private PlotType type;
     private ChunkPosition chunkPosition;
     private String name;
+    private Set<UUID> assignedMembers;
     private Date creationDate;
 
-    public Plot(final UUID uuid, final PlotType type, final ChunkPosition chunkPosition, final String name) {
-        this.uuid = uuid;
+    public Plot(final PlotType type, final ChunkPosition chunkPosition, final String name) {
         this.type = type;
         this.chunkPosition = chunkPosition;
         this.name = name;
         this.assignedMembers = new HashSet<>();
-        this.permissions = new HashMap<>();
         this.creationDate = new Date();
     }
 
@@ -64,23 +54,6 @@ public final class Plot implements CreatedDateHolder, Placeholdered, Named {
      */
     public List<String> getMemberNames() {
         return this.assignedMembers.stream().map(member -> Bukkit.getOfflinePlayer(member).getName()).toList();
-    }
-
-    public boolean getPermission(final Role role, final Permission permission) {
-        return this.permissions.getOrDefault(role, EnumSet.noneOf(Permission.class)).contains(permission);
-    }
-
-    public void setPermission(final Role role, final Permission permission, final boolean value) {
-        final Set<Permission> permissions = this.permissions.computeIfAbsent(role, k -> EnumSet.noneOf(Permission.class));
-        if (value) {
-            permissions.add(permission);
-        } else {
-            permissions.remove(permission);
-        }
-    }
-
-    public boolean isModified() {
-        return !this.getAssignedMembers().isEmpty() || !this.getName().isEmpty() || this.getType() != PlotType.DEFAULT;
     }
 
     @Override
