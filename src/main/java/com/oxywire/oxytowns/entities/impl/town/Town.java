@@ -734,7 +734,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
             Placeholder.parsed("owner-online", Optional.ofNullable(Bukkit.getPlayer(owner)).map(it -> "<green>" + it.getName()).orElse("<owner>")),
             Formatter.number("members", members.size()),
             Formatter.number("members-and-owner", members.size() + 1),
-            Formatter.number("claims", playerPlots.keySet().size()),
+            Formatter.number("claims", claimedChunks.size()),
             Formatter.number("maxclaims", getUpgradeValue(Upgrade.CLAIMS)),
             Formatter.number("outposts", outpostChunks.size()),
             Formatter.number("maxoutposts", getUpgradeValue(Upgrade.OUTPOSTS)),
