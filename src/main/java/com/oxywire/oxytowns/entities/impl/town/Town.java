@@ -672,7 +672,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
 
     @Override
     public boolean isMember(final UUID uuid) {
-        return this.members.containsKey(uuid);
+        return this.members.containsKey(uuid) || this.owner.equals(uuid);
     }
 
     public Location getHome() {
