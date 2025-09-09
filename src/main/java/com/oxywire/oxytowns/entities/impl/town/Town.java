@@ -461,7 +461,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
      * @return set of chunks
      */
     public ImmutableSet<ChunkPosition> getClaimedChunks() {
-        return ImmutableSet.copyOf(this.playerPlots.keySet());
+        return ImmutableSet.copyOf(this.claimedChunks);
     }
 
     /**
