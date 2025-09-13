@@ -6,7 +6,9 @@ import com.oxywire.oxytowns.config.messaging.Message;
 import com.oxywire.oxytowns.utils.IntRange;
 import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.content.SlotPos;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import lombok.Getter;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
@@ -46,6 +48,8 @@ public class MenuElement {
     private List<String> lore = null;
     @Setting
     private Integer customModelData = null;
+    @Setting
+    private String itemModel = null;
     @Setting
     private ItemFlag[] itemFlags = null;
     @Setting
@@ -121,11 +125,12 @@ public class MenuElement {
         if (this.displayName != null) meta.displayName(itemComponent(this.displayName, placeholders));
         if (this.lore != null) meta.lore(this.lore.stream().map(it -> itemComponent(it, placeholders)).toList());
         if (this.customModelData != null) meta.setCustomModelData(this.customModelData);
+        if (this.itemModel != null) itemStack.setData(DataComponentTypes.ITEM_MODEL, Key.key(this.itemModel));
         if (this.itemFlags != null) {
             for (ItemFlag itemFlag : this.itemFlags) {
                 if (itemFlag == ItemFlag.HIDE_ATTRIBUTES) {
                     // Add some dummy attribute so we can hide all attributes
-                    meta.addAttributeModifier(Attribute.GENERIC_BURNING_TIME, new AttributeModifier(new NamespacedKey("oxywire", "dummy"), 0, AttributeModifier.Operation.ADD_SCALAR));
+                    meta.addAttributeModifier(Attribute.GRAVITY, new AttributeModifier(new NamespacedKey("oxywire", "dummy"), 0, AttributeModifier.Operation.ADD_SCALAR));
                 }
 
                 meta.addItemFlags(itemFlag);
