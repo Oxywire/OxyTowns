@@ -56,6 +56,10 @@ public final class Plot implements CreatedDateHolder, Placeholdered, Named {
         return this.assignedMembers.stream().map(member -> Bukkit.getOfflinePlayer(member).getName()).toList();
     }
 
+    public boolean isModified() {
+        return !this.assignedMembers.isEmpty() || this.type != PlotType.DEFAULT;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

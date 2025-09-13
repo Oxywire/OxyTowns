@@ -42,6 +42,10 @@ public final class PlotTypeMenu extends Menu {
                         .getType()
                         .getTypeChanged()
                         .send(player, Placeholder.unparsed("type", Message.formatEnum(plotType)));
+
+                    if (plotType == PlotType.DEFAULT && this.plot.getAssignedMembers().isEmpty()) {
+                        town.getPlayerPlots().remove(plot.getChunkPosition());
+                    }
                 }
             );
         }

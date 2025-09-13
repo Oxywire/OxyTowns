@@ -98,11 +98,14 @@ public final class OxyTownsApi {
         // Get the plot
         final Plot foundPlot = town.getPlot(chunkPosition);
         // If there isn't a plot there, check the town perms
-        if (foundPlot == null) {
+        if (foundPlot == null || !foundPlot.isModified()) {
             return town.hasPermission(player, permission);
         }
 
-        // There is a plot, so only the members can interact
+        // There is a plot, allow if the plot type override supports it
+        if (foundPlot.getType().test(queryObject)) return true;
+
+        // Always allow plot members
         return foundPlot.getAssignedMembers().contains(player);
     }
 }
