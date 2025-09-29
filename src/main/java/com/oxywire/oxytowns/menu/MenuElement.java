@@ -125,7 +125,6 @@ public class MenuElement {
         if (this.displayName != null) meta.displayName(itemComponent(this.displayName, placeholders));
         if (this.lore != null) meta.lore(this.lore.stream().map(it -> itemComponent(it, placeholders)).toList());
         if (this.customModelData != null) meta.setCustomModelData(this.customModelData);
-        if (this.itemModel != null) itemStack.setData(DataComponentTypes.ITEM_MODEL, Key.key(this.itemModel));
         if (this.itemFlags != null) {
             for (ItemFlag itemFlag : this.itemFlags) {
                 if (itemFlag == ItemFlag.HIDE_ATTRIBUTES) {
@@ -144,6 +143,8 @@ public class MenuElement {
         }
 
         itemStack.setItemMeta(meta);
+
+        if (this.itemModel != null) itemStack.setData(DataComponentTypes.ITEM_MODEL, Key.key(this.itemModel));
 
         return itemStack;
     }
