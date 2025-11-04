@@ -28,6 +28,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Enemy;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Monster;
@@ -196,6 +197,31 @@ public class NewEventsHandler implements Listener {
             && !cache.isBypassing(player)
             && Tag.CAMPFIRES.isTagged(event.getBlock().getType())
             && canInteract(player, event.getBlock().getLocation(), Permission.BLOCK_BREAK, event.getBlock())
+        ) {
+            event.setCancelled(true);
+        }
+    }
+
+    // Flying into decorated pots
+    @EventHandler
+    public void onEntityChangeBlock$0(EntityChangeBlockEvent event) {
+        if (event.getEntity() instanceof Firework firework
+            && firework.getShooter() != null
+            && firework.getShooter() instanceof Player player
+            && !cache.isBypassing(player)
+            && canInteract(player, event.getBlock().getLocation(), Permission.BLOCK_BREAK, event.getBlock())
+        ) {
+            event.setCancelled(true);
+        }
+    }
+
+    // Weaving potion effect
+    @EventHandler
+    public void onEntityChangeBlock$1(EntityChangeBlockEvent event) {
+        if (event.getEntity() instanceof Player player
+            && !cache.isBypassing(player)
+            && event.getTo() == Material.COBWEB
+            && canInteract(player, event.getBlock().getLocation(), Permission.BLOCK_PLACE, event.getBlock())
         ) {
             event.setCancelled(true);
         }
