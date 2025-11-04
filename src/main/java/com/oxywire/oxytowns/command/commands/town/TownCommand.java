@@ -34,6 +34,7 @@ public final class TownCommand {
     @Suggestions("town:bannable-members")
     public List<String> bannableMembers(final CommandContext<Player> context, final String input) {
         return Bukkit.getOnlinePlayers().stream()
+            .filter(it -> context.getSender().canSee(it))
             .filter(it ->
                 !this.townCache.getTownByPlayer(context.getSender())
                     .map(Town::getBannedUUIDs)
