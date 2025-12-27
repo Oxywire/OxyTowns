@@ -42,7 +42,6 @@ public final class UnclaimCommand {
             return;
         }
 
-
         if (!TownUtils.townExclusive(this.townCache, town, sender, 1, false)) {
             messages.getTown().getUnclaim().getChunkLinkedOutpost().send(sender);
             return;
@@ -71,7 +70,7 @@ public final class UnclaimCommand {
         }
 
         // Check if it's a claim but not an outpost
-        if (!town.getOutpostChunks().contains(chunkPosition)) {
+        if (town.getOutpostChunks().stream().noneMatch(chunkPosition::contains)) {
             // Check if it's home chunk
             if (town.getHome() != null && chunkPosition.contains(town.getHome())) {
                 messages.getTown().getUnclaim().getConfirmHomeBlockUnclaim().send(sender);
