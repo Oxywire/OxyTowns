@@ -3,13 +3,11 @@ package com.oxywire.oxytowns.storage;
 import com.oxywire.oxytowns.OxyTownsPlugin;
 import com.oxywire.oxytowns.entities.impl.town.Town;
 import com.oxywire.oxytowns.utils.Json;
+import com.oxywire.oxytowns.utils.LegacyPlotTypeMigrator;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +33,17 @@ public class TownStorageManager {
         final List<Town> towns = new ArrayList<>();
         for (final File file : this.dataFile.listFiles()) {
             try {
-                final Town town = Json.GSON.fromJson(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8), Town.class);
+                final String content = Files.readString(file.toPath());
+                final String migratedContent = LegacyPlotTypeMigrator.migrate(content);
+                if (!content.equals(migratedContent)) {
+                    Files.writeString(file.toPath(), migratedContent);
+                }
+
+                final Town town = Json.GSON.fromJson(migratedContent, Town.class);
                 towns.add(town);
             } catch (final FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
         }

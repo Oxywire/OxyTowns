@@ -18,9 +18,7 @@ public enum PlotType {
     PRIVATE_MOB_FARM,
     PUBLIC_MOB_FARM,
     EMBASSY,
-    ARENA,
-    @Deprecated
-    MOB_FARM;
+    ARENA;
 
     private static final List<PlotType> SELECTABLE_VALUES = List.of(
         DEFAULT,
@@ -65,7 +63,7 @@ public enum PlotType {
     }
 
     public boolean allowsMobFarmBehavior() {
-        return this == PRIVATE_MOB_FARM || this == PUBLIC_MOB_FARM || this == MOB_FARM;
+        return this == PRIVATE_MOB_FARM || this == PUBLIC_MOB_FARM;
     }
 
     public boolean allowsPublicChestAccess() {
@@ -81,7 +79,7 @@ public enum PlotType {
     }
 
     public PlotType displayType() {
-        return this == MOB_FARM ? PRIVATE_MOB_FARM : this;
+        return this;
     }
 
     private PlotType configType() {
@@ -89,11 +87,6 @@ public enum PlotType {
     }
 
     private Config.Plot config() {
-        final Config.Plot config = Config.get().getPlots().get(this.configType());
-        if (config != null || this.configType() != PRIVATE_MOB_FARM) {
-            return config;
-        }
-
-        return Config.get().getPlots().get(MOB_FARM);
+        return Config.get().getPlots().get(this.configType());
     }
 }

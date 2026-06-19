@@ -6,6 +6,7 @@ import com.oxywire.oxytowns.config.internal.serializer.MessageSerializer;
 import com.oxywire.oxytowns.config.internal.serializer.ZoneIdSerializer;
 import com.oxywire.oxytowns.config.messaging.Message;
 import com.oxywire.oxytowns.utils.IntRange;
+import com.oxywire.oxytowns.utils.LegacyPlotTypeMigrator;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.yaml.NodeStyle;
@@ -95,12 +96,22 @@ public final class ConfigManager {
                 }
             }
 
+            this.migrateLegacyPlotTypes(path);
+
             final YamlConfigurationLoader loader = this.loader(path);
             final CommentedConfigurationNode node = loader.load();
 
             return node.get(clazz);
         } catch (final IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void migrateLegacyPlotTypes(final Path path) throws IOException {
+        final String content = Files.readString(path);
+        final String migratedContent = LegacyPlotTypeMigrator.migrate(content);
+        if (!content.equals(migratedContent)) {
+            Files.writeString(path, migratedContent);
         }
     }
 }
