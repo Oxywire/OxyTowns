@@ -673,7 +673,7 @@ public final class Menus {
                             ),
                         "plot-type-" + PlotType.DEFAULT, new MenuElement()
                             .setMaterial(Material.GRASS_BLOCK)
-                            .setSlot(21)
+                            .setSlot(20)
                             .setDisplayName("<gold>Default Plot")
                             .setLore(
                                 List.of(
@@ -683,7 +683,7 @@ public final class Menus {
                             ),
                         "plot-type-" + PlotType.FARM, new MenuElement()
                             .setMaterial(Material.HAY_BLOCK)
-                            .setSlot(22)
+                            .setSlot(21)
                             .setDisplayName("<gold>Farm Plot")
                             .setLore(
                                 List.of(
@@ -692,15 +692,26 @@ public final class Menus {
                                     "<red>Warning: ALL players including outsiders will get access!"
                                 )
                             ),
-                        "plot-type-" + PlotType.MOB_FARM, new MenuElement()
+                        "plot-type-" + PlotType.PRIVATE_MOB_FARM, new MenuElement()
                             .setMaterial(Material.CHICKEN)
-                            .setSlot(23)
-                            .setDisplayName("<gold>Mobfarm Plot")
+                            .setSlot(22)
+                            .setDisplayName("<gold>Private Mobfarm Plot")
                             .setLore(
                                 List.of(
                                     "",
                                     "<white>Allow players to kill animals.",
                                     "<red>Warning: All players including outsiders will get access!"
+                                )
+                            ),
+                        "plot-type-" + PlotType.PUBLIC_MOB_FARM, new MenuElement()
+                            .setMaterial(Material.BARREL)
+                            .setSlot(23)
+                            .setDisplayName("<gold>Public Mobfarm Plot")
+                            .setLore(
+                                List.of(
+                                    "",
+                                    "<white>Mobfarm plot with public chest access.",
+                                    "<red>Warning: All players including outsiders can open chests, trapped chests, and barrels."
                                 )
                             ),
                         "plot-type-" + PlotType.ARENA, new MenuElement()

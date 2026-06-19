@@ -183,7 +183,7 @@ public class NewEventsHandler implements Listener {
         if (event.getEntity() instanceof Monster) return;
         // Allow mobs if it's a mob farm plot
         // Or if the town toggle is on
-        if (plot != null && plot.getType() == PlotType.MOB_FARM) return;
+        if (plot != null && plot.getType().allowsMobFarmBehavior()) return;
         else if (town.getToggle(Setting.MOBS)) return;
 
         event.setCancelled(true);
@@ -312,6 +312,7 @@ public class NewEventsHandler implements Listener {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK
             && CHEST_MATERIALS.contains(event.getClickedBlock().getType())
             && !cache.isBypassing(event.getPlayer())
+            && !hasPublicChestAccess(event.getClickedBlock())
             && canInteract(event.getPlayer(), event.getClickedBlock().getLocation(), Permission.CHESTS, event.getClickedBlock())) {
             event.setCancelled(true);
         }
@@ -705,7 +706,7 @@ public class NewEventsHandler implements Listener {
                 Messages.get().getTown().getPlot().getEnter().send(
                     player,
                     Placeholder.unparsed("plot", plot.getName()),
-                    Placeholder.unparsed("type", plot.getType().name())
+                    Placeholder.unparsed("type", Message.formatEnum(plot.getType().displayType()))
                 );
 
                 // Disable their fly if it is a PVP plot
@@ -830,7 +831,7 @@ public class NewEventsHandler implements Listener {
         }
 
         if (plot.getType().isCommandBlacklisted(event.getMessage())) {
-            Messages.get().getPlayer().getCantDoThatCommandInThisPlotType().send(event.getPlayer(), Placeholder.unparsed("type", Message.formatEnum(plot.getType())));
+            Messages.get().getPlayer().getCantDoThatCommandInThisPlotType().send(event.getPlayer(), Placeholder.unparsed("type", Message.formatEnum(plot.getType().displayType())));
             event.setCancelled(true);
         }
     }
@@ -910,7 +911,7 @@ public class NewEventsHandler implements Listener {
         final Plot plot = town.getPlot(event.getLocation());
         if (plot != null) {
             // If the plot was at all modified, only allow mobs if it's a mob farm plot
-            if (plot.getType() != PlotType.MOB_FARM) {
+            if (!plot.getType().allowsMobFarmBehavior()) {
                 event.setCancelled(true);
             }
         } else if (!town.getToggle(Setting.MOBS)) {
@@ -969,6 +970,20 @@ public class NewEventsHandler implements Listener {
         }
 
         return currentTown == null || targetTown == null;
+    }
+
+    private boolean hasPublicChestAccess(final Block block) {
+        if (!CHEST_MATERIALS.contains(block.getType())) {
+            return false;
+        }
+
+        final Town town = cache.getTownByLocation(block.getLocation());
+        if (town == null) {
+            return false;
+        }
+
+        final Plot plot = town.getPlot(block.getLocation());
+        return plot != null && plot.getType().allowsPublicChestAccess();
     }
 
 

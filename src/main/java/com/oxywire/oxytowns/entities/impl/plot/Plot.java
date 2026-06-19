@@ -83,7 +83,7 @@ public final class Plot implements CreatedDateHolder, Placeholdered, Named {
     public TagResolver[] getPlaceholders() {
         return new TagResolver[]{
             Placeholder.unparsed("name", name),
-            Placeholder.unparsed("type", Message.formatEnum(type)),
+            Placeholder.unparsed("type", Message.formatEnum(type.displayType())),
             Formatter.date("age", creationDate.toInstant().atZone(ZoneId.systemDefault())),
             Placeholder.parsed("members", String.join(Messages.get().getTown().getPlot().getHereDelimiter(), getMemberNames()))
         };

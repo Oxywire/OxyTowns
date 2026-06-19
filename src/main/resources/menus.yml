@@ -1630,14 +1630,26 @@ singles:
           - "<yellow>■ Left Click to change plot type."
         slots:
           - 21
-      plot-type-MOB_FARM:
+      plot-type-PRIVATE_MOB_FARM:
         material: CHICKEN
-        display-name: "<c:#ff9f30><b>Mobfarm Plot"
+        display-name: "<c:#ff9f30><b>Private Mobfarm Plot"
         lore:
           - "<c:#f7d3a3>Allow players to kill animals."
           - ""
           - "<red>Warning: ALL players including outsiders will"
           - "<red>be able to kill animals."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 22
+      plot-type-PUBLIC_MOB_FARM:
+        material: BARREL
+        display-name: "<c:#ff9f30><b>Public Mobfarm Plot"
+        lore:
+          - "<c:#f7d3a3>Allow mob farm behavior with public storage."
+          - ""
+          - "<red>Warning: ALL players including outsiders will"
+          - "<red>be able to open chests, trapped chests, and barrels."
           - ""
           - "<yellow>■ Left Click to change plot type."
         slots:

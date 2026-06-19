@@ -30,7 +30,7 @@ public final class PlotTypeMenu extends Menu {
 
         Menu.set(contents, elements.get("go-home"), e -> PlotMenu.open(player, this.town, this.plot));
 
-        for (final PlotType plotType : PlotType.values()) {
+        for (final PlotType plotType : PlotType.selectableValues()) {
             Menu.set(
                 contents,
                 elements.get("plot-type-" + plotType),
