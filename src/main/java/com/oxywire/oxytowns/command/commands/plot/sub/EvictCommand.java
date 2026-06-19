@@ -53,7 +53,7 @@ public final class EvictCommand {
 
         plot.getAssignedMembers().remove(foundPlayer.getUniqueId());
 
-        if (plot.getAssignedMembers().isEmpty()) {
+        if (!plot.isModified()) {
             town.getPlayerPlots().remove(plot.getChunkPosition());
         }
 

@@ -560,6 +560,10 @@ public final class Messages {
                 private Message alreadyMember = new Message().setMessage(
                     "<red><b>Error</b> <dark_gray>» <yellow><player> <red>is already a member of this plot.");
 
+                @Setting
+                private Message embassyCannotAddTownMember = new Message().setMessage(
+                    "<red><b>Error</b> <dark_gray>> <yellow><player> <red>is a member of your town and cannot be assigned to embassy plots.");
+
             }
         }
     }

@@ -1654,6 +1654,18 @@ singles:
           - "<yellow>■ Left Click to change plot type."
         slots:
           - 23
+      plot-type-EMBASSY:
+        material: WRITABLE_BOOK
+        display-name: "<c:#ff9f30><b>Embassy Plot"
+        lore:
+          - "<c:#f7d3a3>Assign this plot to outsiders."
+          - ""
+          - "<red>Warning: Assigned outsiders will"
+          - "<red>get full access to this plot."
+          - ""
+          - "<yellow>â–  Left Click to change plot type."
+        slots:
+          - 24
       plot-type-ARENA:
         material: DIAMOND_SWORD
         display-name: "<c:#ff9f30><b>Arena Plot"

@@ -714,9 +714,20 @@ public final class Menus {
                                     "<red>Warning: All players including outsiders can open chests, trapped chests, and barrels."
                                 )
                             ),
+                        "plot-type-" + PlotType.EMBASSY, new MenuElement()
+                            .setMaterial(Material.WRITABLE_BOOK)
+                            .setSlot(24)
+                            .setDisplayName("<gold>Embassy Plot")
+                            .setLore(
+                                List.of(
+                                    "",
+                                    "<white>Assign this plot to outsiders.",
+                                    "<red>Warning: Assigned outsiders get full access to this plot."
+                                )
+                            ),
                         "plot-type-" + PlotType.ARENA, new MenuElement()
                             .setMaterial(Material.DIAMOND_SWORD)
-                            .setSlot(24)
+                            .setSlot(25)
                             .setDisplayName("<gold>Arena Plot")
                             .setLore(
                                 List.of(

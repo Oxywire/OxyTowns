@@ -97,6 +97,7 @@ town:
       success: "<yellow><player> <gold>was added to this plot."
       added: "<yellow><player> <gold>added you to a plot."
       already-member: "<yellow><player> <red>is already a member of this plot."
+      embassy-cannot-add-town-member: "<yellow><player> <red>is a member of your town and cannot be assigned to embassy plots."
     help-message: |
       <c:#ff9f30><b>|</b><st>                                                            </st>
       <c:#ff9f30><b>|</b>  <c:#f7d3a3>
@@ -109,7 +110,9 @@ town:
       <c:#ff9f30><b>|</b>  <c:#f7d3a3><c:#ff9f30><b>Plot Types:</b>
       <c:#ff9f30><b>|</b>     <c:#f7d3a3>Default <gray>- <white>The default plot type.
       <c:#ff9f30><b>|</b>     <c:#f7d3a3>Farm <gray>- <white>Allow <u>ALL</u> players to farm.
-      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Mobfarm <gray>- <white>Allow <u>ALL</u> players to kill animals.
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Private Mob Farm <gray>- <white>Allow <u>ALL</u> players to kill animals.
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Public Mob Farm <gray>- <white>Allow mobs and public chest access.
+      <c:#ff9f30><b>|</b>     <c:#f7d3a3>Embassy <gray>- <white>Assign outsider access to a plot.
       <c:#ff9f30><b>|</b>     <c:#f7d3a3>Arena <gray>- <white>Allow <u>ALL</u> players to pvp.
       <c:#ff9f30><b>|</b>  <c:#f7d3a3>
       <c:#ff9f30><b>|</b><st>                                                            </st>

@@ -361,7 +361,7 @@ public final class Town implements CreatedDateHolder, Organisation<UUID>, Forwar
     public void removePlayer(final OfflinePlayer player) {
         this.members.remove(player.getUniqueId());
         this.playerPlots.values().forEach(plot -> plot.getAssignedMembers().remove(player.getUniqueId()));
-        this.playerPlots.values().removeIf(plot -> plot.getAssignedMembers().isEmpty());
+        this.playerPlots.values().removeIf(plot -> !plot.isModified());
     }
 
     /**

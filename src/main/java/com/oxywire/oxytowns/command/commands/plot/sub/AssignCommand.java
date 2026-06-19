@@ -44,14 +44,9 @@ public final class AssignCommand {
             return;
         }
 
-        if (!town.isMember(foundPlayer.getUniqueId())) {
-            messages.getTown().getNotMember().send(sender, Placeholder.unparsed("player", name));
-            return;
-        }
-
         if (foundPlot == null) {
             final ChunkPosition chunkPosition = ChunkPosition.chunkPosition(sender.getLocation().getChunk());
-            if (!town.getOwnerAndMembers().contains(foundPlayer.getUniqueId())) {
+            if (!town.isMember(foundPlayer.getUniqueId())) {
                 messages.getTown().getPlot().getMember().getNotMember().send(
                     sender,
                     Placeholder.unparsed("player", name),
@@ -66,6 +61,20 @@ public final class AssignCommand {
         }
 
         if (town.hasPermission(sender.getUniqueId(), Permission.PLOTS_ASSIGN)) {
+            if (foundPlot.getType().allowsOutsiderAssignments()) {
+                if (town.isMember(foundPlayer.getUniqueId())) {
+                    messages.getTown().getPlot().getMember().getEmbassyCannotAddTownMember().send(sender, Placeholder.unparsed("player", name));
+                    return;
+                }
+            } else if (!town.isMember(foundPlayer.getUniqueId())) {
+                messages.getTown().getPlot().getMember().getNotMember().send(
+                    sender,
+                    Placeholder.unparsed("player", name),
+                    Placeholder.unparsed("adder", sender.getName())
+                );
+                return;
+            }
+
             if (foundPlot.getAssignedMembers().contains(foundPlayer.getUniqueId())) {
                 messages.getTown().getPlot().getMember().getAlreadyMember().send(
                     sender, Placeholder.unparsed("player", name),
@@ -73,6 +82,9 @@ public final class AssignCommand {
                 return;
             }
             foundPlot.addMember(foundPlayer.getUniqueId());
+            if (foundPlot.getName() == null || foundPlot.getName().isBlank()) {
+                foundPlot.setName(name);
+            }
 
             messages.getTown().getPlot().getMember().getSuccess().send(sender, Placeholder.unparsed("player", name));
             if (foundPlayer.isOnline()) {

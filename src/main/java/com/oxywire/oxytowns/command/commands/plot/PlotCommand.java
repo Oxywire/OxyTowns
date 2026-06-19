@@ -18,7 +18,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public final class PlotCommand {
@@ -68,6 +70,15 @@ public final class PlotCommand {
             Town town = optional.get();
             Plot plot = town.getPlot(context.getSender().getLocation());
             if (plot != null) {
+                if (plot.getType().allowsOutsiderAssignments()) {
+                    return Arrays.stream(Bukkit.getOfflinePlayers())
+                        .filter(it -> !town.isMember(it.getUniqueId()))
+                        .filter(it -> !plot.getAssignedMembers().contains(it.getUniqueId()))
+                        .map(OfflinePlayer::getName)
+                        .filter(Objects::nonNull)
+                        .toList();
+                }
+
                 return town.getOwnerAndMembers().stream()
                         .filter(it -> !plot.getAssignedMembers().contains(it))
                         .map(Bukkit::getOfflinePlayer)
