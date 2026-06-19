@@ -312,7 +312,7 @@ public class NewEventsHandler implements Listener {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK
             && CHEST_MATERIALS.contains(event.getClickedBlock().getType())
             && !cache.isBypassing(event.getPlayer())
-            && !hasPublicChestAccess(event.getClickedBlock())
+            && !hasPlotChestAccess(event.getPlayer(), event.getClickedBlock())
             && canInteract(event.getPlayer(), event.getClickedBlock().getLocation(), Permission.CHESTS, event.getClickedBlock())) {
             event.setCancelled(true);
         }
@@ -972,7 +972,7 @@ public class NewEventsHandler implements Listener {
         return currentTown == null || targetTown == null;
     }
 
-    private boolean hasPublicChestAccess(final Block block) {
+    private boolean hasPlotChestAccess(final Player player, final Block block) {
         if (!CHEST_MATERIALS.contains(block.getType())) {
             return false;
         }
@@ -983,7 +983,15 @@ public class NewEventsHandler implements Listener {
         }
 
         final Plot plot = town.getPlot(block.getLocation());
-        return plot != null && plot.getType().allowsPublicChestAccess();
+        if (plot == null) {
+            return false;
+        }
+
+        if (plot.getType().allowsPublicChestAccess()) {
+            return true;
+        }
+
+        return plot.getType().allowsTownChestAccess() && town.isMember(player.getUniqueId());
     }
 
 

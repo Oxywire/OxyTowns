@@ -13,6 +13,8 @@ public enum PlotType {
 
     DEFAULT,
     FARM,
+    PRIVATE_COMMUNAL,
+    PUBLIC_COMMUNAL,
     PRIVATE_MOB_FARM,
     PUBLIC_MOB_FARM,
     EMBASSY,
@@ -20,7 +22,16 @@ public enum PlotType {
     @Deprecated
     MOB_FARM;
 
-    private static final List<PlotType> SELECTABLE_VALUES = List.of(DEFAULT, FARM, PRIVATE_MOB_FARM, PUBLIC_MOB_FARM, EMBASSY, ARENA);
+    private static final List<PlotType> SELECTABLE_VALUES = List.of(
+        DEFAULT,
+        FARM,
+        PRIVATE_COMMUNAL,
+        PUBLIC_COMMUNAL,
+        PRIVATE_MOB_FARM,
+        PUBLIC_MOB_FARM,
+        EMBASSY,
+        ARENA
+    );
 
     public static List<PlotType> selectableValues() {
         return SELECTABLE_VALUES;
@@ -58,7 +69,11 @@ public enum PlotType {
     }
 
     public boolean allowsPublicChestAccess() {
-        return this == PUBLIC_MOB_FARM;
+        return this == PUBLIC_MOB_FARM || this == PUBLIC_COMMUNAL;
+    }
+
+    public boolean allowsTownChestAccess() {
+        return this == PRIVATE_COMMUNAL;
     }
 
     public boolean allowsOutsiderAssignments() {
