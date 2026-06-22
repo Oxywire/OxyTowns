@@ -17,7 +17,14 @@ public final class SpawnCommand {
 
     @CommandMethod("town|t spawn [town]")
     @CommandDescription("Teleport to a town's spawn")
-    public void onSpawn(final Player sender, final @Argument("town") @Nullable Town town) {
+    public void onSpawn(final Player sender, final @Argument(value = "town", suggestions = "town:all") @Nullable String townName) {
+        final TownCache townCache = OxyTownsPlugin.get().getTownCache();
+        final Town town = townName == null ? null : townCache.getTownByName(townName).orElse(null);
+        if (townName != null && town == null) {
+            Messages.get().getTown().getTownNotFound().send(sender);
+            return;
+        }
+
         teleport(sender, town);
     }
 

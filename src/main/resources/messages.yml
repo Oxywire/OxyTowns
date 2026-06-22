@@ -69,6 +69,7 @@ town:
     <c:#ff9f30><b>|</b>  <c:#f7d3a3>
     <c:#ff9f30><b>|</b><st>                                                            </st>
   no-permission-teleport: "<red>This town is private and you can't teleport here."
+  town-not-found: "<red>This town does not exist."
   no-spawn-set: "<red>No home has been set."
   broadcast-promotion: "<yellow><player> <gold>has been demoted to <yellow><role><gold>."
   broadcast-demotion: "<yellow><player> <gold>has been promoted to <yellow><role><gold>."

@@ -200,6 +200,9 @@ public final class Messages {
             "<red><b>Error</b> <dark_gray>» <red>You currently do not have permission to teleport to this town!");
 
         @Setting
+        private Message townNotFound = new Message().setMessage("<red>This town does not exist.");
+
+        @Setting
         private Message noSpawnSet = new Message().setMessage("<red><b>Error</b> <dark_gray>» <red>No home has been set.");
 
         @Setting
