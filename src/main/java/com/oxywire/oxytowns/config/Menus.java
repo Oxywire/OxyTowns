@@ -673,7 +673,7 @@ public final class Menus {
                             ),
                         "plot-type-" + PlotType.DEFAULT, new MenuElement()
                             .setMaterial(Material.GRASS_BLOCK)
-                            .setSlot(21)
+                            .setSlot(19)
                             .setDisplayName("<gold>Default Plot")
                             .setLore(
                                 List.of(
@@ -683,7 +683,7 @@ public final class Menus {
                             ),
                         "plot-type-" + PlotType.FARM, new MenuElement()
                             .setMaterial(Material.HAY_BLOCK)
-                            .setSlot(22)
+                            .setSlot(20)
                             .setDisplayName("<gold>Farm Plot")
                             .setLore(
                                 List.of(
@@ -692,10 +692,30 @@ public final class Menus {
                                     "<red>Warning: ALL players including outsiders will get access!"
                                 )
                             ),
-                        "plot-type-" + PlotType.MOB_FARM, new MenuElement()
+                        "plot-type-" + PlotType.PRIVATE_COMMUNAL, new MenuElement()
+                            .setMaterial(Material.CHEST)
+                            .setSlot(21)
+                            .setDisplayName("<gold>Private Communal Plot")
+                            .setLore(
+                                List.of(
+                                    "",
+                                    "<white>Town members can open chests in this plot."
+                                )
+                            ),
+                        "plot-type-" + PlotType.PUBLIC_COMMUNAL, new MenuElement()
+                            .setMaterial(Material.TRAPPED_CHEST)
+                            .setSlot(22)
+                            .setDisplayName("<gold>Public Communal Plot")
+                            .setLore(
+                                List.of(
+                                    "",
+                                    "<white>Everyone can open chests in this plot."
+                                )
+                            ),
+                        "plot-type-" + PlotType.PRIVATE_MOB_FARM, new MenuElement()
                             .setMaterial(Material.CHICKEN)
                             .setSlot(23)
-                            .setDisplayName("<gold>Mobfarm Plot")
+                            .setDisplayName("<gold>Private Mobfarm Plot")
                             .setLore(
                                 List.of(
                                     "",
@@ -703,9 +723,31 @@ public final class Menus {
                                     "<red>Warning: All players including outsiders will get access!"
                                 )
                             ),
+                        "plot-type-" + PlotType.PUBLIC_MOB_FARM, new MenuElement()
+                            .setMaterial(Material.BARREL)
+                            .setSlot(24)
+                            .setDisplayName("<gold>Public Mobfarm Plot")
+                            .setLore(
+                                List.of(
+                                    "",
+                                    "<white>Mobfarm plot with public chest access.",
+                                    "<red>Warning: All players including outsiders can open chests, trapped chests, and barrels."
+                                )
+                            ),
+                        "plot-type-" + PlotType.EMBASSY, new MenuElement()
+                            .setMaterial(Material.WRITABLE_BOOK)
+                            .setSlot(25)
+                            .setDisplayName("<gold>Embassy Plot")
+                            .setLore(
+                                List.of(
+                                    "",
+                                    "<white>Assign this plot to outsiders.",
+                                    "<red>Warning: Assigned outsiders get full access to this plot."
+                                )
+                            ),
                         "plot-type-" + PlotType.ARENA, new MenuElement()
                             .setMaterial(Material.DIAMOND_SWORD)
-                            .setSlot(24)
+                            .setSlot(31)
                             .setDisplayName("<gold>Arena Plot")
                             .setLore(
                                 List.of(

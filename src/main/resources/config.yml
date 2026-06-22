@@ -87,7 +87,7 @@ plots:
       - WARPED_WART_BLOCK
     entities: []
     blacklisted-commands: []
-  MOB_FARM:
+  PRIVATE_MOB_FARM:
     blocks: []
     entities:
       - ALLAY

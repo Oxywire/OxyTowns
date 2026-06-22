@@ -1629,10 +1629,28 @@ singles:
           - ""
           - "<yellow>■ Left Click to change plot type."
         slots:
+          - 20
+      plot-type-PRIVATE_COMMUNAL:
+        material: CHEST
+        display-name: "<c:#ff9f30><b>Private Communal Plot"
+        lore:
+          - "<c:#f7d3a3>Allow town members to open chests."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
           - 21
-      plot-type-MOB_FARM:
+      plot-type-PUBLIC_COMMUNAL:
+        material: TRAPPED_CHEST
+        display-name: "<c:#ff9f30><b>Public Communal Plot"
+        lore:
+          - "<c:#f7d3a3>Allow everyone to open chests."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 22
+      plot-type-PRIVATE_MOB_FARM:
         material: CHICKEN
-        display-name: "<c:#ff9f30><b>Mobfarm Plot"
+        display-name: "<c:#ff9f30><b>Private Mobfarm Plot"
         lore:
           - "<c:#f7d3a3>Allow players to kill animals."
           - ""
@@ -1642,6 +1660,30 @@ singles:
           - "<yellow>■ Left Click to change plot type."
         slots:
           - 23
+      plot-type-PUBLIC_MOB_FARM:
+        material: BARREL
+        display-name: "<c:#ff9f30><b>Public Mobfarm Plot"
+        lore:
+          - "<c:#f7d3a3>Allow mob farm behavior with public storage."
+          - ""
+          - "<red>Warning: ALL players including outsiders will"
+          - "<red>be able to open chests, trapped chests, and barrels."
+          - ""
+          - "<yellow>■ Left Click to change plot type."
+        slots:
+          - 24
+      plot-type-EMBASSY:
+        material: WRITABLE_BOOK
+        display-name: "<c:#ff9f30><b>Embassy Plot"
+        lore:
+          - "<c:#f7d3a3>Assign this plot to outsiders."
+          - ""
+          - "<red>Warning: Assigned outsiders will"
+          - "<red>get full access to this plot."
+          - ""
+          - "<yellow>â–  Left Click to change plot type."
+        slots:
+          - 25
       plot-type-ARENA:
         material: DIAMOND_SWORD
         display-name: "<c:#ff9f30><b>Arena Plot"
@@ -1653,7 +1695,7 @@ singles:
           - ""
           - "<yellow>■ Left Click to change plot type."
         slots:
-          - 25
+          - 31
 
 common-permission-lore:
   - "<status:'<green>Enabled':'<red>Disabled'>"

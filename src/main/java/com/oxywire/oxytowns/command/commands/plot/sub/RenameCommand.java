@@ -5,8 +5,6 @@ import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.Regex;
 import com.oxywire.oxytowns.cache.TownCache;
-import com.oxywire.oxytowns.command.annotation.MustBeInTown;
-import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.config.Messages;
 import com.oxywire.oxytowns.entities.impl.plot.Plot;
 import com.oxywire.oxytowns.entities.impl.town.Town;
@@ -25,18 +23,18 @@ public final class RenameCommand {
 
     @CommandMethod("plot rename <name>")
     @CommandDescription("Rename a plot")
-    @MustBeInTown
-    public void onRename(final Player sender, final @SendersTown Town town, final @Argument("name") @Regex(TownUtils.VALID_NAME) String name) {
+    public void onRename(final Player sender, final @Argument("name") @Regex(TownUtils.VALID_NAME) String name) {
         final Messages messages = Messages.get();
+        final Town town = this.townCache.getTownByLocation(sender.getLocation());
+        if (town == null) {
+            messages.getTown().getPlot().getNotClaimed().send(sender);
+            return;
+        }
+
         final Plot plot = town.getPlot(sender.getLocation());
 
         if (plot == null) {
             messages.getTown().getPlot().getIsNotPlot().send(sender);
-            return;
-        }
-
-        if (!this.townCache.getTownByLocation(sender.getLocation()).equals(town)) {
-            messages.getTown().getPlot().getNotClaimed().send(sender);
             return;
         }
 

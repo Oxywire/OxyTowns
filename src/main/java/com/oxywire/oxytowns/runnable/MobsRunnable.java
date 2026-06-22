@@ -37,7 +37,7 @@ public final class MobsRunnable extends BukkitRunnable {
                 final Plot plot = town.getPlot(entity.getLocation());
                 if (plot != null) {
                     // If the plot was at all modified, only allow mobs if it's a mob farm plot
-                    if (plot.getType() != PlotType.MOB_FARM) {
+                    if (!plot.getType().allowsMobFarmBehavior()) {
                         entity.remove();
                     }
                 } else if (!town.getToggle(Setting.MOBS)) {

@@ -68,6 +68,14 @@ public final class PlotCommand {
             Town town = optional.get();
             Plot plot = town.getPlot(context.getSender().getLocation());
             if (plot != null) {
+                if (plot.getType().allowsOutsiderAssignments()) {
+                    return Bukkit.getOnlinePlayers().stream()
+                        .filter(it -> !town.isMember(it.getUniqueId()))
+                        .filter(it -> !plot.getAssignedMembers().contains(it.getUniqueId()))
+                        .map(Player::getName)
+                        .toList();
+                }
+
                 return town.getOwnerAndMembers().stream()
                         .filter(it -> !plot.getAssignedMembers().contains(it))
                         .map(Bukkit::getOfflinePlayer)

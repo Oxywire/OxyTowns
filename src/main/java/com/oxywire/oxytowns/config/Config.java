@@ -39,7 +39,7 @@ public final class Config {
     @Setting
     private Map<PlotType, Plot> plots = Map.of(
         PlotType.FARM, new Plot(EnumSet.of(Material.CARROTS, Material.POTATOES, Material.WHEAT), EnumSet.noneOf(EntityType.class), Set.of()),
-        PlotType.MOB_FARM, new Plot(EnumSet.noneOf(Material.class), EnumSet.of(EntityType.COW, EntityType.PIG, EntityType.SHEEP, EntityType.CHICKEN), Set.of()),
+        PlotType.PRIVATE_MOB_FARM, new Plot(EnumSet.noneOf(Material.class), EnumSet.of(EntityType.COW, EntityType.PIG, EntityType.SHEEP, EntityType.CHICKEN), Set.of()),
         PlotType.ARENA, new Plot(EnumSet.noneOf(Material.class), EnumSet.of(EntityType.PLAYER), Set.of("/fly"))
     );
 
