@@ -14,6 +14,7 @@ import cloud.commandframework.execution.postprocessor.CommandPostprocessor;
 import cloud.commandframework.meta.SimpleCommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.google.common.reflect.ClassPath;
+import com.oxywire.oxytowns.command.argument.MessageArgumentParseException;
 import com.oxywire.oxytowns.command.parser.OfflinePlayerParser;
 import com.oxywire.oxytowns.config.Messages;
 import io.leangen.geantyref.TypeToken;
@@ -56,6 +57,12 @@ public final class CommandManager extends PaperCommandManager<CommandSender> {
         setSetting(ManagerSettings.OVERRIDE_EXISTING_COMMANDS, true);
 
         registerExceptionHandler(ArgumentParseException.class, (c, e) -> {
+            final Optional<MessageArgumentParseException> configuredMessage = findCause(e, MessageArgumentParseException.class);
+            if (configuredMessage.isPresent()) {
+                configuredMessage.get().getConfiguredMessage().send(c);
+                return;
+            }
+
             final Component msg = Optional.ofNullable(ComponentMessageThrowable.getOrConvertMessage(e))
                 .orElseGet(() -> ComponentMessageThrowable.getOrConvertMessage(e.getCause()));
             Messages.get().getCommandFeedback().getArgumentParse().send(c, Placeholder.component("value", msg == null ? Component.text("null") : msg));
@@ -151,5 +158,17 @@ public final class CommandManager extends PaperCommandManager<CommandSender> {
     public CommandManager withPostProcessor(final CommandPostprocessor<CommandSender> postProcessor) {
         registerCommandPostProcessor(postProcessor);
         return this;
+    }
+
+    private static <T extends Throwable> Optional<T> findCause(final Throwable throwable, final Class<T> type) {
+        Throwable current = throwable;
+        while (current != null) {
+            if (type.isInstance(current)) {
+                return Optional.of(type.cast(current));
+            }
+            current = current.getCause();
+        }
+
+        return Optional.empty();
     }
 }

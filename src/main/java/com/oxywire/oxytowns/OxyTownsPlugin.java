@@ -14,6 +14,7 @@ import com.oxywire.oxytowns.command.annotation.CreateConfirmation;
 import com.oxywire.oxytowns.command.annotation.MustBeInTown;
 import com.oxywire.oxytowns.command.annotation.SendersTown;
 import com.oxywire.oxytowns.command.argument.ArgumentType;
+import com.oxywire.oxytowns.command.argument.MessageArgumentParseException;
 import com.oxywire.oxytowns.command.commands.plot.PlotCommand;
 import com.oxywire.oxytowns.command.commands.town.TownCommand;
 import com.oxywire.oxytowns.command.confirmation.CommandConfirmationManager;
@@ -85,7 +86,8 @@ public class OxyTownsPlugin extends JavaPlugin {
                 Town.class,
                 new ArgumentType<>(
                     input -> this.townCache.getTownByName(input).orElse(null),
-                    input -> this.townCache.getTowns().stream().map(Town::getName).toList()
+                    input -> this.townCache.getTowns().stream().map(Town::getName).toList(),
+                    (context, input) -> new MessageArgumentParseException(Messages.get().getTown().getTownNotFound())
                 )
             )
             .withPostProcessor(context -> {

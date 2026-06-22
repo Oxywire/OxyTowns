@@ -75,13 +75,6 @@ public final class TownCommand {
             .orElse(List.of());
     }
 
-    @Suggestions("town:all")
-    public List<String> towns(final CommandContext<Player> context, final String input) {
-        return this.townCache.getTowns().stream()
-            .map(Town::getName)
-            .toList();
-    }
-
     @Suggestions("town:joinable_towns")
     public List<String> joinableTowns(final CommandContext<Player> context, final String input) {
         if (townCache.getTownByPlayer(context.getSender()).isPresent()) {
