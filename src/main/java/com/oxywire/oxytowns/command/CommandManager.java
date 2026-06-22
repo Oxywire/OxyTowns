@@ -80,7 +80,7 @@ public final class CommandManager extends PaperCommandManager<CommandSender> {
         );
         registerExceptionHandler(
             InvalidSyntaxException.class,
-            (c, e) -> Messages.get().getCommandFeedback().getInvalidSyntax().send(c, Placeholder.unparsed("value", e.getCorrectSyntax()))
+            (c, e) -> Messages.get().getCommandFeedback().getArgumentParse().send(c)
         );
         registerExceptionHandler(
             NoPermissionException.class,
@@ -142,6 +142,11 @@ public final class CommandManager extends PaperCommandManager<CommandSender> {
 
     public <T> CommandManager withArgumentType(final Class<T> clazz, final ArgumentParser<CommandSender, T> argumentParser) {
         parserRegistry().registerParserSupplier(TypeToken.get(clazz), params -> argumentParser);
+        return this;
+    }
+
+    public CommandManager withNamedArgumentType(final String name, final ArgumentParser<CommandSender, ?> argumentParser) {
+        parserRegistry().registerNamedParserSupplier(name, params -> argumentParser);
         return this;
     }
 

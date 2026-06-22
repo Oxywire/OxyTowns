@@ -17,7 +17,7 @@ public final class SpawnCommand {
 
     @CommandMethod("town|t spawn [town]")
     @CommandDescription("Teleport to a town's spawn")
-    public void onSpawn(final Player sender, final @Argument("town") @Nullable Town town) {
+    public void onSpawn(final Player sender, final @Argument(value = "town", parserName = "town-spawn") @Nullable Town town) {
         teleport(sender, town);
     }
 

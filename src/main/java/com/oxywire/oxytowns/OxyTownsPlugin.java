@@ -86,6 +86,13 @@ public class OxyTownsPlugin extends JavaPlugin {
                 Town.class,
                 new ArgumentType<>(
                     input -> this.townCache.getTownByName(input).orElse(null),
+                    input -> this.townCache.getTowns().stream().map(Town::getName).toList()
+                )
+            )
+            .withNamedArgumentType(
+                "town-spawn",
+                new ArgumentType<Town>(
+                    input -> this.townCache.getTownByName(input).orElse(null),
                     input -> this.townCache.getTowns().stream().map(Town::getName).toList(),
                     (context, input) -> new MessageArgumentParseException(Messages.get().getTown().getTownNotFound())
                 )
